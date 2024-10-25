@@ -69,4 +69,15 @@ export const HelperText: StoryObj<typeof Input> = {
     }
 };
 
+export const State: StoryObj<typeof Input> = {
+    render: () => {
+        return (
+            <>
+                <Input placeholder="disabled" disabled gutterBottom />
+                <Input placeholder="Read only" readOnly />
+            </>
+        );
+    }
+};
+
 export default meta;

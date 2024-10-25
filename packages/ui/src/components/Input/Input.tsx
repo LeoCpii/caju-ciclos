@@ -1,53 +1,76 @@
-import { InputHTMLAttributes, cloneElement } from 'react';
+import { InputHTMLAttributes, ButtonHTMLAttributes, ReactElement, cloneElement, MouseEvent } from 'react';
 
 import joinClass from '@/utils/joinClass';
 
 import './Input.scss';
 
 export type InputType = 'text' | 'password' | 'number';
+export type ErrorState = 'show' | 'hide';
 
 interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
     error?: boolean;
     fullWidth?: boolean;
+    label?: string;
     helperText?: string;
+    gutterBottom?: boolean;
     type?: InputType;
-    startIcon?: React.JSX.Element;
     endIcon?: React.JSX.Element;
+    startIcon?: React.JSX.Element;
 }
 export default function Input({
     error,
+    label,
     fullWidth,
     helperText,
-    startIcon,
+    gutterBottom,
     endIcon,
+    startIcon,
     type = 'text',
     ...props
 }: InputProps) {
+    const containerClss = joinClass([
+        'cj-input-container',
+        fullWidth && 'cj-input-container--full-width',
+        gutterBottom && 'cj-input-container--gutter-bottom'
+    ]);
+
+    const labelClss = joinClass([
+        'cj-input-label',
+        error && 'cj-input-label--error',
+    ]);
+
     const clss = joinClass([
         'cj-input',
         error && 'cj-input--error',
-        fullWidth && 'cj-input--full-width',
         props.className
     ]);
 
-    const spanClss = joinClass([
+    const helperTextClss = joinClass([
         'cj-input__helper-text',
         helperText && 'cj-input__helper-text--visible',
         error && 'cj-input__helper-text--error'
     ]);
 
-    const renderIcon = (icon: React.JSX.Element, direction: 'left' | 'right') => {
+    const renderIcon = (icon: ReactElement<ButtonHTMLAttributes<any>>, direction: 'left' | 'right') => {
         return cloneElement(icon, {
-            className: joinClass([icon.props.className, 'cj-input__icon', `cj-input__icon--${direction}`])
+            className: joinClass([icon.props.className, 'cj-input__icon', `cj-input__icon--${direction}`]),
+            type: 'button',
+            onClick: (e: MouseEvent<any, globalThis.MouseEvent>) => {
+                e.stopPropagation();
+                if (icon.props.onClick) { icon.props.onClick(e); };
+            }
         });
     };
 
     return (
-        <div className={clss}>
-            {startIcon && renderIcon(startIcon, 'right')}
-            <input {...props} type={type} />
-            {endIcon && renderIcon(endIcon, 'left')}
-            <span className={spanClss}>{helperText}</span>
+        <div className={containerClss}>
+            {label && <label className={labelClss}>{label} {props.required && '*'}</label>}
+            <div className={clss}>
+                {startIcon && renderIcon(startIcon, 'right')}
+                <input {...props} type={type} />
+                {endIcon && renderIcon(endIcon, 'left')}
+            </div>
+            <span className={helperTextClss}>{helperText}</span>
         </div>
     );
 }

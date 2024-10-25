@@ -1,10 +1,31 @@
+.cj-input-container {
+    width: fit-content;
+
+    &--full-width {
+        width: 100%;
+    }
+
+    &--gutter-bottom {
+        margin-bottom: 10px;
+    }
+}
+
+.cj-input-label {
+    font-size: $font-small;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 5px;
+
+    &--error {
+        color: var(--error);
+    }
+}
+
 .cj-input {
     cursor: text;
     border-radius: 4px;
-    width: fit-content;
     border: 1px solid var(--divider);
     font-family: $font-regular;
-    padding: auto 12px;
     position: relative;
 
     display: flex;
@@ -15,17 +36,15 @@
         outline: 2px solid var(--primary);
     }
 
-    &--full-width {
-        width: 100%;
-    }
-
     &--error {
         border-color: var(--error);
+        // margin-bottom: 30px;
     }
 
     input {
         background: transparent;
         height: 100%;
+        width: 100%;
         border: none;
         outline: none;
         user-select: none;
@@ -40,13 +59,26 @@
             color: var(--text-secondary);
             opacity: 1;
         }
+
+        &:disabled {
+            cursor: not-allowed;
+            background: var(--divider);
+            color: var(--text-disabled);
+        }
+
+        &:read-only {
+            background: var(--divider);
+            color: var(--text-disabled);
+        }
+    }
+
+    &__helper-text-container {
+        margin-bottom: 30px;
     }
 
     &__helper-text {
-        position: absolute;
-        left: 16px;
         opacity: 0;
-        bottom: -18px;
+        margin-top: 5px;
         transition: all 0.3s;
         font-size: $font-small;
 
