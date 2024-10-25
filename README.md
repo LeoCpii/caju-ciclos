@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>LZ Vibes</h1>
+  <h1>Caju ciclos</h1>
   <br/>
   <p>
    <strong>Powered by</strong>
