@@ -27,11 +27,7 @@ export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
         updateTheme: (newTheme: ThemeBuilded) => updateTheme(newTheme),
     }), [theme]);
 
-    useEffect(() => {
-        applyTheme(_theme);
-
-        console.log('theme', _theme);
-    }, [_theme]);
+    useEffect(() => { applyTheme(_theme); }, [_theme]);
 
     const updateMode = (mode: Mode) => {
         console.log('updateMode', mode);
