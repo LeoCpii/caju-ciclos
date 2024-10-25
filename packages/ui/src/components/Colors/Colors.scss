@@ -9,6 +9,12 @@
         border-radius: 5px;
         color: white;
         font-size: 14px;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
     }
 
     @each $color in $colors {

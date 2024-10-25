@@ -10,7 +10,7 @@ const meta: Meta<any> = {
 };
 
 function Color({ color }: { color: string }) {
-    const name = color.replace('--', ' ');
+    const name = color.replace('--', ' ').replace('-', ' ');
 
     return (
         <div className={joinClass([color, 'color'])}>
