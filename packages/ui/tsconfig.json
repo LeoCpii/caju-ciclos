@@ -5,9 +5,7 @@
     "target": "ES2022",
     "outDir": "dist",
     "module": "ESNext",
-    "isolatedModules": true,
     "moduleResolution": "Bundler",
-    "declarationDir": "src/types",
     "allowJs": true,
     "paths": {
       "@/*": [

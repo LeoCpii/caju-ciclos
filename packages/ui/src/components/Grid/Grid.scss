@@ -1,3 +1,5 @@
+@use "src/styles/main.scss" as *;
+
 .grid {
     @include grid(15px, 12);
 
