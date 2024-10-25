@@ -1,16 +1,8 @@
-import React, {
-    Children,
-    useEffect,
-    ReactElement,
-    cloneElement,
-    FormHTMLAttributes,
-    InputHTMLAttributes,
-    JSXElementConstructor,
-} from 'react';
+import React, { useContext, ReactElement, cloneElement, InputHTMLAttributes, } from 'react';
 
 import useControl from './useControl';
-
-type ChildrenElem = ReactElement<any, string | JSXElementConstructor<any>>[];
+import FormContext from './FormContext';
+import FormControl from './formControl';
 
 type ActionParams = {
     text: React.FormEvent<HTMLDivElement>;
@@ -19,28 +11,23 @@ type ActionParams = {
     checkbox: React.ChangeEvent<HTMLInputElement>;
 }
 
-const validateChildren = (arrayChildren: ChildrenElem) => {
-    if (!arrayChildren.length || arrayChildren.length > 1) {
-        throw new Error('Control must have only one child');
-    }
-};
-
-interface ControlProps<Form> extends FormHTMLAttributes<InputHTMLAttributes<any>> {
-    controlName: keyof Form;
-    children: React.ReactNode;
+interface ControlProps<
+    Form, Key extends keyof Form = keyof Form
+> extends InputHTMLAttributes<InputHTMLAttributes<any>> {
+    controlName: Key;
+    // children: React.ReactNode;
     action?: 'onBlur' | 'onChange' | 'onInput';
     type?: 'text' | 'checkbox' | 'radio' | 'number';
+    field: (control: FormControl<any>) => React.JSX.Element;
 }
 export default function Control<Form>({
-    children,
+    field,
     controlName,
     type = 'text',
     action = 'onInput',
 }: ControlProps<Form>) {
-    const { update } = useControl<Form>(controlName);
-    const arrayChildren = Children.toArray(children) as ChildrenElem;
-
-    useEffect(() => { validateChildren(arrayChildren); }, []);
+    const { formGroup } = useContext(FormContext);
+    const { control, update } = useControl<Form>(controlName);
 
     const renderChildren = (child: ReactElement<ControlProps<Form>>) => {
         return cloneElement(child, {
@@ -49,10 +36,12 @@ export default function Control<Form>({
                     ? e.target['checked']
                     : e.target['value']
             ),
+            required: control.required
         });
     };
 
     return (
-        renderChildren(arrayChildren[0])
+        renderChildren(field(formGroup.controls[controlName]))
     );
 }
+

@@ -61,6 +61,8 @@ export default class FormControl<C> {
 
     public get isInvalid() { return Boolean(this.dirty && this.error); }
 
+    public get messageError() { return this.isInvalid ? this.error : ''; }
+
     public validate(): void {
         const data: any = {};
 

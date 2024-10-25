@@ -68,8 +68,8 @@ export default function NewForm({ children, formGroup, debug = false, ...props }
     useEffect(() => { change(); }, [formGroup]);
 
     const change = () => {
-        if (formGroup.handle?.change) {
-            formGroup.isValid && formGroup.handle.change(formGroup);
+        if (formGroup.handle?.change && formGroup.isValid) {
+            formGroup.handle.change(formGroup);
         }
 
         formGroup.validate();
@@ -79,14 +79,14 @@ export default function NewForm({ children, formGroup, debug = false, ...props }
         event.preventDefault();
         formGroup.dirty();
 
-        if (formGroup.handle?.submit) {
-            formGroup.isValid && formGroup.handle.submit(formGroup);
+        if (formGroup.handle?.submit && formGroup.isValid) {
+            formGroup.handle.submit(formGroup);
         }
     };
 
     return (
         <FormContext.Provider value={{ formGroup }}>
-            <form {...props} onSubmit={submit}>
+            <form {...props} onSubmit={submit} noValidate>
                 {children}
             </form>
             {debug && <Log formGroup={formGroup} />}
