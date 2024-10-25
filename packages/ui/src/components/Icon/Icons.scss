@@ -2,15 +2,15 @@
     transition: all 0.3s;
 
     &.small {
-        font-size: $font-small;
+        font-size: $icon-small;
     }
 
     &.medium {
-        font-size: $font-medium;
+        font-size: $icon-medium;
     }
 
     &.large {
-        font-size: $font-large;
+        font-size: $icon-large;
     }
 
     @each $color in $colors {
