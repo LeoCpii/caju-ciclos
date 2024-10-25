@@ -91,6 +91,7 @@ export default function useResize({
     useEffect(() => {
         const medias = getMedias();
 
+        /* eslint-disable @typescript-eslint/no-unused-expressions */
         onMobile && medias.mobile.addEventListener('change', makeMobile);
         onTablet && medias.tablet.addEventListener('change', makeTablet);
         onDesktop && medias.desktop.addEventListener('change', makeDesktop);
@@ -104,6 +105,7 @@ export default function useResize({
             onWidescreen && medias.widescreen.removeEventListener('change', makeWidescreen);
             onFullHD && medias.full_hd.removeEventListener('change', makeFullhd);
         };
+        /* eslint-enable @typescript-eslint/no-unused-expressions */
     }, deps);
 
 };
