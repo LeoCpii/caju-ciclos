@@ -1,0 +1,28 @@
+{
+  "name": "caju",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "leonardo.goncalves <leogoncalves.contato@gmail.com>",
+  "private": true,
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/ui",
+      "packages/app/*",
+      "packages/services"
+    ]
+  },
+  "devDependencies": {
+    "@caju/services": "*",
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "eslint-plugin-import-helpers": "^2.0.1",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.11.0"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  }
+}
