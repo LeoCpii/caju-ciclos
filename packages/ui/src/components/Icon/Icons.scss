@@ -1,0 +1,25 @@
+.cj-icon {
+    transition: all 0.3s;
+
+    &.small {
+        font-size: $font-small;
+    }
+
+    &.medium {
+        font-size: $font-medium;
+    }
+
+    &.large {
+        font-size: $font-large;
+    }
+
+    @each $color in $colors {
+        &.#{$color} {
+            color: var(--#{$color});
+        }
+
+        &.#{$color}-contrast {
+            color: var(--#{$color}-contrast);
+        }
+    }
+}
