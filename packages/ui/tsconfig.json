@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "target": "ES2022",
+    "outDir": "dist",
+    "module": "ESNext",
+    "isolatedModules": true,
+    "moduleResolution": "Bundler",
+    "declarationDir": "src/types",
+    "allowJs": true,
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "strict": true,
+    "sourceMap": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "declarationMap": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": [
+    "src/",
+    "types/custom.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "*.stories.tsx",
+    "**/__mocks__"
+  ]
+}
