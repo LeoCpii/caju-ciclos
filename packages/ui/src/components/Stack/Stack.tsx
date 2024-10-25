@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, CSSProperties } from 'react';
 
 import joinClass from '@/utils/joinClass';
 
@@ -12,6 +12,8 @@ interface StackProps extends HTMLAttributes<HTMLElement> {
     orientation?: Orientation;
     spacing?: Spacing;
     tag?: React.ElementType;
+    justify?: CSSProperties['justifyContent'];
+    align?: CSSProperties['alignItems'];
 }
 
 export default function Stack({
@@ -19,13 +21,19 @@ export default function Stack({
     tag = 'div',
     spacing = 'medium',
     orientation = 'column',
+    justify,
+    align,
     ...props
 }: Readonly<StackProps>) {
     const CustomTag = tag;
     const cls = joinClass(['cj-stack', `cj-stack__${spacing}`, `cj-stack__${orientation}`, props.className]);
 
     return (
-        <CustomTag {...props} className={cls}>
+        <CustomTag
+            {...props}
+            className={cls}
+            style={{ justifyContent: justify, alignItems: align, ...props.style }}
+        >
             {children}
         </CustomTag>
     );
