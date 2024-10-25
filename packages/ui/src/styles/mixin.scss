@@ -1,3 +1,5 @@
+@use "sass:string";
+
 // GRID
 @mixin grid($gap: 0, $grid-columns: 12, $grid-rows: 1) {
     width: 100%;
@@ -6,7 +8,7 @@
     position: relative;
     grid-template-rows: $grid-rows;
     grid-template-columns: repeat($grid-columns, 1fr);
-    -ms-grid-columns: unquote(repeater("1fr ", $grid-columns));
+    -ms-grid-columns: string.unquote(repeater("1fr ", $grid-columns));
 }
 
 @mixin grid-column-start($cols) {
