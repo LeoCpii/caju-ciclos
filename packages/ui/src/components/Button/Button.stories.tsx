@@ -64,4 +64,12 @@ export const Size: StoryObj<typeof Button> = {
     }
 };
 
+export const States: StoryObj<typeof Button> = {
+    render: () => {
+        return (
+            <Button disabled>Medium</Button>
+        );
+    }
+};
+
 export default meta;

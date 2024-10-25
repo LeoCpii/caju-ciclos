@@ -13,7 +13,7 @@ export default function ButtonIcon({ children, ...props }: ButtonIconProps) {
     ]);
 
     return (
-        <button {...props} className={cls} >
+        <button {...props} className={cls}>
             {children}
             <Ripple />
         </button>
