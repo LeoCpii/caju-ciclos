@@ -1,0 +1,45 @@
+$colors: (
+    'primary',
+    'secondary',
+    'error',
+    'success',
+    'info',
+    'warning'
+);
+
+$colors-text: (
+    'primary',
+    'secondary',
+    'disabled'
+);
+
+$colors-background: (
+    'paper',
+    'default'
+);
+
+$colors-divider: (
+    'divider'
+);
+
+/* FONT SIZE */
+$font-small: 16px;
+$font-medium: 24px;
+$font-large: 32px;
+
+$sizes: (
+    'small',
+    'large',
+    'medium'
+);
+
+/* FONT FAMILY */
+$font-regular: "poppins" !important;
+$font-light: "poppins-light" !important;
+$font-bold: "poppins-bold" !important;
+$font-semibold: "poppins-semibold" !important;
+
+/* FONT FAMILY */
+$spacing-regular: 16px;
+$spacing-small: 8px;
+$spacing-xlarge: 32px;
