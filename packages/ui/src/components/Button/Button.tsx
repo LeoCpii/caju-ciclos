@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type HTMLAttributes, cloneElement } from 'react';
+import { type PropsWithChildren, type ButtonHTMLAttributes, cloneElement } from 'react';
 
 import Ripple from '@/components/Ripple';
 import joinClass from '@/utils/joinClass';
@@ -6,7 +6,7 @@ import type { Colors, Size } from '@/theme';
 
 import './Button.scss';
 
-interface ButtonProps extends PropsWithChildren<HTMLAttributes<HTMLButtonElement>> {
+interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
     size?: Size;
     color?: Colors;
     endIcon?: React.JSX.Element;
