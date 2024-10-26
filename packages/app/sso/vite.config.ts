@@ -18,6 +18,9 @@ export default defineConfig({
     server: {
         host: true,
     },
+    css: {
+        postcss: '@caju/ui/styles/index.css',
+    },
     optimizeDeps: {
         esbuildOptions: {
             // Node.js global to browser globalThis
