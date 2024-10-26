@@ -18,6 +18,16 @@ jobs:
       BUILD_ENV: production
     secrets: inherit
   
+  project-env:
+    runs-on: ubuntu-latest
+    outputs:
+      PROJECT_ENV: ${{ steps.convert.outputs.PROJECT_ENV }}
+    steps:
+      - name: Convert inputs to uppercase and set environment variables
+        id: convert
+        run: |
+          echo "::set-output name=PROJECT_ENV::$(echo ${{ inputs.project }} | tr '[:lower:]' '[:upper:]')"
+
   build-dependencies:
     needs: [setup]
     uses: ./.github/workflows/dependencies.yml
@@ -26,10 +36,10 @@ jobs:
     secrets: inherit
 
   build-project:
-    needs: [setup]
+    needs: [setup, project-env, build-dependencies]
     uses: ./.github/workflows/projects.yml
     with:
-      ENVIRONMENT: PROD
+      ENVIRONMENT: ${{ needs.project-env.outputs.PROJECT_ENV }}
       BUILD_ENV: production
       PATH: dist
       PROJECT: ${{ inputs.project }}
@@ -37,10 +47,10 @@ jobs:
     secrets: inherit
 
   deploy-project:
-    needs: [build-project]
+    needs: [build-project, project-env]
     uses: ./.github/workflows/deploy.yml
     with:
-      ENVIRONMENT: PROD
+      ENVIRONMENT: ${{ needs.project-env.outputs.PROJECT_ENV }}
       BUILD_ENV: production
       PATH: dist
       PROJECT: ${{ inputs.project }}
