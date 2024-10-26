@@ -26,12 +26,11 @@
     "forceConsistentCasingInFileNames": true,
   },
   "include": [
-    "src/",
-    "types/custom.d.ts"
+    "src/"
   ],
   "exclude": [
-    "node_modules",
     "dist",
+    "node_modules",
     "*.stories.tsx",
     "**/__mocks__"
   ]
