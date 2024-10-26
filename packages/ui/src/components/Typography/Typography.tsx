@@ -1,6 +1,6 @@
 import type { PropsWithChildren, HTMLAttributes } from 'react';
 
-import { Path } from '@caju/services/interface';
+import { Path } from '@caju/toolkit/interface';
 
 import joinClass from '@/utils/joinClass';
 import { useTheme, type PaletteBuilded, convertPathToColor } from '@/theme';

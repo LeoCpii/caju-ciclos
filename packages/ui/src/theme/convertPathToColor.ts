@@ -1,4 +1,4 @@
-import type { Path } from '@caju/services/interface';
+import type { Path } from '@caju/toolkit/interface';
 
 import type { PaletteBuilded } from './Theme';
 

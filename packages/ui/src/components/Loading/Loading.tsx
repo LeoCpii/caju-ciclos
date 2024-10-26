@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 
-import type { Path } from '@caju/services/interface';
+import type { Path } from '@caju/toolkit/interface';
 
 import joinClass from '@/utils/joinClass';
 import { convertPathToColor, useTheme, type PaletteBuilded } from '@/theme';
