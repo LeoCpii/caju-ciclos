@@ -1,5 +1,13 @@
+import { Outlet } from 'react-router-dom';
+
+import { ThemeProvider, createTheme } from '@caju/ui/theme';
+
+import '@caju/ui/styles';
+
 export default function App() {
     return (
-        <h1>APP</h1>
+        <ThemeProvider theme={createTheme()}>
+            <Outlet />
+        </ThemeProvider>
     );
 };
