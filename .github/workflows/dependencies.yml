@@ -3,7 +3,7 @@ name: Build Dependencies
 on:
   workflow_call:
     inputs:
-      ENV:
+      BUILD_ENV:
         required: true
         type: string
 
@@ -24,14 +24,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-setup-${{ inputs.ENV }}-${{ hashFiles('./yarn.lock') }}
+          key: ${{ runner.os }}-setup-${{ inputs.BUILD_ENV }}-${{ hashFiles('./yarn.lock') }}
 
       - name: Cache Dependencies
         id: cache-dependencies
         uses: actions/cache@v4
         with:
           path: "**/packages/*/dist"
-          key: ${{ runner.os }}-dependencies-${{ inputs.ENV }}-${{ github.sha }}
+          key: ${{ runner.os }}-dependencies-${{ inputs.BUILD_ENV }}-${{ github.sha }}
 
       - name: Build dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'

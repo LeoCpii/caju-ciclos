@@ -1,5 +1,5 @@
 name: CD - PRD
-run-name: Deploy to "${{ inputs.project }}" by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.project }}
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
     needs: [setup]
     uses: ./.github/workflows/dependencies.yml
     with:
-      ENV: prod
+      BUILD_ENV: production
     secrets: inherit
 
   build-project:
