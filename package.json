@@ -15,6 +15,8 @@
   },
   "devDependencies": {
     "@caju/services": "*",
+    "@caju/toolkit": "*",
+    "@caju/ui": "*",
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",
     "eslint-plugin-import-helpers": "^2.0.1",

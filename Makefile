@@ -2,23 +2,29 @@ RUN:=yarn
 
 NAME:=caju
 
-# STYLE #
-ERROR=\x1b[41m
-SUCCESS=\x1b[42m
-RESET=\x1b[0m
-WARN=\x1b[30;43m
+# STYLE BOX #
+ERROR_BOX=\x1b[41m
+SUCCESS_BOX=\x1b[42m
+RESET_BOX=\x1b[0m
+WARN_BOX=\x1b[30;43m
+
+# STYLE COLOR #
+ERROR_TEXT=\x1b[31m       
+SUCCESS_TEXT=\x1b[32m     
+RESET_TEXT=\x1b[0m        
+WARN_TEXT=\x1b[33m        
 
 # ------------------------------------------------------------------------------------ #
 
 # Função para executar comandos dentro do workspace
 define run_in_workspace
 	@echo ------------------------------------------------------------------------------;
-	@printf "${WARN} RUNNING ${RESET}: $(1) - $(2) $(3)\n";
+	@printf "${WARN_BOX} RUNNING ${RESET_BOX}: $(1) - $(2) $(3)\n";
 	@echo ;
 	@$(RUN) workspace @$(NAME)/$(1) $(2) $(3)
 
 	@if [ $$? -eq 0 ]; then \
-		printf "${SUCCESS} SUCCESS ${RESET}: $(1) - $(2) $(3)\n"; \
+		printf "${SUCCESS_BOX} SUCCESS ${RESET_BOX}: $(1) - $(2) $(3)\n"; \
 		echo ------------------------------------------------------------------------------; \
 	fi
 endef
@@ -48,10 +54,10 @@ define delete_build
 endef
 
 clean-builds:
+	$(call delete_build,shared/toolkit)
 	$(call delete_build,shared/services)
-	$(call delete_build,shared/business)
 	$(call delete_build,shared/ui)
-	@printf "${SUCCESS} >>>> Builds deleteds ${RESET}\n";
+	@printf "${SUCCESS_TEXT} >>>> builds deleted successfully ${RESET_TEXT}\n";
 
 define delete_dependencies
 	@echo delete_dependencies $(1)
@@ -61,8 +67,9 @@ endef
 clean-dependencies:
 	rm -Rf ./node_modules
 	$(call delete_dependencies,ui)
+	$(call delete_dependencies,toolkit)
 	$(call delete_dependencies,services)
-	$(call delete_dependencies,business)
+	@printf "${SUCCESS_TEXT} >>>> dependencies deleted successfully ${RESET_TEXT}\n";
 
 build-dependencies:
 	make run services build
