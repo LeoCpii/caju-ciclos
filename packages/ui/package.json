@@ -19,7 +19,8 @@
       "require": "./dist/*/index.js",
       "types": "./dist/*/index.d.ts"
     },
-    "./styles": "./dist/styles/index.css"
+    "./styles": "./dist/styles/index.css",
+    "./styles/*": "./dist/styles/*"
   },
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs ",
