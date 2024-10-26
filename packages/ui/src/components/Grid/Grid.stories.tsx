@@ -4,7 +4,7 @@ import Grid from './Grid';
 import GridItem from './GridItem';
 
 const meta: Meta<typeof Grid> = {
-    title: 'Grid',
+    title: 'components/Grid',
     component: Grid,
 };
 

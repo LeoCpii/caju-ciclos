@@ -5,7 +5,7 @@ import Stack from '@/components/Stack';
 import Loading from './Loading';
 
 const meta: Meta<typeof Loading> = {
-    title: 'Loading',
+    title: 'components/Loading',
     component: Loading,
 };
 

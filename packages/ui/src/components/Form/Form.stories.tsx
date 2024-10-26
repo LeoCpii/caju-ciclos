@@ -13,7 +13,7 @@ import ButtonIcon from '../ButtonIcon';
 import Icon from '../Icon';
 
 const meta: Meta<typeof Form> = {
-    title: 'Form',
+    title: 'components/Form',
     component: Form,
 };
 

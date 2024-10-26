@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import Stack from './Stack';
 
 const meta: Meta<typeof Stack> = {
-    title: 'Stack',
+    title: 'components/Stack',
     component: Stack,
 };
 

@@ -6,7 +6,7 @@ import { Grid, GridItem } from '@/components/Grid';
 import './Colors.scss';
 
 const meta: Meta<any> = {
-    title: 'Colors',
+    title: 'docs/Colors',
 };
 
 function Color({ color }: { color: string }) {

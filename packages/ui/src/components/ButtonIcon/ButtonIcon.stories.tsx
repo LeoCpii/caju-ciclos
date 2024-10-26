@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 import ButtonIcon from './ButtonIcon';
 
 const meta: Meta<typeof ButtonIcon> = {
-    title: 'ButtonIcon',
+    title: 'components/ButtonIcon',
     component: ButtonIcon,
 };
 

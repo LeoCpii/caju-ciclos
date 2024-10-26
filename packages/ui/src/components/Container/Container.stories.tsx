@@ -7,7 +7,7 @@ import Typography from '@/components/Typography';
 import Container from './Container';
 
 const meta: Meta<typeof Container> = {
-    title: 'Container',
+    title: 'components/Container',
     component: Container,
 };
 

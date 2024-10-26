@@ -5,7 +5,7 @@ import { useTheme } from '@/theme';
 import Ripple from './Ripple';
 
 const meta: Meta<typeof Ripple> = {
-    title: 'Ripple',
+    title: 'components/Ripple',
     component: Ripple,
 };
 

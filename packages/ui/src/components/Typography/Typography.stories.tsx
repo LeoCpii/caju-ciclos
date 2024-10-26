@@ -5,7 +5,7 @@ import Stack from '@/components/Stack';
 import Typography from './Typography';
 
 const meta: Meta<typeof Typography> = {
-    title: 'Typography',
+    title: 'components/Typography',
     component: Typography,
 };
 

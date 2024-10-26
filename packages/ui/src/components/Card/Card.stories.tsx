@@ -4,7 +4,7 @@ import Card from './Card';
 import CardContent from './CardContent';
 
 const meta: Meta<typeof Card> = {
-    title: 'Card',
+    title: 'components/Card',
     component: Card,
 };
 

@@ -6,7 +6,7 @@ import Button from './Button';
 import LoadingComponent from '../Loading';
 
 const meta: Meta<typeof Button> = {
-    title: 'Button',
+    title: 'components/Button',
     component: Button,
 };
 
