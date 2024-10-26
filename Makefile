@@ -72,6 +72,6 @@ clean-dependencies:
 	@printf "${SUCCESS_TEXT} >>>> dependencies deleted successfully ${RESET_TEXT}\n";
 
 build-dependencies:
+	make run toolkit build
 	make run services build
-	make run business build
 	make run ui build
