@@ -35,3 +35,36 @@ run:
 	@:
 
 # ----------------------------------------------- #
+
+setup:
+	make clean-builds
+	make clean-dependencies
+	yarn install
+	make build-dependencies
+
+define delete_build
+	@echo delete_build $(1)
+	rm -Rf ./packages/$(1)/dist
+endef
+
+clean-builds:
+	$(call delete_build,shared/services)
+	$(call delete_build,shared/business)
+	$(call delete_build,shared/ui)
+	@printf "${SUCCESS} >>>> Builds deleteds ${RESET}\n";
+
+define delete_dependencies
+	@echo delete_dependencies $(1)
+	rm -Rf ./packages/$(1)/node_modules
+endef
+
+clean-dependencies:
+	rm -Rf ./node_modules
+	$(call delete_dependencies,ui)
+	$(call delete_dependencies,services)
+	$(call delete_dependencies,business)
+
+build-dependencies:
+	make run services build
+	make run business build
+	make run ui build
