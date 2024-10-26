@@ -1,0 +1,47 @@
+name: CD - PRD
+run-name: Deploy to "${{ inputs.project }}" by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        type: choice
+        description: Choice a project
+        required: true
+        options:
+          - sso
+
+jobs:
+  setup:
+    uses: ./.github/workflows/setup.yml
+    with:
+      BUILD_ENV: production
+    secrets: inherit
+  
+  build-dependencies:
+    needs: [setup]
+    uses: ./.github/workflows/dependencies.yml
+    with:
+      ENV: prod
+    secrets: inherit
+
+  build-project:
+    needs: [setup]
+    uses: ./.github/workflows/projects.yml
+    with:
+      ENVIRONMENT: PROD
+      BUILD_ENV: production
+      PATH: dist
+      PROJECT: ${{ inputs.project }}
+      COMMAND: build
+    secrets: inherit
+
+  deploy-project:
+    needs: [build-project]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ENVIRONMENT: PROD
+      BUILD_ENV: production
+      PATH: dist
+      PROJECT: ${{ inputs.project }}
+    secrets: inherit
