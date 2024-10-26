@@ -1,5 +1,5 @@
-export * from './FadeA';
-export * from './ZoomA';
-export * from './SlideA';
+export * from './Fade';
+export * from './Zoom';
+export * from './Slide';
 
 export type { Direction } from './interface';
