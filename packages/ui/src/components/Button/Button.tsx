@@ -36,8 +36,6 @@ export default function Button({
         props.className
     ]);
 
-    console.log('cls', loading);
-
     const renderIcon = (icon: React.JSX.Element, direction: 'left' | 'right') => {
         return cloneElement(icon, {
             className: joinClass([icon.props.className, 'cj-button__icon', `cj-button__icon--${direction}`])
