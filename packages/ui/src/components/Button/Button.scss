@@ -6,19 +6,27 @@
     font-size: 0.875rem;
     padding: 6px 16px;
     border-radius: 5px;
-    transition: all 0.3s;
+    transition: all $animation;
     overflow: hidden;
+    min-height: 37px;
 
     cursor: pointer;
 
     &--small {
         font-size: 0.8125rem;
         padding: 4px 10px;
+        min-height: 33px;
     }
 
     &--large {
         font-size: 0.9375rem;
         padding: 8px 22px;
+        min-height: 41px;
+    }
+
+    &--fullWidth {
+        display: block;
+        width: 100%;
     }
 
     @each $color in $colors {
@@ -46,6 +54,22 @@
 
                 &--right {
                     margin-left: 10px;
+                }
+            }
+
+            .cj-button__loading {
+                color: var(--#{$color}-contrast) !important;
+
+                &--small {
+                    margin-bottom: -5px;
+                }
+
+                &--medium {
+                    margin-bottom: -4px;
+                }
+
+                &--large {
+                    margin-bottom: -3px;
                 }
             }
 

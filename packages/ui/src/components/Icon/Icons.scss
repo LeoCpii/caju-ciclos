@@ -1,7 +1,7 @@
 @use "src/styles/main.scss" as *;
 
 .cj-icon {
-    transition: all 0.3s;
+    transition: all $animation;
 
     &.small {
         font-size: $icon-small;

@@ -1,5 +1,16 @@
 @use 'variables' as *;
 
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    height: auto;
+    transition: all $animation;
+}
+
 h1,
 h2,
 h3,

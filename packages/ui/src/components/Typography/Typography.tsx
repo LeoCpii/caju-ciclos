@@ -35,13 +35,28 @@ const MAP: { [x: string]: keyof JSX.IntrinsicElements } = {
 interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
     variant?: Variant;
     color?: Path<PaletteBuilded>;
+    noMargin?: boolean;
+    gutterBottom?: boolean;
 }
-export default function Typography({ children, variant = 'body1', color = 'text.primary', ...props }: TypographyProps) {
+export default function Typography({
+    children,
+    noMargin,
+    gutterBottom,
+    variant = 'body1',
+    color = 'text.primary',
+    ...props
+}: TypographyProps) {
     const { theme: { palette } } = useTheme();
 
     const CustomTag = MAP[variant];
 
-    const cls = joinClass(['cj-typography', `cj-typography--${variant}`]);
+    const cls = joinClass([
+        'cj-typography',
+        noMargin && 'cj-typography--no-margin',
+        gutterBottom && 'cj-typography--gutter-bottom',
+        `cj-typography--${variant}`,
+        props.className
+    ]);
 
     const c = convertPathToColor(color, palette);
 

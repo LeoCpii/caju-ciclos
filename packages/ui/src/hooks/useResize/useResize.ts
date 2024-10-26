@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
 export enum DeviceBreakpoints {
-    MAX_MOBILE = '(max-width: 719px)',
-    MIN_TABLET = '(min-width: 720px)',
+    MAX_MOBILE = '(max-width: 759px)',
+    MIN_TABLET = '(min-width: 760px)',
     MAX_TABLET = '(max-width: 1023px)',
     MIN_DESKTOP = '(min-width: 1024px)',
     MAX_DESKTOP = '(max-width: 1279px)',

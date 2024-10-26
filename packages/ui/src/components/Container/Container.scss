@@ -1,14 +1,7 @@
 @use "src/styles/main.scss" as *;
 
 .cj-container {
-    width: 600px;
     margin: auto;
 
-    @include for-expanded {
-        width: 800px;
-    }
-
-    @include for-compacted {
-        width: 100%;
-    }
+    padding: 0px 16px;
 }

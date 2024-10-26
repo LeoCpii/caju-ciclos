@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Button from './Button';
 import Icon from '../Icon';
 import Stack from '../Stack';
+import Button from './Button';
+import LoadingComponent from '../Loading';
 
 const meta: Meta<typeof Button> = {
     title: 'Button',
@@ -67,7 +68,25 @@ export const Size: StoryObj<typeof Button> = {
 export const States: StoryObj<typeof Button> = {
     render: () => {
         return (
-            <Button disabled>Medium</Button>
+            <Button disabled>Disabled</Button>
+        );
+    }
+};
+
+export const Loading: StoryObj<typeof Button> = {
+    render: () => {
+        return (
+            <>
+                <Button size="small" loading={<LoadingComponent />}>
+                    loading text
+                </Button>
+                <Button loading={<LoadingComponent />}>
+                    loading text
+                </Button>
+                <Button size="large" loading={<LoadingComponent />}>
+                    loading text
+                </Button>
+            </>
         );
     }
 };

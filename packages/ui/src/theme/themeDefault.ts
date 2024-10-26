@@ -15,8 +15,8 @@ export const themeDefaultLight: Theme = {
             disabled: 'rgba(0, 0, 0, 0.38)'
         },
         background: {
-            paper: '#f9f9f9',
-            default: '#f1f1f1',
+            paper: '#f1f1f1',
+            default: '#f9f9f9',
         },
         divider: 'rgba(0, 0, 0, 0.12)'
     }

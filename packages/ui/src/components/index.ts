@@ -6,6 +6,7 @@ export * from './Input';
 export * from './Stack';
 export * from './Ripple';
 export * from './Button';
+export * from './Loading';
 export * from './Container';
 export * from './ButtonIcon';
 export * from './Typography';
