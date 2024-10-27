@@ -6,6 +6,7 @@ import './Select.scss';
 
 export interface OptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     value: any;
+    children: string;
 }
 export default function Option({ children, ...props }: OptionProps) {
 

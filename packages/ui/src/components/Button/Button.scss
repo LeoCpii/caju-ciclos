@@ -42,6 +42,10 @@
                 background-color: var(--divider);
                 color: var(--text-disabled);
                 cursor: not-allowed;
+
+                .cj-button__icon {
+                    color: var(--text-disabled) !important;
+                }
             }
 
             .cj-button__icon {

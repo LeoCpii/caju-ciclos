@@ -3,13 +3,14 @@
 .cj-select {
     width: 100%;
     cursor: pointer;
+    font-size: 14px;
 
     input {
         cursor: pointer;
 
         &:read-only {
             background-color: var(--background-default);
-            color: var(--text-disabled);
+            color: var(--text-primary);
         }
     }
 }

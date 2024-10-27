@@ -41,7 +41,7 @@ export default [
                         ['/^react/'],
                         'module',
                         '/^@hello-pangea/',
-                        '/^@(?!/)/',
+                        // '/^@(?!/)/',
                         '/^@caju/ui/',
                         '/^@caju/toolkit/',
                         '/^@caju/services/',

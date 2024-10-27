@@ -14,7 +14,7 @@ import Menu, { useMenu } from '@/components/Menu';
 
 import type { OptionProps } from './Option';
 
-import '@/components/Input/Input.scss';
+import '../Input/Input.scss';
 import './Select.scss';
 
 export type InputType = 'text' | 'password' | 'number' | 'date';
@@ -39,10 +39,12 @@ export default function Select({
     children,
     ...props
 }: SelectProps) {
-    const [value, setValue] = useState(props.value);
-    const [open, el, ref, toggle] = useMenu();
-
     const arrayChildren = Children.toArray(children) as ReactElement<OptionProps>[];
+
+    const [value, setValue] = useState(arrayChildren.find((child) =>
+        child.props.value === props.value)?.props.children || '');
+
+    const [open, el, ref, toggle] = useMenu();
 
     const containerClss = joinClass([
         'cj-input-container',
@@ -83,12 +85,9 @@ export default function Select({
         return arrayChildren.map((child) => {
             return cloneElement(child, {
                 onClick: (e) => {
-                    console.log(child.props.value);
-                    setValue(child.props.value);
+                    setValue(child.props.children);
 
-                    if (props.onChange) {
-                        props.onChange(e);
-                    }
+                    if (props.onChange) { props.onChange(e); }
                 }
             });
         });

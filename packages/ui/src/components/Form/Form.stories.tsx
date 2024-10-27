@@ -34,7 +34,7 @@ export const Template: StoryObj<typeof Form> = {
                 name: new FormControl({ value: 'Goku', required: true }),
                 email: new FormControl({ value: 'goku@dragonball.com', required: true, type: 'email' }),
                 tel: new FormControl({ value: '21999999999', type: 'tel' }),
-                options: new FormControl({ value: '1' }),
+                options: new FormControl({ value: '3' }),
                 password: new FormControl({ value: '', type: 'password', required: true }),
                 confirmPassword: new FormControl({ value: '', type: 'password', required: true }),
             },

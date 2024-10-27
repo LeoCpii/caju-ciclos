@@ -68,7 +68,7 @@ export const Size: StoryObj<typeof Button> = {
 export const States: StoryObj<typeof Button> = {
     render: () => {
         return (
-            <Button disabled>Disabled</Button>
+            <Button disabled startIcon={<Icon name="star" />}>Disabled</Button>
         );
     }
 };
