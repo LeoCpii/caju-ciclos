@@ -40,12 +40,12 @@ export const Icon: StoryObj<typeof Input> = {
             <Stack orientation="column">
                 <Input type={data.type as InputType} endIcon={
                     <ButtonIcon onClick={() => setVisible(prev => prev === 'hide' ? 'show' : 'hide')}>
-                        <IconComponent icon={data.icon} />
+                        <IconComponent name={data.icon} />
                     </ButtonIcon>
                 } />
                 <Input type="text" startIcon={
                     <ButtonIcon>
-                        <IconComponent icon="search" />
+                        <IconComponent name="search" />
                     </ButtonIcon>
                 } />
             </Stack>

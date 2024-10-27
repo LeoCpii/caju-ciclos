@@ -13,9 +13,9 @@ export const size: StoryObj<typeof Icon> = {
     render: () => {
         return (
             <>
-                <Icon icon={icon} size="small" />
-                <Icon icon={icon} />
-                <Icon icon={icon} size="large" />
+                <Icon name={icon} size="small" />
+                <Icon name={icon} />
+                <Icon name={icon} size="large" />
             </>
         );
     }
@@ -25,12 +25,12 @@ export const colors: StoryObj<typeof Icon> = {
     render: () => {
         return (
             <>
-                <Icon icon={icon} color="primary" />
-                <Icon icon={icon} color="secondary" />
-                <Icon icon={icon} color="success" />
-                <Icon icon={icon} color="warning" />
-                <Icon icon={icon} color="error" />
-                <Icon icon={icon} color="info" />
+                <Icon name={icon} color="primary" />
+                <Icon name={icon} color="secondary" />
+                <Icon name={icon} color="success" />
+                <Icon name={icon} color="warning" />
+                <Icon name={icon} color="error" />
+                <Icon name={icon} color="info" />
             </>
         );
     }

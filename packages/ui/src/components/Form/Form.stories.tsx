@@ -110,7 +110,7 @@ export const Template: StoryObj<typeof Form> = {
                                 helperText={control.messageError}
                                 endIcon={
                                     <ButtonIcon>
-                                        <Icon icon="eye" />
+                                        <Icon name="eye" />
                                     </ButtonIcon>
                                 }
                             />}
@@ -129,7 +129,7 @@ export const Template: StoryObj<typeof Form> = {
                                 helperText={control.messageError}
                                 endIcon={
                                     <ButtonIcon>
-                                        <Icon icon="eye" />
+                                        <Icon name="eye" />
                                     </ButtonIcon>
                                 }
                             />}

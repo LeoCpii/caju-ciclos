@@ -13,7 +13,7 @@ export const Template: StoryObj<typeof ButtonIcon> = {
     render: () => {
         return (
             <ButtonIcon>
-                <Icon icon="star" />
+                <Icon name="star" />
             </ButtonIcon>
         );
     }
