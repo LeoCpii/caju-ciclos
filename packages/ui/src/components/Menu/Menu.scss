@@ -1,0 +1,15 @@
+.cj-menu {
+    position: absolute;
+    word-break: break-all;
+    white-space: pre-wrap;
+
+    &.open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &.close {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
