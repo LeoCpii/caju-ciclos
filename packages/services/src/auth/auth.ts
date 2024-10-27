@@ -21,11 +21,12 @@ export default class Auth {
             });
     }
 
-    public async logout() {
+    public async logout(redirect: () => void) {
         return this.methods.signout()
             .then(() => {
                 local.remove('user');
                 this.cookies.remove('access_token');
+                redirect();
             });
     }
 }
