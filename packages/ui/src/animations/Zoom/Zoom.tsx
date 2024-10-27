@@ -23,7 +23,7 @@ export default function Zoom({ children, enter, delay = 0, timeout = .2 }: Reado
     }, [enter]);
 
     return (
-        <div style={{ ...style, width: 'fit-content' }}>
+        <div style={{ ...style }}>
             {children}
         </div>
     );
