@@ -16,7 +16,7 @@ interface ControlProps<
 > extends InputHTMLAttributes<InputHTMLAttributes<any>> {
     controlName: Key;
     // children: React.ReactNode;
-    action?: 'onBlur' | 'onChange' | 'onInput';
+    action?: 'onChange' | 'onInput';
     type?: 'text' | 'checkbox' | 'radio' | 'number';
     field: (control: FormControl<any>) => React.JSX.Element;
 }
@@ -31,6 +31,7 @@ export default function Control<Form>({
 
     const renderChildren = (child: ReactElement<ControlProps<Form>>) => {
         return cloneElement(child, {
+            onBlur: () => { control.dirty = true; },
             [action]: (e: ActionParams[typeof type]) => update(
                 ['radio', 'checkbox'].includes(type)
                     ? e.target['checked']

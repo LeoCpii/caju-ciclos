@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import { Select, Option } from '@/components/Select';
 import { Card, CardContent } from '@/components/Card';
 
 import Form from './Form';
@@ -21,6 +22,7 @@ interface IFormTeste {
     tel: string;
     name: string;
     email: string;
+    options: string;
     password: string;
     confirmPassword: string;
 }
@@ -31,8 +33,9 @@ export const Template: StoryObj<typeof Form> = {
             form: {
                 name: new FormControl({ value: 'Goku', required: true }),
                 email: new FormControl({ value: 'goku@dragonball.com', required: true, type: 'email' }),
-                password: new FormControl({ value: '', type: 'password', required: true }),
                 tel: new FormControl({ value: '21999999999', type: 'tel' }),
+                options: new FormControl({ value: '1' }),
+                password: new FormControl({ value: '', type: 'password', required: true }),
                 confirmPassword: new FormControl({ value: '', type: 'password', required: true }),
             },
             handle: {
@@ -96,6 +99,25 @@ export const Template: StoryObj<typeof Form> = {
                                 error={control.isInvalid}
                                 helperText={control.messageError}
                             />}
+                        />
+                        <Control
+                            controlName="options"
+                            action="onChange"
+                            field={(control) => (
+                                <Select
+                                    fullWidth
+                                    gutterBottom
+                                    label="options"
+                                    value={control.value}
+                                    error={control.isInvalid}
+                                    helperText={control.messageError}
+                                >
+                                    <Option value="1">Option 1</Option>
+                                    <Option value="2">Option 2</Option>
+                                    <Option value="3">Option 3</Option>
+                                    <Option value="4">Option 4</Option>
+                                </Select>
+                            )}
                         />
                         <Control
                             controlName="password"

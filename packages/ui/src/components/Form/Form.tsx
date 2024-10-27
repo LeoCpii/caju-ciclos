@@ -55,12 +55,12 @@ function Log<T,>({ formGroup }: Readonly<{ formGroup: FormGroup<T> }>) {
     );
 }
 
-interface NewFormProps extends FormHTMLAttributes<HTMLFormElement> {
+interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
     debug?: boolean;
     formGroup: FormGroup<any>;
     children: React.ReactNode;
 }
-export default function NewForm({ children, formGroup, debug = false, ...props }: Readonly<NewFormProps>) {
+export default function Form({ children, formGroup, debug = false, ...props }: Readonly<FormProps>) {
     const arrayChildren = Children.toArray(children) as ChildrenElem;
 
     useEffect(() => { validateChildren(arrayChildren, formGroup); }, []);

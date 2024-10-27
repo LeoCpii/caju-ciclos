@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import debounce from './debounce';
+import debounce from '@/utils/debounce';
+
 import FormContext from './FormContext';
 
 function sanitize(value: string) {
@@ -17,7 +18,6 @@ export default function useControl<T>(controlName: keyof T, delay = 0) {
     const update = (value: any) => {
         debounce.delay(() => {
             control.value = value;
-            control.dirty = true;
 
             formGroup.update({ [controlName]: shouldSanitize ? sanitize(value) : value });
         }, delay);
