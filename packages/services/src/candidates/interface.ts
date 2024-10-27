@@ -1,19 +1,17 @@
 import { SKILLS } from './skills';
 
-export type CandidateStatus = 'pending' | 'approved' | 'rejected';
 export type Position = 'frontend' | 'backend';
 export type Skills = typeof SKILLS[number];
 
 export interface CandidateData {
+    id: string;
     cpf: string;
     name: string;
     email: string;
     admissionDate: string;
-    ownerId: string;
     picture: string;
-    status: CandidateStatus;
-    position: Position;
     skills: Skills[];
+    position: Position;
 }
 
 export type BasicCandidateData = Pick<CandidateData,
@@ -21,6 +19,5 @@ export type BasicCandidateData = Pick<CandidateData,
     | 'name'
     | 'email'
     | 'admissionDate'
-    | 'ownerId'
     | 'position'
 >;

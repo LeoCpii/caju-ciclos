@@ -1,27 +1,26 @@
 import { uuid } from '@caju/toolkit/uuid';
 
-import DB from '@/db';
-
 import generateSkills from './generateSkills';
-import type { CandidateData, BasicCandidateData } from './interface';
+import type { CandidateData, BasicCandidateData, Position } from './interface';
 
-export default class CandidatesServices {
-    private static PATH = 'candidates';
+export default class CandidatesServices implements CandidateData {
+    public id: string;
+    public cpf: string;
+    public name: string;
+    public email: string;
+    public picture: string;
+    public skills: string[];
+    public admissionDate: string;
+    public position: Position;
 
-    constructor(private db: DB) { }
-
-    async createAdmission(data: BasicCandidateData) {
-        const id = uuid();
-
-        return this.db.setItem<CandidateData>({
-            path: CandidatesServices.PATH,
-            data: {
-                ...data,
-                status: 'pending',
-                picture: `https://robohash.org/${data.name}`,
-                skills: generateSkills()
-            },
-            pathSegments: [id],
-        });
+    constructor(basic: BasicCandidateData) {
+        this.id = uuid();
+        this.cpf = basic.cpf;
+        this.name = basic.name;
+        this.email = basic.email;
+        this.picture = `https://robohash.org/${basic.name}`;
+        this.skills = generateSkills();
+        this.admissionDate = basic.admissionDate;
+        this.position = basic.position;
     }
 }
