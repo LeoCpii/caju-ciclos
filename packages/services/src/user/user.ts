@@ -5,11 +5,11 @@ import db from '@/db';
 
 import type { UserData } from './interface';
 
-export default class User {
+export default class UserServices {
     private static PATH = 'users';
     private cookies = new Cookies();
 
-    constructor(private db: db) { }
+    constructor(private db: db, private urlToRedirect: string) { }
 
     get currentByToken() {
         try {
@@ -22,7 +22,7 @@ export default class User {
                 user_id: data.user_id,
             };
         } catch {
-            window.location.href = '/auth';
+            window.location.href = this.urlToRedirect;
             return { name: '', email: '', picture: '', user_id: '' };
         }
     }
@@ -42,7 +42,7 @@ export default class User {
 
     async getUserByEmail(email: string) {
         return this.db.getItem<UserData>({
-            path: User.PATH,
+            path: UserServices.PATH,
             pathSegments: [],
             filters: [{ field: 'email', operator: '==', value: email }],
         });
@@ -50,9 +50,9 @@ export default class User {
 
     async createUser() {
         return this.db.setItem<UserData>({
-            path: User.PATH,
+            path: UserServices.PATH,
             data: this.currentByToken,
             pathSegments: [this.currentByToken.email],
-        }).then(() => { this.current = this.currentByToken; });
+        });
     }
 }
