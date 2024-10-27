@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
                 loader: () => document.title = 'Caju - Login',
                 element: <Signin />,
             },
+            {
+                path: '*',
+                element: <Navigate to='/signin' />,
+            }
         ]
     },
 ]);

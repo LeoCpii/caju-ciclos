@@ -12,6 +12,7 @@ interface ImportMetaEnv {
 
     // URLS
     readonly VITE_SSO_URL: string;
+    readonly VITE_MANAGER_URL: string;
 }
 
 interface ImportMeta {

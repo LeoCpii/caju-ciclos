@@ -9,13 +9,13 @@ import Container from '@caju/ui/components/Container';
 import Typography from '@caju/ui/components/Typography';
 import { Card, CardContent } from '@caju/ui/components/Card';
 
-import { authServices, userServices } from '@/services/core';
+import { authServices, userServices, url } from '@/services/core';
 
 export default function Signin() {
     const [loading, setLoading] = useState(false);
 
     const redirect = () => {
-        console.log('redirect', userServices.current.name);
+        window.open(url.manager, '_self');
     };
 
     const signinWithGoogle = () => {

@@ -9,6 +9,7 @@ import User from '@caju/services/user';
 // VARIABLES
 export const url = {
     sso: import.meta.env.VITE_SSO_URL,
+    manager: import.meta.env.VITE_MANAGER_URL,
 };
 
 // FIREBASE

@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { authServices } from '@/services/core';
+import { authServices, url } from '@/services/core';
 
 export const UserLoggedOutGuard = ({ children }: React.PropsWithChildren<unknown>) => {
-    const pathRedirect = '/auth/signin';
-    const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        if (!authServices.access_token && location.pathname !== pathRedirect) {
-            navigate(pathRedirect);
+        if (!authServices.access_token) {
+            window.open(url.sso, '_self');
             return;
         }
     }, [location]);
