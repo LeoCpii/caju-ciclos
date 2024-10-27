@@ -4,8 +4,7 @@ import joinClass from '@/utils/joinClass';
 
 import './Input.scss';
 
-export type InputType = 'text' | 'password' | 'number';
-export type ErrorState = 'show' | 'hide';
+export type InputType = 'text' | 'password' | 'number' | 'date';
 
 interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
     error?: boolean;
@@ -14,8 +13,8 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>
     helperText?: string;
     gutterBottom?: boolean;
     type?: InputType;
-    endIcon?: React.JSX.Element;
-    startIcon?: React.JSX.Element;
+    endIcon?: React.JSX.Element | boolean;
+    startIcon?: React.JSX.Element | boolean;
 }
 export default function Input({
     error,
@@ -66,9 +65,9 @@ export default function Input({
         <div className={containerClss}>
             {label && <label className={labelClss}>{label} {props.required && '*'}</label>}
             <div className={clss}>
-                {startIcon && renderIcon(startIcon, 'right')}
+                {startIcon && renderIcon(startIcon as React.JSX.Element, 'right')}
                 <input {...props} type={type} />
-                {endIcon && renderIcon(endIcon, 'left')}
+                {endIcon && renderIcon(endIcon as React.JSX.Element, 'left')}
             </div>
             <span className={helperTextClss}>{helperText}</span>
         </div>

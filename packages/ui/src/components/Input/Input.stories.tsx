@@ -20,6 +20,7 @@ export const InputTypes: StoryObj<typeof Input> = {
                 <Input placeholder="Text" />
                 <Input placeholder="Password" type="password" />
                 <Input placeholder="Number" type="number" />
+                <Input placeholder="Date" type="date" />
             </Stack>
         );
     }

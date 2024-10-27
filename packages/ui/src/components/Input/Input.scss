@@ -29,6 +29,7 @@
     border: 1px solid var(--divider);
     font-family: $font-regular;
     position: relative;
+    background-color: var(--background-default);
 
     display: flex;
     justify-content: space-between;
@@ -40,7 +41,6 @@
 
     &--error {
         border-color: var(--error);
-        // margin-bottom: 30px;
     }
 
     input {
@@ -97,9 +97,11 @@
     &__icon {
         &--left {
             margin-right: 8px;
+            margin-left: -8px;
         }
 
         &--right {
+            margin-right: -8px;
             margin-left: 8px;
         }
     }
