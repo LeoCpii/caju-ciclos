@@ -1,18 +1,20 @@
 import { HTMLAttributes, CSSProperties } from 'react';
 
 import joinClass from '@/utils/joinClass';
+import { ThemeBuilded, useTheme } from '@/theme';
 
 import './Stack.scss';
-import { ThemeBuilded, useTheme } from '@/theme';
 
 type Orientation = 'row' | 'column';
 type Spacing = 'small' | 'medium' | 'large';
 
 interface StackProps extends HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
-    orientation?: Orientation;
-    spacing?: Spacing;
     tag?: React.ElementType;
+    nogap?: boolean;
+    spacing?: Spacing;
+    orientation?: Orientation;
+
     justify?: CSSProperties['justifyContent'];
     align?: CSSProperties['alignItems'];
     sx?: (theme: ThemeBuilded) => CSSProperties;
@@ -24,6 +26,7 @@ export default function Stack({
     justify,
     children,
     tag = 'div',
+    nogap = false,
     spacing = 'medium',
     orientation = 'column',
     ...props
@@ -31,7 +34,13 @@ export default function Stack({
     const { theme } = useTheme();
 
     const CustomTag = tag;
-    const cls = joinClass(['cj-stack', `cj-stack__${spacing}`, `cj-stack__${orientation}`, 'VBVVVV', props.className]);
+    const cls = joinClass([
+        'cj-stack',
+        nogap && 'cj-stack__nogap',
+        `cj-stack__${spacing}`,
+        `cj-stack__${orientation}`,
+        props.className
+    ]);
 
     const style = sx ? sx(theme) : {};
 

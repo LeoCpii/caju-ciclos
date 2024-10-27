@@ -24,4 +24,8 @@
     &__large {
         gap: $spacing-xlarge;
     }
+
+    &__nogap {
+        gap: 0;
+    }
 }
