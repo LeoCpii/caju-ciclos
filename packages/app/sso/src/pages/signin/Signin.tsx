@@ -55,12 +55,12 @@ export default function Signin() {
                         <CardContent>
                             <Typography variant="subtitle1" noMargin gutterBottom>Login</Typography>
                             <Typography variant="body2" noMargin gutterBottom>
-                                Use sua conta do Google para acessar o Sprint Review.
+                                Use sua conta do Google para acessar o desafio Caju.
                             </Typography>
                             <Button
                                 fullWidth
                                 size="large"
-                                startIcon={<Icon icon="google" />}
+                                startIcon={<Icon name="google" />}
                                 style={{ marginTop: 16 }}
                                 loading={loading && <Loading />}
                                 onClick={signinWithGoogle}
