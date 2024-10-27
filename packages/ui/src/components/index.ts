@@ -4,6 +4,7 @@ export * from './Icon';
 export * from './Card';
 export * from './Input';
 export * from './Stack';
+export * from './Avatar';
 export * from './Ripple';
 export * from './Button';
 export * from './Loading';
