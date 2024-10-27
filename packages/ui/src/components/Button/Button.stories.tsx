@@ -41,11 +41,11 @@ export const WithIcon: StoryObj<typeof Button> = {
     render: () => {
         return (
             <Stack orientation="row">
-                <Button startIcon={<Icon icon="star" />}>
+                <Button startIcon={<Icon name="star" />}>
                     Contained
                 </Button>
 
-                <Button endIcon={<Icon icon="star" />}>
+                <Button endIcon={<Icon name="star" />}>
                     Contained
                 </Button>
             </Stack>

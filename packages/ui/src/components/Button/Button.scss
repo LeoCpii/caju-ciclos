@@ -107,12 +107,7 @@
                 color: var(--#{$color});
 
                 &:hover {
-                    background-color: var(--#{$color});
-                    color: var(--#{$color}-contrast);
-                }
-
-                &:hover .cj-button__icon {
-                    color: var(--#{$color}-contrast) !important;
+                    background-color: var(--divider);
                 }
 
                 .cj-button__icon {
