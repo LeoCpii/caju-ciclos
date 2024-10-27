@@ -3,6 +3,7 @@ export * from './jwt';
 export * from './url';
 export * from './uuid';
 export * from './array';
+export * from './object';
 export * from './logger';
 export * from './string';
 export * from './interface';
