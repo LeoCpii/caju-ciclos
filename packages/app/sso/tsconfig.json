@@ -26,9 +26,6 @@
     "paths": {
       "@/*": [
         "src/*"
-      ],
-      "@core": [
-        "src/shared/core.ts"
       ]
     },
   },

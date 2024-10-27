@@ -31,7 +31,6 @@ export default function Signin() {
         userServices.getUserByEmail(email)
             .then(current => {
                 if (current) {
-                    userServices.current = current;
                     setTimeout(() => { redirect(); }, 500);
                     return;
                 }

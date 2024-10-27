@@ -6,6 +6,11 @@ import DB from '@caju/services/db';
 import Auth from '@caju/services/auth';
 import User from '@caju/services/user';
 
+// VARIABLES
+export const url = {
+    sso: import.meta.env.VITE_SSO_URL,
+};
+
 // FIREBASE
 const app = initializeApp({
     appId: import.meta.env.VITE_ID,
@@ -29,4 +34,4 @@ export const authServices = new Auth({
 export const db = new DB(getFirestore(app));
 
 // ENTITY SERVICES
-export const userServices = new User(db);
+export const userServices = new User(db, url.sso);
