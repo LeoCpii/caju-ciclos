@@ -1,14 +1,12 @@
 import { HTMLAttributes } from 'react';
 
-import type { Path } from '@caju/toolkit/interface';
-
 import joinClass from '@/utils/joinClass';
-import { convertPathToColor, useTheme, type PaletteBuilded } from '@/theme';
+import { convertPathToColor, useTheme, type MappedColors } from '@/theme';
 
 import './Loading.scss';
 
 export interface LoadingProps extends HTMLAttributes<HTMLSpanElement> {
-    color?: Path<PaletteBuilded>;
+    color?: MappedColors;
     size?: number | string;
 }
 export default function Loading({ color = 'primary.main', size = '1.5rem', ...props }: LoadingProps) {

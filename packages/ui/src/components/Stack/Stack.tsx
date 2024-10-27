@@ -5,10 +5,10 @@ import { ThemeBuilded, useTheme } from '@/theme';
 
 import './Stack.scss';
 
-type Orientation = 'row' | 'column';
-type Spacing = 'small' | 'medium' | 'large';
+export type Orientation = 'row' | 'column';
+export type Spacing = 'small' | 'medium' | 'large';
 
-interface StackProps extends HTMLAttributes<HTMLElement> {
+export interface StackProps extends HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
     tag?: React.ElementType;
     nogap?: boolean;

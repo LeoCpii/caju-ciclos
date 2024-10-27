@@ -25,12 +25,12 @@ export const colors: StoryObj<typeof Icon> = {
     render: () => {
         return (
             <>
-                <Icon name={icon} color="primary" />
-                <Icon name={icon} color="secondary" />
-                <Icon name={icon} color="success" />
-                <Icon name={icon} color="warning" />
-                <Icon name={icon} color="error" />
-                <Icon name={icon} color="info" />
+                <Icon name={icon} color="primary.main" />
+                <Icon name={icon} color="secondary.main" />
+                <Icon name={icon} color="success.main" />
+                <Icon name={icon} color="warning.main" />
+                <Icon name={icon} color="error.main" />
+                <Icon name={icon} color="info.main" />
             </>
         );
     }

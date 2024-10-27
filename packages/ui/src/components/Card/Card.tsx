@@ -1,17 +1,22 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import { HTMLAttributes, PropsWithChildren, CSSProperties } from 'react';
 
 import joinClass from '@/utils/joinClass';
+import { ThemeBuilded, useTheme } from '@/theme';
 
 import './Card.scss';
 
-type CardProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>;
-export default function Card({ children, ...props }: CardProps) {
+interface CardProps extends PropsWithChildren<HTMLAttributes<HTMLDivElement>> {
+    sx?: (theme: ThemeBuilded) => CSSProperties;
+}
+export default function Card({ children, sx, ...props }: CardProps) {
+    const { theme } = useTheme();
 
+    const style = sx ? sx(theme) : {};
     const cls = joinClass(['cj-card', props.className]);
 
     return (
-        <div {...props} className={cls}>
+        <div {...props} className={cls} style={{ ...props.style, ...style }}>
             {children}
-        </div>
+        </div >
     );
 }

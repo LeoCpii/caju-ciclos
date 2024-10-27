@@ -1,9 +1,7 @@
 import type { PropsWithChildren, HTMLAttributes } from 'react';
 
-import { Path } from '@caju/toolkit/interface';
-
 import joinClass from '@/utils/joinClass';
-import { useTheme, type PaletteBuilded, convertPathToColor } from '@/theme';
+import { useTheme, type MappedColors, convertPathToColor } from '@/theme';
 
 import './Typography.scss';
 
@@ -34,7 +32,7 @@ const MAP: { [x: string]: keyof JSX.IntrinsicElements } = {
 
 interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
     variant?: Variant;
-    color?: Path<PaletteBuilded>;
+    color?: MappedColors;
     noMargin?: boolean;
     gutterBottom?: boolean;
 }
