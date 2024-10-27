@@ -10,6 +10,7 @@ on:
         required: true
         options:
           - sso
+          - manager
 
 jobs:
   setup:
