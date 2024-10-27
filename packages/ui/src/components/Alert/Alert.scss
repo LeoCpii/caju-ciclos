@@ -1,0 +1,41 @@
+@use "src/styles/main.scss" as *;
+
+.cj-alert-container {
+    position: fixed;
+    top: 15px;
+    z-index: 50;
+
+    @include for-medium {
+        right: 15px;
+    }
+
+    @include for-compacted {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.cj-alert {
+    height: 48px;
+    min-width: 150px;
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 4px;
+
+    @each $color in $colors {
+        &--#{$color} {
+            color: var(--#{$color});
+            background-color: var(--#{$color}-light);
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+            .cj-alert__icon {
+                margin-right: 8px;
+                color: var(--#{$color}-dark) !important;
+            }
+        }
+    }
+}
