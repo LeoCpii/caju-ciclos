@@ -21,7 +21,7 @@ const app = initializeApp({
     storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
     measurementId: import.meta.env.VITE_MEASUREMENT_ID,
     messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-}, 'sso');
+}, 'manager');
 
 // FIREBASE SERVICES
 const firebaseAuth = getAuth(app);

@@ -19,7 +19,7 @@ export default function Signin() {
 
     const redirect = () => {
         logger.info('Redirecting to manager page.');
-        window.open(url.manager, '_self');
+        window.open(`${url.manager}?token=${authServices.access_token}`, '_self');
     };
 
     const signinWithGoogle = () => {
