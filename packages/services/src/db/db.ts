@@ -1,6 +1,5 @@
 import type {
     Firestore, DocumentData, WithFieldValue, WhereFilterOp,
-    // Transaction
 } from 'firebase/firestore';
 import {
     doc,
@@ -8,11 +7,9 @@ import {
     where,
     setDoc,
     getDocs,
-    // updateDoc,
+    updateDoc,
     collection,
-    // onSnapshot,
-    // arrayUnion,
-    // runTransaction
+    arrayUnion,
 } from 'firebase/firestore';
 
 import { Path, PathValue, ArrayOrObject } from '@caju/toolkit/interface';
@@ -21,17 +18,12 @@ type Field = WithFieldValue<DocumentData>;
 
 type CollectionData<
     F extends Field,
-    S extends F[keyof F] = F[keyof F],
     T extends ArrayOrObject<F> = ArrayOrObject<F>,
     K extends keyof T = keyof T,
 > = {
     data: F;
     path: string;
     pathSegments: string[];
-    pathData: Path<S>;
-    callback: (data: S) => Partial<{
-        [P in Path<S>]: PathValue<S, P>;
-    }>;
     filters: Array<{
         field: K;
         operator: WhereFilterOp;
@@ -39,8 +31,15 @@ type CollectionData<
     }>;
 };
 
-type CollectionWithData<F extends Field> = Omit<CollectionData<F>, 'filters' | 'pathData' | 'callback'>;
-type CollectionWithFilters<F extends Field> = Omit<CollectionData<F>, 'data' | 'pathData' | 'callback'>;
+type CollectionSegmentData<F extends Field, S> = {
+    path: string;
+    pathSegments: string[];
+    pathToSegment: Path<F>;
+    dataSegment: S;
+};
+
+type CollectionWithData<F extends Field> = Omit<CollectionData<F>, 'filters'>;
+type CollectionWithFilters<F extends Field> = Omit<CollectionData<F>, 'data'>;
 
 export default class DB {
     constructor(private db: Firestore) { }
@@ -62,5 +61,30 @@ export default class DB {
                 const result = querySnapshot.docs.map((doc) => doc.data() as F);
                 return result ? result[0] : null;
             });
+    }
+
+    public async getList<F extends Field>({ path, filters, pathSegments }: CollectionWithFilters<F>) {
+        const q = query(
+            collection(this.db, path, ...pathSegments),
+            ...filters.map(({ field, operator, value }) => where(field as string, operator, value))
+        );
+
+        return getDocs(q)
+            .then((querySnapshot) => {
+                return querySnapshot.docs.map<F>((doc) => doc.data() as F);
+            });
+    }
+
+    public async insert<F extends Field, S>({
+        path,
+        pathToSegment,
+        dataSegment,
+        pathSegments,
+    }: CollectionSegmentData<F, S>) {
+        const ref = doc(this.db, path, ...pathSegments);
+
+        updateDoc(ref, {
+            [pathToSegment]: arrayUnion(dataSegment)
+        });
     }
 }
