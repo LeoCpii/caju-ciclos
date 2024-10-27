@@ -21,7 +21,9 @@ const Child = () => {
 
     const handleAddAlert = () => {
         setCount(count + 1);
-        addAlert({ color: 'success', message: `${count + 1}`, delay: 80000 });
+        addAlert({
+            color: 'success', message: `${count + 1}`, delay: 80000
+        });
     };
 
     return (
@@ -33,12 +35,12 @@ export const Variants: StoryObj<typeof AlertProvider> = {
     render: () => {
         return (
             <Stack>
-                <Alert color="primary">ola!</Alert>
-                <Alert color="secondary">ola!</Alert>
-                <Alert color="success">ola!</Alert>
-                <Alert color="error">ola!</Alert>
-                <Alert color="warning">ola!</Alert>
-                <Alert color="info">ola!</Alert>
+                <Alert color="primary">Uma mensagem aleatória</Alert>
+                <Alert color="secondary">Uma mensagem aleatória</Alert>
+                <Alert color="success">Uma mensagem aleatória</Alert>
+                <Alert color="error">Uma mensagem aleatória</Alert>
+                <Alert color="warning">Uma mensagem aleatória</Alert>
+                <Alert color="info">Uma mensagem aleatória</Alert>
             </Stack>
         );
     }
@@ -48,7 +50,7 @@ export const WithClose: StoryObj<typeof AlertProvider> = {
     render: () => {
         return (
             <Stack>
-                <Alert onClose={() => ''}>ola!</Alert>
+                <Alert onClose={() => ''}>Uma mensagem aleatória</Alert>
             </Stack>
         );
     }
@@ -60,6 +62,27 @@ export const WithIcon: StoryObj<typeof AlertProvider> = {
             <Stack>
                 <Alert
                     color="success"
+                    icon={<Icon name="check" />}
+                    onClose={() => ''}
+                >
+                    Uma mensagem aleatória
+                </Alert>
+                <Alert
+                    color="error"
+                    icon={<Icon name="check" />}
+                    onClose={() => ''}
+                >
+                    Uma mensagem aleatória
+                </Alert>
+                <Alert
+                    color="warning"
+                    icon={<Icon name="check" />}
+                    onClose={() => ''}
+                >
+                    Uma mensagem aleatória
+                </Alert>
+                <Alert
+                    color="info"
                     icon={<Icon name="check" />}
                     onClose={() => ''}
                 >

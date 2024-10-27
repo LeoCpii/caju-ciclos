@@ -1,13 +1,10 @@
 @use "src/styles/main.scss" as *;
 
 .cj-alert-container {
-    position: fixed;
     top: 15px;
     z-index: 50;
-
-    @include for-medium {
-        right: 15px;
-    }
+    right: 15px;
+    position: fixed;
 
     @include for-compacted {
         right: auto;
@@ -34,7 +31,10 @@
 
             .cj-alert__icon {
                 margin-right: 8px;
-                color: var(--#{$color}-dark) !important;
+            }
+
+            .cj-alert__button {
+                margin-left: 8px;
             }
         }
     }

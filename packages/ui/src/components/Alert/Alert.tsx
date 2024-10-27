@@ -27,7 +27,7 @@ export default function Alert({ children, icon, color = 'primary', onClose }: Al
 
     const renderIcon = (icon: React.JSX.Element) => {
         return cloneElement<IconProps>(icon, {
-            color
+            color: `${color}.dark`
         });
     };
 
@@ -43,8 +43,8 @@ export default function Alert({ children, icon, color = 'primary', onClose }: Al
             {message}
             {
                 !!onClose && (
-                    <ButtonIcon onClick={onClose}>
-                        <Icon name="times" color={color} />
+                    <ButtonIcon onClick={onClose} className="cj-alert__button">
+                        <Icon name="times" color={`${color}.dark`} />
                     </ButtonIcon>
                 )
             }
