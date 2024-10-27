@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import logger from '@caju/toolkit/logger';
 import Icon from '@caju/ui/components/Icon';
 import Slide from '@caju/ui/animations/Slide';
 import Stack from '@caju/ui/components/Stack';
@@ -11,7 +10,9 @@ import Container from '@caju/ui/components/Container';
 import Typography from '@caju/ui/components/Typography';
 import { Card, CardContent } from '@caju/ui/components/Card';
 
-import { authServices, userServices, url } from '@/services/core';
+import logger from '@caju/toolkit/logger';
+
+import { authServices, userServices, url, admissionServices } from '@/services/core';
 
 export default function Signin() {
     const { addAlert } = useAlert();
@@ -25,6 +26,7 @@ export default function Signin() {
 
     const signinWithGoogle = () => {
         setLoading(true);
+
         authServices.login()
             .then(() => { verifyUser(); })
             .catch((e) => {
@@ -41,7 +43,7 @@ export default function Signin() {
     };
 
     const verifyUser = () => {
-        const { email } = userServices.currentByToken;
+        const { email, user_id } = userServices.currentByToken;
 
         userServices.getUserByEmail(email)
             .then(current => {
@@ -51,6 +53,7 @@ export default function Signin() {
                 }
 
                 userServices.createUser()
+                    .then(() => admissionServices.createAdmission(user_id))
                     .then(() => setTimeout(() => { redirect(); }, 500));
             });
     };

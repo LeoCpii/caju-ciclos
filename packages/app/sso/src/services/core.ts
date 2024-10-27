@@ -3,8 +3,9 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 import DB from '@caju/services/db';
-import Auth from '@caju/services/auth';
-import User from '@caju/services/user';
+import AuthServices from '@caju/services/auth';
+import UserServices from '@caju/services/user';
+import AdmissionServices from '@caju/services/admission';
 
 // VARIABLES
 export const url = {
@@ -27,7 +28,7 @@ const app = initializeApp({
 const firebaseAuth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
-export const authServices = new Auth({
+export const authServices = new AuthServices({
     googleAuth: () => signInWithPopup(firebaseAuth, googleProvider),
     signout: () => signOut(firebaseAuth),
 });
@@ -35,4 +36,5 @@ export const authServices = new Auth({
 export const db = new DB(getFirestore(app));
 
 // ENTITY SERVICES
-export const userServices = new User(db, url.sso);
+export const userServices = new UserServices(db, url.sso);
+export const admissionServices = new AdmissionServices(db);

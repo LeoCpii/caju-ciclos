@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@caju/ui/theme';
 
 import { Layout } from './layout';
 import UserProvider from './providers/user';
+import GlobalProvider from './providers/global';
 import { userServices } from './services/core';
 
 import '@caju/ui/styles';
@@ -16,9 +17,11 @@ export default function App() {
         <ThemeProvider theme={createTheme()}>
             <AlertProvider>
                 <UserProvider user={user}>
-                    <Layout>
-                        <Outlet />
-                    </Layout>
+                    <GlobalProvider>
+                        <Layout>
+                            <Outlet />
+                        </Layout>
+                    </GlobalProvider>
                 </UserProvider>
             </AlertProvider>
         </ThemeProvider>
