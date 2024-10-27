@@ -5,7 +5,10 @@ import BasePage from '@/layout/BasePage';
 export default function Vacancies() {
     return (
         <BasePage>
-            <Typography>Admissão</Typography>
+            <Typography variant="h5" noMargin>Admissão</Typography>
+            <Typography noMargin>
+                Detalhes sobre a admissão de novos funcionários.
+            </Typography>
         </BasePage>
     );
 }

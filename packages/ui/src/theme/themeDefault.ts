@@ -6,7 +6,7 @@ export const themeDefaultLight: Theme = {
         info: '#2196f3',
         error: '#f44336',
         warning: '#ff9800',
-        success: '#2e7d32',
+        success: '#A6D577',
         primary: '#3f51b5',
         secondary: '#f50057',
         text: {

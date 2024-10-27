@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+import logger from '@caju/toolkit/logger';
 import Icon from '@caju/ui/components/Icon';
 import Slide from '@caju/ui/animations/Slide';
 import Stack from '@caju/ui/components/Stack';
 import Button from '@caju/ui/components/Button';
 import Loading from '@caju/ui/components/Loading';
+import { useAlert } from '@caju/ui/components/Alert';
 import Container from '@caju/ui/components/Container';
 import Typography from '@caju/ui/components/Typography';
 import { Card, CardContent } from '@caju/ui/components/Card';
@@ -12,9 +14,11 @@ import { Card, CardContent } from '@caju/ui/components/Card';
 import { authServices, userServices, url } from '@/services/core';
 
 export default function Signin() {
+    const { addAlert } = useAlert();
     const [loading, setLoading] = useState(false);
 
     const redirect = () => {
+        logger.info('Redirecting to manager page.');
         window.open(url.manager, '_self');
     };
 
@@ -22,7 +26,17 @@ export default function Signin() {
         setLoading(true);
         authServices.login()
             .then(() => { verifyUser(); })
+            .catch((e) => {
+                logger.info('Error on login:', e);
+                addAlert({
+                    color: 'error',
+                    message: 'Erro ao tentar fazer login.',
+                    icon: <Icon name="error" />,
+                    delay: 800000
+                });
+            })
             .finally(() => setTimeout(() => { setLoading(false); }, 500));
+
     };
 
     const verifyUser = () => {

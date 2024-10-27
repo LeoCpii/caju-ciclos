@@ -1,5 +1,6 @@
 export * from './Form';
 export * from './Grid';
+export * from './Alert';
 export * from './Icon';
 export * from './Card';
 export * from './Input';

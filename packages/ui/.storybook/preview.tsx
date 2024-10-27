@@ -18,7 +18,7 @@ addLink('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;
 
 export const decorators = [
     (Story: StoryFn) => (
-        <ThemeProvider theme={createTheme({ palette: { primary: '#8612d2', secondary: '#bfd465' } })}>
+        <ThemeProvider theme={createTheme()}>
             <Story />
         </ThemeProvider>
     ),

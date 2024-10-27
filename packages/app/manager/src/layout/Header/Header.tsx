@@ -13,8 +13,6 @@ export default function Header() {
 
     const goToProfile = () => { navigate('meu-perfil'); };
 
-    console.log(currentUser);
-
     return (
         <div className="layout__header">
             <div className="layout__header__logo">
