@@ -1,6 +1,6 @@
 
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@caju/ui/components/Box';
 import Icon from '@caju/ui/components/Icon';
@@ -10,6 +10,7 @@ import Button from '@caju/ui/components/Button';
 import Loading from '@caju/ui/components/Loading';
 import { useAlert } from '@caju/ui/components/Alert';
 import ButtonIcon from '@caju/ui/components/ButtonIcon';
+import { Select, Option } from '@caju/ui/components/Select';
 import Form, { Control, useForm, FormControl } from '@caju/ui/components/Form';
 
 import logger from '@caju/toolkit/logger';
@@ -17,23 +18,27 @@ import logger from '@caju/toolkit/logger';
 import { BasicCandidateData } from '@caju/services/candidates';
 
 import { BasePage } from '@/layout';
-import { useUser } from '@/providers/user';
-import { candidatesServices } from '@/services/core';
+import { admissionServices } from '@/services/core';
+import { useGlobal } from '@/providers/global';
+
+interface RegisterForm extends Omit<BasicCandidateData, 'ownerId' | 'position'> {
+    position: BasicCandidateData['position'] | string;
+}
 
 export default function Register() {
     const navigate = useNavigate();
     const { addAlert } = useAlert();
     const [loading, setLoading] = useState(false);
 
-    const { currentUser } = useUser();
+    const { admission } = useGlobal();
 
-    const [formGroup] = useForm<Omit<BasicCandidateData, 'ownerId'>>({
+    const [formGroup] = useForm<RegisterForm>({
         form: {
             cpf: new FormControl({ value: '11111111111', type: 'cpf', required: true }),
             name: new FormControl({ value: 'leozin', type: 'text', required: true }),
             email: new FormControl({ value: 'teste@teste.com', type: 'email', required: true }),
             admissionDate: new FormControl({ value: '2024-10-03', required: true }),
-            position: new FormControl({ value: 'frontend', required: true })
+            position: new FormControl({ value: '', required: true })
         },
         handle: {
             submit: (form) => {
@@ -41,24 +46,23 @@ export default function Register() {
 
                 setLoading(true);
 
-                candidatesServices
-                    .createAdmission({ ...values, ownerId: currentUser.user_id })
-                    .then(() => {
-                        addAlert({
-                            message: 'Candidato cadastrado com sucesso!',
-                            color: 'success',
-                            delay: 5000
-                        });
-                    })
-                    .catch((e) => {
-                        logger.error('Error to create candidate', e);
-                        addAlert({
-                            message: 'Erro ao cadastrar candidato!',
-                            color: 'error',
-                            delay: 5000
-                        });
-                    })
-                    .finally(() => setLoading(false));
+                admissionServices.addCandidate(admission.id, 'pending', {
+                    ...values,
+                    position: values.position as BasicCandidateData['position'],
+                }).then(() => {
+                    addAlert({
+                        message: 'Candidato cadastrado com sucesso!',
+                        color: 'success',
+                        delay: 5000
+                    });
+                }).catch((e) => {
+                    logger.error('Error to create candidate', e);
+                    addAlert({
+                        message: 'Erro ao cadastrar candidato!',
+                        color: 'error',
+                        delay: 5000
+                    });
+                }).finally(() => setLoading(false));
             }
         }
     }, [loading]);
@@ -125,6 +129,23 @@ export default function Register() {
                                     error={control.isInvalid}
                                     helperText={control.messageError}
                                 />
+                            )}
+                        />
+                        <Control
+                            controlName="position"
+                            action="onChange"
+                            field={(control) => (
+                                <Select
+                                    fullWidth
+                                    label="Cargo"
+                                    placeholder="Selecione um cargo"
+                                    value={control.value}
+                                    error={control.isInvalid}
+                                    helperText={control.messageError}
+                                >
+                                    <Option value="frontend">Frontend</Option>
+                                    <Option value="backend">Backend</Option>
+                                </Select>
                             )}
                         />
                         <Button
