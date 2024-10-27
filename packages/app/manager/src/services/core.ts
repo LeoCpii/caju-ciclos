@@ -5,6 +5,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/
 import DB from '@caju/services/db';
 import Auth from '@caju/services/auth';
 import UserServices from '@caju/services/user';
+import CandidatesServices from '@caju/services/candidates';
 
 // VARIABLES
 export const url = {
@@ -36,3 +37,4 @@ export const db = new DB(getFirestore(app));
 
 // ENTITY SERVICES
 export const userServices = new UserServices(db, url.sso);
+export const candidatesServices = new CandidatesServices(db);

@@ -5,6 +5,7 @@ import Error from '@/pages/error';
 import Signin from '@/pages/home';
 import Vacancies from '@/pages/vacancies';
 import Admission from '@/pages/admission';
+import Register from '@/pages/admission/register';
 import Profile from '@/pages/profile/Profile';
 
 import { UserLoggedOutGuard } from './LoggedGuard';
@@ -36,6 +37,11 @@ export const router = createBrowserRouter([
                 path: '/admissao',
                 loader: () => document.title = 'Caju - Admissão',
                 element: <Admission />,
+            },
+            {
+                path: '/admissao/cadastro',
+                loader: () => document.title = 'Caju - Cadastro de candidato',
+                element: <Register />,
             },
             {
                 path: '/meu-perfil',

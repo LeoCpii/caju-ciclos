@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
+import AlertProvider from '@caju/ui/components/Alert';
 import { ThemeProvider, createTheme } from '@caju/ui/theme';
 
 import { Layout } from './layout';
@@ -13,11 +14,13 @@ export default function App() {
 
     return (
         <ThemeProvider theme={createTheme()}>
-            <UserProvider user={user}>
-                <Layout>
-                    <Outlet />
-                </Layout>
-            </UserProvider>
+            <AlertProvider>
+                <UserProvider user={user}>
+                    <Layout>
+                        <Outlet />
+                    </Layout>
+                </UserProvider>
+            </AlertProvider>
         </ThemeProvider>
     );
 };

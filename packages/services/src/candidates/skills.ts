@@ -1,0 +1,22 @@
+export const SKILLS = [
+    'react',
+    'angular',
+    'vue',
+    'typescript',
+    'javascript',
+    'node',
+    'python',
+    'java',
+    'ruby',
+    'php',
+    'docker',
+    'kubernetes',
+    'aws',
+    'azure',
+    'gcp',
+    'git',
+    'html',
+    'css',
+    'sass',
+    'less'
+];
