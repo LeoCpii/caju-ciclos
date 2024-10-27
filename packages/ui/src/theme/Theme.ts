@@ -1,5 +1,9 @@
+
+import type { Path } from '@caju/toolkit/interface';
+
 export type Mode = 'light' | 'dark'
 
+export type MappedColors = Path<PaletteBuilded>;
 export type Colors = 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'info';
 
 export type Size = 'small' | 'medium' | 'large';
