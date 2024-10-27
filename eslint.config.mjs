@@ -40,7 +40,11 @@ export default [
                     groups: [
                         ['/^react/'],
                         'module',
+                        '/^@hello-pangea/',
                         '/^@(?!/)/',
+                        '/^@caju/ui/',
+                        '/^@caju/toolkit/',
+                        '/^@caju/services/',
                         '/^@caju/',
                         '/^@(?!caju)/',
                         ['parent', 'sibling', 'index'],
