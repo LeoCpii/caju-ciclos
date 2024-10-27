@@ -1,0 +1,56 @@
+import { useState } from 'react';
+
+import { Meta, StoryObj } from '@storybook/react';
+
+import Stack from '@/components/Stack';
+import Typography from '@/components/Typography';
+
+import Avatar from './Avatar';
+
+const meta: Meta<typeof Avatar> = {
+    title: 'components/Avatar',
+    component: Avatar,
+};
+
+export const Variants: StoryObj<typeof Avatar> = {
+    render: () => {
+        return (
+            <Stack orientation="row">
+                <Avatar
+                    src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Sarah"
+                />
+                <Avatar name="Saul Goodman" />
+                <Avatar />
+            </Stack>
+        );
+    }
+};
+
+export const CustomColor: StoryObj<typeof Avatar> = {
+    render: () => {
+        return (
+            <Stack orientation="row">
+                <Avatar sx={(theme) => ({ background: theme.palette.warning.light })} />
+                <Avatar sx={(theme) => ({ background: theme.palette.warning.main })} />
+                <Avatar sx={(theme) => ({ background: theme.palette.warning.dark })} />
+            </Stack>
+        );
+    }
+};
+
+export const clickable: StoryObj<typeof Avatar> = {
+    render: () => {
+        const [count, setCount] = useState(0);
+
+        const handleClick = () => { setCount(prev => prev + 1); };
+
+        return (
+            <Stack orientation="row">
+                <Avatar onClick={handleClick} />
+                <Typography>{count}</Typography>
+            </Stack>
+        );
+    }
+};
+
+export default meta;
