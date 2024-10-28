@@ -41,6 +41,7 @@ export default [
                         ['/^react/'],
                         'module',
                         '/^@hello-pangea/',
+                        '/^@storybook/',
                         // '/^@(?!/)/',
                         '/^@caju/ui/',
                         '/^@caju/toolkit/',

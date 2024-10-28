@@ -17,6 +17,7 @@ type Config = { animation: AnimationClass, state: State; width: CSSProperties['w
 interface MenuListProps extends React.HTMLAttributes<HTMLDivElement> {
     open: boolean;
     direction?: Direction;
+    width?: CSSProperties['width'];
     children: React.JSX.Element | React.JSX.Element[];
     anchorEl: HTMLElement | null;
     onClose: (e?: React.MouseEvent<HTMLButtonElement>) => void;
@@ -25,6 +26,7 @@ export default forwardRef<HTMLDivElement, MenuListProps>(function Menu({
     open,
     children,
     anchorEl,
+    width,
     direction = 'left',
     onClose,
     ...props
@@ -106,7 +108,7 @@ export default forwardRef<HTMLDivElement, MenuListProps>(function Menu({
             id={id}
             ref={ref}
             style={{
-                width: config.width,
+                width: width || config.width,
                 top: coordinate?.top,
                 left: coordinate?.left,
                 display: config?.state === 'visible' ? 'block' : 'none',
@@ -117,7 +119,11 @@ export default forwardRef<HTMLDivElement, MenuListProps>(function Menu({
             {...props}
         >
             <Card>
-                <CardContent>
+                <CardContent style={{
+                    display: 'flex',
+                    padding: '8px 0px',
+                    flexDirection: 'column',
+                }}>
                     {renderChildren()}
                 </CardContent>
             </Card>

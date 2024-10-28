@@ -4,6 +4,7 @@ import Button from '@/components/Button';
 
 import Menu from './Menu';
 import useMenu from './useMenu';
+import MenuButton from './MenuButton';
 
 const meta: Meta<typeof Menu> = {
     title: 'components/Menu',
@@ -19,12 +20,10 @@ export const Template: StoryObj<typeof Menu> = {
                 <div ref={ref}>
                     <Button onClick={toggle}>Toggle Menu</Button>
                 </div>
-                <Menu direction="right" anchorEl={el} open={open} onClose={toggle}>
-                    <div>Um texto aqui</div>
-                    <div>Um texto aqui</div>
-                    <div>Um texto aqui</div>
-                    <div>Um texto aqui</div>
-                    <div>Um texto aqui</div>
+                <Menu direction="right" anchorEl={el} open={open} onClose={toggle} width="fit-content">
+                    <MenuButton label="Option 1" />
+                    <MenuButton label="Option 2" />
+                    <MenuButton label="Option 3" />
                 </Menu>
             </div>
         );
