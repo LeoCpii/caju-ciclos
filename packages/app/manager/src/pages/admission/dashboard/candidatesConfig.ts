@@ -13,7 +13,7 @@ interface CandidatesConfig {
 export const CANDIDATES_CONFIG: Array<CandidatesConfig> = [
     {
         columnId: 'pending',
-        color: 'primary',
+        color: 'warning',
         icon: 'file-search-alt',
         label: 'Pronto para revisar',
         status: 'pending'

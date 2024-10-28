@@ -1,4 +1,3 @@
-import type { Status } from '@caju/services/admission';
 import type { CandidateData } from '@caju/services/candidates';
 
 export function _generateNewOrderedColumn(column: CandidateData[], card: CandidateData, position: number) {

@@ -12,10 +12,10 @@ import { CandidateData } from '@caju/services/candidates';
 import { useGlobal } from '@/providers/global';
 import { admissionServices } from '@/services/core';
 
-import { _generateNewOrderedColumn } from './admissionUtils';
+import { _generateNewOrderedColumn } from './dashboard/admissionUtils';
 
 interface AdmissionContextConfig {
-    deleteCard: (cardId: string, status: Status) => void;
+    deleteCard: (cardId: string, status: Status) => Promise<void>;
     reorderCard: (originColumn: Status, candidateCard: CandidateData, targetPosition: number) => Promise<void>;
     changeCardColumn: (
         originColumn: Status,
@@ -26,7 +26,7 @@ interface AdmissionContextConfig {
 }
 
 export const AdmissionContext = createContext<AdmissionContextConfig>({
-    deleteCard: () => { },
+    deleteCard: () => Promise.resolve(),
     reorderCard: () => Promise.resolve(),
     changeCardColumn: () => Promise.resolve()
 });
@@ -71,7 +71,7 @@ export default function AdmissionProvider({ children }: AdmissionProviderProps) 
 
         const columnUpdated = { ...admission.columns, [status]: updatedCards };
 
-        admissionServices.updateAdmission({
+        return admissionServices.updateAdmission({
             ...admission,
             columns: columnUpdated
         }).then(() => {

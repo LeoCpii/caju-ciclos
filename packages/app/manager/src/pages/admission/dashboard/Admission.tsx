@@ -9,7 +9,9 @@ import Input from '@caju/ui/components/Input';
 import Slide from '@caju/ui/animations/Slide';
 import Button from '@caju/ui/components/Button';
 import useResize from '@caju/ui/hooks/useResize';
+import useFilter from '@caju/ui/hooks/useFilter';
 import Loading from '@caju/ui/components/Loading';
+import ButtonIcon from '@caju/ui/components/ButtonIcon';
 import Form, { Control, FormControl, useForm } from '@caju/ui/components/Form';
 
 import type { Status } from '@caju/services/admission';
@@ -19,7 +21,7 @@ import BasePage from '@/layout/BasePage';
 import { useGlobal } from '@/providers/global';
 
 import Columns from './Columns';
-import useAdmission from './useAdmission';
+import useAdmission from '../useAdmission';
 
 interface FilterForm { sort: string; cpf: string; }
 
@@ -30,6 +32,8 @@ export default function Admission() {
 
     const { admission } = useGlobal();
     const { reorderCard, changeCardColumn } = useAdmission();
+
+    const { filter, filtered, reset } = useFilter(admission);
 
     const [formGroup] = useForm<FilterForm>({
         form: {
@@ -43,7 +47,22 @@ export default function Admission() {
 
                 if (cpf.length === 11) {
                     setIsLoading(true);
-                    setTimeout(() => setIsLoading(false), 2000);
+
+                    filter((admissao) => {
+                        const columns = Object.keys(admissao.columns) as Status[];
+                        const newColumns = columns.reduce((acc, column) => {
+                            const filtered = admissao.columns[column].filter((candidate) => candidate.cpf === cpf);
+
+                            return { ...acc, [column]: filtered };
+                        }, {} as { [x in Status]: CandidateData[] });
+
+                        return { ...admissao, columns: newColumns };
+                    });
+
+                    setTimeout(() => setIsLoading(false), 500);
+                } else {
+                    console.log('resetando');
+                    reset();
                 }
             }
         }
@@ -126,11 +145,11 @@ export default function Admission() {
                                         <Icon name="search" color="text.secondary" />
                                     }
                                     endIcon={
-                                        isLoading && <Loading
-                                            size={15}
-                                            color="text.secondary"
-                                            style={{ marginRight: 40 }}
-                                        />
+                                        control.value && (
+                                            <ButtonIcon onClick={() => formGroup.setValues({ cpf: '' })}>
+                                                <Icon name="times" />
+                                            </ButtonIcon>
+                                        )
                                     }
                                 />
                             )}
@@ -138,7 +157,15 @@ export default function Admission() {
                     </Form>
                 </Slide>
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <Columns />
+                    {
+                        isLoading
+                            ? (
+                                <Stack justify="center" align="center">
+                                    <Loading />
+                                </Stack>
+                            )
+                            : <Columns admission={filtered} />
+                    }
                 </DragDropContext>
             </Stack>
         </BasePage>

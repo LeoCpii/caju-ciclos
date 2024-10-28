@@ -12,6 +12,7 @@ import { useAlert } from '@caju/ui/components/Alert';
 import ButtonIcon from '@caju/ui/components/ButtonIcon';
 import { Select, Option } from '@caju/ui/components/Select';
 import Form, { Control, useForm, FormControl } from '@caju/ui/components/Form';
+import Slide from '@caju/ui/animations/Slide';
 
 import logger from '@caju/toolkit/logger';
 
@@ -36,10 +37,10 @@ export default function Register() {
 
     const [formGroup] = useForm<RegisterForm>({
         form: {
-            cpf: new FormControl({ value: '11111111111', type: 'cpf', required: true }),
-            name: new FormControl({ value: 'leozin', type: 'text', required: true }),
-            email: new FormControl({ value: 'teste@teste.com', type: 'email', required: true }),
-            admissionDate: new FormControl({ value: '2024-10-03', required: true }),
+            cpf: new FormControl({ value: '', type: 'cpf', required: true }),
+            name: new FormControl({ value: '', type: 'text', required: true }),
+            email: new FormControl({ value: '', type: 'email', required: true }),
+            admissionDate: new FormControl({ value: '', required: true }),
             position: new FormControl({ value: '', required: true })
         },
         handle: {
@@ -78,8 +79,28 @@ export default function Register() {
                     });
                 }).finally(() => setLoading(false));
             }
-        }
-    }, [loading]);
+        },
+        validator: {
+            name: (form) => {
+                const { name } = form.values;
+
+                const [firstName, secondName] = name.split(' ');
+
+                const isValidName = (name: string) => {
+                    const numberValidator = !/\d+/g.test(name.charAt(0));
+                    const lengthValidator = name.length >= 2;
+
+                    return numberValidator && lengthValidator;
+                };
+
+                if (!isValidName(firstName)) { return 'Informe o nome válido'; }
+
+                if (!secondName || !isValidName(secondName)) { return 'Informe o nome completo'; }
+
+                return '';
+            },
+        },
+    }, []);
 
     const goBack = () => { navigate('/admissao'); };
 
@@ -88,90 +109,98 @@ export default function Register() {
             title="Cadastro de candidato"
             subtitle="Preencha os campos abaixo para cadastrar um novo candidato."
             backAction={
-                <ButtonIcon onClick={goBack}>
-                    <Icon name="arrow-left" color="text.secondary" />
-                </ButtonIcon>
+                <Button
+                    size="small"
+                    variant="text"
+                    startIcon={<Icon name="arrow-left" color="text.secondary" />}
+                    onClick={goBack}
+                    style={{ padding: 0, }}
+                >
+                    Voltar
+                </Button>
             }
         >
             <Box style={{ maxWidth: 400 }}>
-                <Form formGroup={formGroup}>
-                    <Stack>
-                        <Control
-                            controlName="name"
-                            field={(control) => (
-                                <Input
-                                    fullWidth
-                                    label="Nome"
-                                    value={control.value}
-                                    error={control.isInvalid}
-                                    helperText={control.messageError}
-                                />
-                            )}
-                        />
-                        <Control
-                            controlName="email"
-                            field={(control) => (
-                                <Input
-                                    fullWidth
-                                    label="E-mail"
-                                    value={control.value}
-                                    error={control.isInvalid}
-                                    helperText={control.messageError}
-                                />
-                            )}
-                        />
-                        <Control
-                            controlName="cpf"
-                            field={(control) => (
-                                <Input
-                                    fullWidth
-                                    maxLength={14}
-                                    label="CPF"
-                                    value={control.masked}
-                                    error={control.isInvalid}
-                                    helperText={control.messageError}
-                                />
-                            )}
-                        />
-                        <Control
-                            controlName="admissionDate"
-                            field={(control) => (
-                                <Input
-                                    fullWidth
-                                    type="date"
-                                    label="Data de admissão"
-                                    value={control.value}
-                                    error={control.isInvalid}
-                                    helperText={control.messageError}
-                                />
-                            )}
-                        />
-                        <Control
-                            controlName="position"
-                            action="onChange"
-                            field={(control) => (
-                                <Select
-                                    fullWidth
-                                    label="Cargo"
-                                    placeholder="Selecione um cargo"
-                                    value={control.value}
-                                    error={control.isInvalid}
-                                    helperText={control.messageError}
-                                >
-                                    <Option value="frontend">Frontend</Option>
-                                    <Option value="backend">Backend</Option>
-                                </Select>
-                            )}
-                        />
-                        <Button
-                            type="submit"
-                            size="large"
-                            loading={loading && <Loading size={20} color="text.secondary" />}
-                        >
-                            Salvar
-                        </Button>
-                    </Stack>
-                </Form>
+                <Slide enter direction="left" delay={150}>
+                    <Form formGroup={formGroup}>
+                        <Stack>
+                            <Control
+                                controlName="name"
+                                field={(control) => (
+                                    <Input
+                                        fullWidth
+                                        label="Nome"
+                                        value={control.value}
+                                        error={control.isInvalid}
+                                        helperText={control.messageError}
+                                    />
+                                )}
+                            />
+                            <Control
+                                controlName="email"
+                                field={(control) => (
+                                    <Input
+                                        fullWidth
+                                        label="E-mail"
+                                        value={control.value}
+                                        error={control.isInvalid}
+                                        helperText={control.messageError}
+                                    />
+                                )}
+                            />
+                            <Control
+                                controlName="cpf"
+                                field={(control) => (
+                                    <Input
+                                        fullWidth
+                                        maxLength={14}
+                                        label="CPF"
+                                        value={control.masked}
+                                        error={control.isInvalid}
+                                        helperText={control.messageError}
+                                    />
+                                )}
+                            />
+                            <Control
+                                controlName="admissionDate"
+                                field={(control) => (
+                                    <Input
+                                        fullWidth
+                                        type="date"
+                                        label="Data de admissão"
+                                        value={control.value}
+                                        error={control.isInvalid}
+                                        helperText={control.messageError}
+                                    />
+                                )}
+                            />
+                            <Control
+                                controlName="position"
+                                action="onChange"
+                                field={(control) => (
+                                    <Select
+                                        fullWidth
+                                        label="Cargo"
+                                        placeholder="Selecione um cargo"
+                                        value={control.value}
+                                        error={control.isInvalid}
+                                        helperText={control.messageError}
+                                    >
+                                        <Option value="frontend">Frontend</Option>
+                                        <Option value="backend">Backend</Option>
+                                    </Select>
+                                )}
+                            />
+                            <Button
+                                type="submit"
+                                size="large"
+                                loading={loading && <Loading size={20} color="text.secondary" />}
+                            >
+                                Salvar
+                            </Button>
+                        </Stack>
+                    </Form>
+                </Slide>
             </Box>
         </BasePage>
     );

@@ -11,12 +11,10 @@ import Typography from '@caju/ui/components/Typography';
 import { Grid, GridItem } from '@caju/ui/components/Grid';
 import { Card, CardContent } from '@caju/ui/components/Card';
 
-import { Status } from '@caju/services/admission';
-
-import { useGlobal } from '@/providers/global';
+import { AdmissionData, Status } from '@caju/services/admission';
 
 import { CANDIDATES_CONFIG } from './candidatesConfig';
-import CandidateCard, { type CandidateCardProps } from './CandidateCard';
+import CandidateCard, { type CandidateCardProps } from './CardCandidate';
 
 interface CardColumnProps {
     color: Colors;
@@ -63,7 +61,7 @@ function CardColumn({ title, icon, color, columnId, children }: CardColumnProps)
                 <Droppable droppableId={columnId}>
                     {(provided) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            <Stack spacing="medium">
+                            <Stack spacing="small">
                                 {!arrayChildren.length && (
                                     <Zoom enter>
                                         <Typography
@@ -88,9 +86,8 @@ function CardColumn({ title, icon, color, columnId, children }: CardColumnProps)
     );
 }
 
-export default function Columns() {
-    const { admission } = useGlobal();
-
+interface ColumnsProps { admission: AdmissionData; }
+export default function Columns({ admission }: ColumnsProps) {
     return (
         <Slide enter direction="top">
             <Grid>
