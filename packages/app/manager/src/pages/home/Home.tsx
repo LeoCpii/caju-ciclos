@@ -1,11 +1,8 @@
-import Typography from '@caju/ui/components/Typography';
-
 import BasePage from '@/layout/BasePage';
 
-export default function Signin() {
+export default function Home() {
     return (
-        <BasePage>
-            <Typography>Home</Typography>
+        <BasePage title="Home">
         </BasePage>
     );
 }

@@ -1,11 +1,9 @@
 import Chip from '@caju/ui/components/Chip';
 import Stack from '@caju/ui/components/Stack';
 import Avatar from '@caju/ui/components/Avatar';
-import Divider from '@caju/ui/components/Divider';
-import { Grid, GridItem } from '@caju/ui/components/Grid';
 import Typography from '@caju/ui/components/Typography';
+import { Grid, GridItem } from '@caju/ui/components/Grid';
 import { Drawer, DrawerContent } from '@caju/ui/components/Drawer';
-import { Card, CardContent } from '@caju/ui/components/Card';
 
 import type { CandidateData } from '@caju/services/candidates';
 
@@ -50,7 +48,7 @@ export default function CandiateDetail({ open, onClose, ...candidate }: Candiate
                             <Typography variant="body2" weight="bold" noMargin>Habilidades</Typography>
                             <Stack orientation="row" spacing="small">
                                 {
-                                    candidate.skills.map((skill, index) => (
+                                    candidate.skills.map((skill) => (
                                         <Chip key={skill} label={skill} />
                                     ))
                                 }

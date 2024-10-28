@@ -5,14 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@caju/ui/components/Box';
 import Icon from '@caju/ui/components/Icon';
 import Input from '@caju/ui/components/Input';
+import Slide from '@caju/ui/animations/Slide';
 import Stack from '@caju/ui/components/Stack';
 import Button from '@caju/ui/components/Button';
 import Loading from '@caju/ui/components/Loading';
 import { useAlert } from '@caju/ui/components/Alert';
-import ButtonIcon from '@caju/ui/components/ButtonIcon';
 import { Select, Option } from '@caju/ui/components/Select';
 import Form, { Control, useForm, FormControl } from '@caju/ui/components/Form';
-import Slide from '@caju/ui/animations/Slide';
 
 import logger from '@caju/toolkit/logger';
 
