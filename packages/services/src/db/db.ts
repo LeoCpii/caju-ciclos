@@ -1,5 +1,9 @@
 import type {
-    Firestore, DocumentData, WithFieldValue, WhereFilterOp,
+    Firestore,
+    Transaction,
+    DocumentData,
+    WithFieldValue,
+    WhereFilterOp,
 } from 'firebase/firestore';
 import {
     doc,
@@ -10,9 +14,10 @@ import {
     updateDoc,
     collection,
     arrayUnion,
+    runTransaction
 } from 'firebase/firestore';
 
-import { Path, PathValue, ArrayOrObject } from '@caju/toolkit/interface';
+import { Path, ArrayOrObject } from '@caju/toolkit/interface';
 
 type Field = WithFieldValue<DocumentData>;
 
@@ -40,6 +45,7 @@ type CollectionSegmentData<F extends Field, S> = {
 
 type CollectionWithData<F extends Field> = Omit<CollectionData<F>, 'filters'>;
 type CollectionWithFilters<F extends Field> = Omit<CollectionData<F>, 'data'>;
+type CollectionWithOnlyPaths<F extends Field> = Omit<CollectionData<F>, 'data' | 'filters'>;
 
 export default class DB {
     constructor(private db: Firestore) { }
@@ -86,5 +92,17 @@ export default class DB {
         updateDoc(ref, {
             [pathToSegment]: arrayUnion(dataSegment)
         });
+    }
+
+    public async transaction<F extends Field>() {
+        const getRef = ({ path, pathSegments }: CollectionWithOnlyPaths<F>) => doc(this.db, path, ...pathSegments);
+
+        const transaction = async (callback: (t: Transaction) => void) => {
+            return await runTransaction(this.db, async (transaction) => {
+                return callback(transaction);
+            });
+        };
+
+        return { getRef, transaction };
     }
 }

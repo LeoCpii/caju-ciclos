@@ -9,13 +9,13 @@ import { useUser } from '../user';
 interface GlobalContextConfig {
     loading: boolean;
     admission: AdmissionData;
-    // updateCandidates: (candidates: Partial<AdmissionData>) => void;
+    updateAdmission: (callback: (admission: AdmissionData) => AdmissionData) => void;
 }
 
 export const GlobalContext = createContext<GlobalContextConfig>({
     loading: false,
     admission: { id: '', ownerId: '', columns: { pending: [], approved: [], rejected: [] } },
-    // updateCandidates: () => { }
+    updateAdmission: () => { }
 });
 
 interface GlobalProviderProps { children: React.JSX.Element; }
@@ -32,7 +32,7 @@ export default function GlobalProvider({ children }: GlobalProviderProps) {
     const context = useMemo<GlobalContextConfig>(() => ({
         loading,
         admission,
-        // updateCandidates: (candidates) => setCandidates(prev => ({ ...prev, ...candidates }))
+        updateAdmission: (callback) => setAdmission((prev) => callback(prev))
     }), [admission, loading]);
 
     useEffect(() => { getCandidates(); }, []);
@@ -40,7 +40,6 @@ export default function GlobalProvider({ children }: GlobalProviderProps) {
     const getCandidates = () => {
         admissionServices.getAdmissions(currentUser.user_id)
             .then(res => {
-                console.log(res);
                 setAdmission(res);
                 setTimeout(() => { setLoading(false); }, 1000);
             });

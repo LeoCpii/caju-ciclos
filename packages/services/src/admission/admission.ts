@@ -34,6 +34,16 @@ export default class AdmissionServices {
         });
     }
 
+    async updateAdmission(data: AdmissionData): Promise<void> {
+        console.log('candidate', data);
+
+        return this.db.setItem<AdmissionData>({
+            data,
+            path: AdmissionServices.PATH,
+            pathSegments: [data.id],
+        });
+    }
+
     async addCandidate(admissionId: string, status: Status, data: BasicCandidateData) {
         const candidate = new CandidatesServices(data);
 
@@ -42,6 +52,6 @@ export default class AdmissionServices {
             pathSegments: [admissionId],
             dataSegment: { ...candidate },
             pathToSegment: `columns.${status}`
-        });
+        }).then(() => ({ ...candidate }));
     }
 }

@@ -30,7 +30,9 @@ export default function Register() {
     const { addAlert } = useAlert();
     const [loading, setLoading] = useState(false);
 
-    const { admission } = useGlobal();
+    const { admission, updateAdmission } = useGlobal();
+
+    const goTo = () => { navigate('/admissao'); };
 
     const [formGroup] = useForm<RegisterForm>({
         form: {
@@ -49,18 +51,30 @@ export default function Register() {
                 admissionServices.addCandidate(admission.id, 'pending', {
                     ...values,
                     position: values.position as BasicCandidateData['position'],
-                }).then(() => {
+                }).then((candidate) => {
+                    updateAdmission((prev) => ({
+                        ...prev,
+                        columns: {
+                            ...prev.columns,
+                            pending: [...prev.columns.pending, candidate]
+                        }
+                    }));
+
                     addAlert({
-                        message: 'Candidato cadastrado com sucesso!',
+                        delay: 5000,
                         color: 'success',
-                        delay: 5000
+                        message: 'Candidato cadastrado com sucesso!',
+                        icon: <Icon name="check" />
                     });
+
+                    setTimeout(() => { goTo(); }, 500);
                 }).catch((e) => {
                     logger.error('Error to create candidate', e);
                     addAlert({
-                        message: 'Erro ao cadastrar candidato!',
+                        delay: 5000,
                         color: 'error',
-                        delay: 5000
+                        message: 'Erro ao cadastrar candidato!',
+                        icon: <Icon name="times" />
                     });
                 }).finally(() => setLoading(false));
             }
