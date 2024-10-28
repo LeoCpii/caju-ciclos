@@ -6,6 +6,7 @@ import importHelpers from 'eslint-plugin-import-helpers';
 import pluginJs from '@eslint/js';
 
 export default [
+    { ignores: ['**/dist/*', '**/*.html', '**/jest.config.js', '**/build/*', '**/*.d.ts', '**/lcov-report/*'] },
     { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
     { languageOptions: { globals: globals.browser } },
     pluginJs.configs.recommended,
