@@ -38,6 +38,10 @@ export default class FormGroup<F> {
         return values as F;
     }
 
+    public get isDurty() {
+        return this.eachControl((control) => control.dirty).some(Boolean);
+    }
+
     private eachControl(fn: (control: FormControl<F>, key?: string) => any) {
         return Object.keys(this.controls).map(k => fn(this.controls[k], k));
     }

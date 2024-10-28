@@ -68,7 +68,7 @@ export default function Form({ children, formGroup, debug = false, ...props }: R
     useEffect(() => { change(); }, [formGroup]);
 
     const change = () => {
-        if (formGroup.handle?.change && formGroup.isValid) {
+        if (formGroup.handle?.change && formGroup.isValid && formGroup.isDurty) {
             formGroup.handle.change(formGroup);
         }
 

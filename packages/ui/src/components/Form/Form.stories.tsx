@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { Select, Option } from '@/components/Select';
@@ -33,10 +32,10 @@ export const Template: StoryObj<typeof Form> = {
             form: {
                 name: new FormControl({ value: 'Goku', required: true }),
                 email: new FormControl({ value: 'goku@dragonball.com', required: true, type: 'email' }),
-                tel: new FormControl({ value: '21999999999', type: 'tel' }),
+                tel: new FormControl({ value: '21999999', type: 'tel' }),
                 options: new FormControl({ value: '3' }),
-                password: new FormControl({ value: '', type: 'password', required: true }),
-                confirmPassword: new FormControl({ value: '', type: 'password', required: true }),
+                password: new FormControl({ value: '111111111', type: 'password', required: true }),
+                confirmPassword: new FormControl({ value: '111111111', type: 'password', required: true }),
             },
             handle: {
                 submit(form) {

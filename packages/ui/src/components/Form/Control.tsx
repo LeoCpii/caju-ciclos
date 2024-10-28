@@ -4,13 +4,6 @@ import useControl from './useControl';
 import FormContext from './FormContext';
 import FormControl from './formControl';
 
-type ActionParams = {
-    text: React.FormEvent<HTMLDivElement>;
-    number: React.FormEvent<HTMLDivElement>;
-    radio: React.ChangeEvent<HTMLInputElement>;
-    checkbox: React.ChangeEvent<HTMLInputElement>;
-}
-
 interface ControlProps<
     Form, Key extends keyof Form = keyof Form
 > extends InputHTMLAttributes<InputHTMLAttributes<any>> {
@@ -31,13 +24,23 @@ export default function Control<Form>({
 
     const renderChildren = (child: ReactElement<ControlProps<Form>>) => {
         return cloneElement(child, {
-            onBlur: () => { control.dirty = true; },
-            [action]: (e: ActionParams[typeof type]) => update(
-                ['radio', 'checkbox'].includes(type)
-                    ? e.target['checked']
-                    : e.target['value']
-            ),
-            required: control.required
+            required: control.required,
+            onBlur: (e: any) => {
+                control.dirty = true;
+                update(e.target['value']);
+            },
+            onInput: (e: any) => {
+                update(e.target['value']);
+                if (action === 'onInput') { control.dirty = true; };
+            },
+            onChange: (e: any) => {
+                update(
+                    ['radio', 'checkbox'].includes(type)
+                        ? e.target['checked']
+                        : e.target['value']
+                );
+                if (action === 'onChange') { control.dirty = true; };
+            }
         });
     };
 
