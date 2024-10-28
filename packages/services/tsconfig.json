@@ -11,6 +11,7 @@
     "downlevelIteration": true,
     "declarationMap": true,
     "resolveJsonModule": true,
+    "allowJs": true,
     "lib": [
       "es2018",
       "dom"
@@ -34,7 +35,6 @@
     "node_modules",
     "dist",
     "**/__mocks__",
-    "**/tests",
-    "**/*.spec.ts"
+    "**/tests"
   ]
 }
