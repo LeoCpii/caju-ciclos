@@ -1,10 +1,10 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import { HTMLAttributes } from 'react';
 
 import joinClass from '@/utils/joinClass';
 
 import './Card.scss';
 
-type CardContentProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>;
+type CardContentProps = HTMLAttributes<HTMLDivElement>;
 export default function CardContent({ children, ...props }: CardContentProps) {
 
     const cls = joinClass(['cj-card__content', props.className]);
