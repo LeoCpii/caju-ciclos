@@ -42,7 +42,6 @@ export default function Admission() {
         },
         handle: {
             change: (form) => {
-                // TODO: verificar regra de lastupdate
                 const { cpf } = form.values;
 
                 if (cpf.length === 11) {
@@ -61,7 +60,6 @@ export default function Admission() {
 
                     setTimeout(() => setIsLoading(false), 500);
                 } else {
-                    console.log('resetando');
                     reset();
                 }
             }
