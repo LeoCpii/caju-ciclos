@@ -6,8 +6,6 @@ import DB from '@caju/services/db';
 import Auth from '@caju/services/auth';
 import UserServices from '@caju/services/user';
 import AdmissionServices from '@caju/services/admission';
-import CandidatesServices from '@caju/services/candidates';
-
 // VARIABLES
 export const url = {
     sso: import.meta.env.VITE_SSO_URL,
