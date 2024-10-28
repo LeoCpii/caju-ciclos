@@ -75,3 +75,17 @@ build-dependencies:
 	make run toolkit build
 	make run services build
 	make run ui build
+
+# -------------------- TESTS ------------------- #
+
+toolkit-test:
+	$(call run_in_workspace,toolkit,test)
+
+services-test:
+	$(call run_in_workspace,services,test)
+
+ui-test:
+	$(call run_in_workspace,ui,test)
+
+layout-test:
+	$(call run_in_workspace,layout,test)
