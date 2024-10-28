@@ -33,6 +33,7 @@ const MAP: { [x: string]: keyof JSX.IntrinsicElements } = {
 interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
     variant?: Variant;
     color?: MappedColors;
+    weight?: 'bold' | 'normal';
     noMargin?: boolean;
     gutterBottom?: boolean;
 }
@@ -42,6 +43,7 @@ export default function Typography({
     gutterBottom,
     variant = 'body1',
     color = 'text.primary',
+    weight,
     ...props
 }: TypographyProps) {
     const { theme: { palette } } = useTheme();
@@ -53,6 +55,7 @@ export default function Typography({
         noMargin && 'cj-typography--no-margin',
         gutterBottom && 'cj-typography--gutter-bottom',
         `cj-typography--${variant}`,
+        weight && `cj-typography--weight-${weight}`,
         props.className
     ]);
 
