@@ -37,11 +37,3 @@ export function getRandom<T>(arr: T[]): T {
 export function getFilledArray(length: number) {
     return Array.from(Array(length), (_, index) => index);
 }
-
-export function flattenArray(array: Array<any>) { return [].concat(...array); }
-export function flattenArrayDeep(array: Array<any>, depth: number) {
-    if (!depth) {
-        return array;
-    }
-    return Array.from({ length: depth }).reduce(newArray => flattenArray(newArray as Array<any>), array);
-}
