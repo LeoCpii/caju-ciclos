@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import useResize from './useResize';
 
 const meta: Meta<typeof useResize> = {
-    title: 'hook/useResize'
+    title: 'hooks/useResize'
 };
 
 export const Template: StoryObj<typeof useResize> = {

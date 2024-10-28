@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import useListenerResize from './useListenerResized';
 
 const meta: Meta<typeof useListenerResize> = {
-    title: 'useListenerResize'
+    title: 'hooks/useListenerResize'
 };
 
 export const Template: StoryObj<typeof useListenerResize> = {

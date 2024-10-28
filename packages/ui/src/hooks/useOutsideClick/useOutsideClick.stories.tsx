@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import useOutsideClick from './useOutsideClick';
 
 const meta: Meta<typeof useOutsideClick> = {
-    title: 'useOutsideClick'
+    title: 'hooks/useOutsideClick'
 };
 
 export const Template: StoryObj<typeof useOutsideClick> = {
