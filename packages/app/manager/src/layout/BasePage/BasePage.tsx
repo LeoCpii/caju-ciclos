@@ -39,6 +39,7 @@ export default function BasePage({ title, subtitle, action, backAction, children
 
     return (
         <Slide enter direction="top">
+            {backAction}
             <Stack
                 orientation={orientation}
                 justify="space-between"
@@ -46,12 +47,11 @@ export default function BasePage({ title, subtitle, action, backAction, children
                 style={{ marginBottom: 32 }}
             >
                 <Stack orientation="row" align="center" style={{ width: 'auto' }}>
-                    {backAction}
                     <div>
                         <Typography variant="h5" noMargin>{title}</Typography>
                         {
                             subtitle && (
-                                <Typography noMargin> {subtitle}</Typography>
+                                <Typography variant="subtitle1" weight="normal" noMargin> {subtitle}</Typography>
                             )
                         }
                     </div>
