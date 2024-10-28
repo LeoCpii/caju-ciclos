@@ -10,7 +10,6 @@ import Slide from '@caju/ui/animations/Slide';
 import Button from '@caju/ui/components/Button';
 import useResize from '@caju/ui/hooks/useResize';
 import Loading from '@caju/ui/components/Loading';
-import ButtonIcon from '@caju/ui/components/ButtonIcon';
 import Form, { Control, FormControl, useForm } from '@caju/ui/components/Form';
 
 import type { Status } from '@caju/services/admission';
@@ -22,10 +21,7 @@ import { useGlobal } from '@/providers/global';
 import Columns from './Columns';
 import useAdmission from './useAdmission';
 
-interface FilterForm {
-    sort: string;
-    cpf: string;
-}
+interface FilterForm { sort: string; cpf: string; }
 
 export default function Admission() {
     const navigate = useNavigate();
@@ -71,8 +67,6 @@ export default function Admission() {
         const mainColumnCandidates = admission.columns[originColumn as Status];
 
         const origin = mainColumnCandidates.find(c => c.id === draggedCandidateId) as CandidateData;
-
-        console.log('result', origin);
 
         // Dropping outside the list
         if (!result.destination) { return; }
@@ -129,9 +123,7 @@ export default function Admission() {
                                     error={control.isInvalid}
                                     helperText={control.messageError}
                                     startIcon={
-                                        <ButtonIcon>
-                                            <Icon name="search" />
-                                        </ButtonIcon>
+                                        <Icon name="search" color="text.secondary" />
                                     }
                                     endIcon={
                                         isLoading && <Loading

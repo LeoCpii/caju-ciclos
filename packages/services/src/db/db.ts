@@ -24,7 +24,7 @@ type Field = WithFieldValue<DocumentData>;
 type CollectionData<
     F extends Field,
     T extends ArrayOrObject<F> = ArrayOrObject<F>,
-    K extends keyof T = keyof T,
+    K extends Path<T> = Path<T>,
 > = {
     data: F;
     path: string;

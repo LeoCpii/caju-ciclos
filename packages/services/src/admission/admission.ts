@@ -35,8 +35,6 @@ export default class AdmissionServices {
     }
 
     async updateAdmission(data: AdmissionData): Promise<void> {
-        console.log('candidate', data);
-
         return this.db.setItem<AdmissionData>({
             data,
             path: AdmissionServices.PATH,

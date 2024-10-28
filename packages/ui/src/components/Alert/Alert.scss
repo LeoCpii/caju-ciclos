@@ -5,6 +5,9 @@
     z-index: 50;
     right: 15px;
     position: fixed;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
 
     @include for-compacted {
         right: auto;

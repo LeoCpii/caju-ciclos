@@ -1,6 +1,6 @@
 import type { Colors } from '@caju/ui/theme';
 
-import type { Status } from '@caju/services/candidates';
+import type { Status } from '@caju/services/admission';
 
 interface CandidatesConfig {
     color: Colors;
