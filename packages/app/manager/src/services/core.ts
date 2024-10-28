@@ -39,4 +39,3 @@ export const db = new DB(getFirestore(app));
 // ENTITY SERVICES
 export const userServices = new UserServices(db, url.sso);
 export const admissionServices = new AdmissionServices(db);
-export const candidatesServices = new CandidatesServices(db);

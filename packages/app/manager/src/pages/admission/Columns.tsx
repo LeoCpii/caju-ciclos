@@ -11,6 +11,8 @@ import Typography from '@caju/ui/components/Typography';
 import { Grid, GridItem } from '@caju/ui/components/Grid';
 import { Card, CardContent } from '@caju/ui/components/Card';
 
+import { Status } from '@caju/services/admission';
+
 import { useGlobal } from '@/providers/global';
 
 import { CANDIDATES_CONFIG } from './candidatesConfig';
@@ -18,21 +20,21 @@ import CandidateCard, { type CandidateCardProps } from './CandidateCard';
 
 interface CardColumnProps {
     color: Colors;
-    columnId: string;
+    columnId: Status;
     icon: React.JSX.Element;
     title: React.JSX.Element;
     children: React.ReactNode;
 }
 function CardColumn({ title, icon, color, columnId, children }: CardColumnProps) {
-
     const arrayChildren = Children.toArray(children) as ReactElement<CandidateCardProps>[];
 
     const renderChildren = () => {
         return arrayChildren.map((child, i) => {
             return cloneElement(child, {
                 color,
+                index: i,
+                status: columnId,
                 cardId: child.props.id,
-                index: i
             });
         });
     };
@@ -95,18 +97,20 @@ export default function Columns() {
                 {
                     CANDIDATES_CONFIG.map((config, i) => (
                         <GridItem key={config.columnId} lg={4} md={4} sm={12}>
-                            <CardColumn
-                                columnId={config.columnId}
-                                color={config.color}
-                                icon={<Icon name={config.icon} color="text.secondary" />}
-                                title={<Typography variant="body2" noMargin>{config.label}</Typography>}
-                            >
-                                {
-                                    admission.columns[config.status].map((candidate) => (
-                                        <CandidateCard key={candidate.id} {...candidate} />
-                                    ))
-                                }
-                            </CardColumn>
+                            <Slide enter direction="top" delay={(i + 1) * 100}>
+                                <CardColumn
+                                    columnId={config.columnId}
+                                    color={config.color}
+                                    icon={<Icon name={config.icon} color="text.secondary" />}
+                                    title={<Typography variant="body2" noMargin>{config.label}</Typography>}
+                                >
+                                    {
+                                        admission.columns[config.status].map((candidate) => (
+                                            <CandidateCard key={candidate.id} {...candidate} />
+                                        ))
+                                    }
+                                </CardColumn>
+                            </Slide>
                         </GridItem>
                     ))
                 }

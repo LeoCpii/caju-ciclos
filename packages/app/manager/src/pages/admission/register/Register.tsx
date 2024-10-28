@@ -125,6 +125,7 @@ export default function Register() {
                             field={(control) => (
                                 <Input
                                     fullWidth
+                                    maxLength={14}
                                     label="CPF"
                                     value={control.masked}
                                     error={control.isInvalid}

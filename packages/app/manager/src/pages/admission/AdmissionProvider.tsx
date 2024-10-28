@@ -15,6 +15,7 @@ import { admissionServices } from '@/services/core';
 import { _generateNewOrderedColumn } from './admissionUtils';
 
 interface AdmissionContextConfig {
+    deleteCard: (cardId: string, status: Status) => void;
     reorderCard: (originColumn: Status, candidateCard: CandidateData, targetPosition: number) => Promise<void>;
     changeCardColumn: (
         originColumn: Status,
@@ -25,6 +26,7 @@ interface AdmissionContextConfig {
 }
 
 export const AdmissionContext = createContext<AdmissionContextConfig>({
+    deleteCard: () => { },
     reorderCard: () => Promise.resolve(),
     changeCardColumn: () => Promise.resolve()
 });
@@ -35,6 +37,9 @@ export default function AdmissionProvider({ children }: AdmissionProviderProps) 
     const { admission, loading, updateAdmission } = useGlobal();
 
     const context = useMemo<AdmissionContextConfig>(() => ({
+        deleteCard: async (cardId, status) => {
+            deleteCard(cardId, status);
+        },
         reorderCard: async (originColumn, candidateCard, targetPosition) => {
             reorderCard(originColumn, candidateCard, targetPosition);
         },
@@ -58,6 +63,22 @@ export default function AdmissionProvider({ children }: AdmissionProviderProps) 
             color: 'error',
             message: 'Erro ao atualizar card!',
             icon: <Icon name="times" />,
+        });
+    };
+
+    const deleteCard = async (cardId: string, status: Status) => {
+        const updatedCards = admission.columns[status].filter(card => card.id !== cardId);
+
+        const columnUpdated = { ...admission.columns, [status]: updatedCards };
+
+        admissionServices.updateAdmission({
+            ...admission,
+            columns: columnUpdated
+        }).then(() => {
+            sendSuccessFeedback();
+            updateAdmission((prev) => ({ ...prev, columns: columnUpdated }));
+        }).catch(() => {
+            sendErrorFeedback();
         });
     };
 
