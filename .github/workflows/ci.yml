@@ -32,7 +32,7 @@ jobs:
     needs: [build-dependencies]
     uses: ./.github/workflows/unit-tests.yml
     with:
-      BUILD_ENV: qa
+      BUILD_ENV: production
     secrets: inherit
 
   build-sso:
@@ -45,3 +45,15 @@ jobs:
       PROJECT: sso
       COMMAND: build
     secrets: inherit
+
+  build-manager:
+    needs: [unit-tests]
+    uses: ./.github/workflows/projects.yml
+    with:
+      ENVIRONMENT: MANAGER
+      BUILD_ENV: production
+      PATH: dist
+      PROJECT: manager
+      COMMAND: build
+    secrets: inherit
+  
