@@ -107,7 +107,7 @@ export default function Register() {
 
                 const date = new Date(admissionDate);
 
-                if (date > new Date()) { return 'Data de admissão inválida'; }
+                if (date > new Date()) { return 'A data de admissão não pode ser superior a data de hoje'; }
 
                 return form.controls.admissionDate.error;
             },
