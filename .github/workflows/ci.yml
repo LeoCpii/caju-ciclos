@@ -66,6 +66,6 @@ jobs:
       BUILD_ENV: local
       PROJECT: manager
       RUN_TEST_COMMAND: test:manager
-      START_PROJECT_COMMAND: start
+      START_PROJECT_COMMAND: preview
     secrets: inherit
   

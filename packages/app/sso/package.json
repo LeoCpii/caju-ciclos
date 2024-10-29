@@ -5,11 +5,10 @@
   "type": "module",
   "author": "leonardo.goncalves <leogoncalves.contato@gmail.com>",
   "scripts": {
-    "dev": "env-cmd -f .env vite --port 5001",
-    "start": "vite --port 5001",
+    "start": "env-cmd -f .env vite --port 5000",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview --port 5000"
   },
   "dependencies": {
     "@firebase/auth": "^1.8.0",
