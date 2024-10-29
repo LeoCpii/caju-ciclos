@@ -7,7 +7,7 @@ import {
     GoogleAuthProvider,
     connectAuthEmulator,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
 } from 'firebase/auth';
 
 import DB from '@caju/services/db';

@@ -1,13 +1,34 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
+import logger from '@caju/toolkit/logger';
+import { getParams } from '@caju/toolkit/url';
+
 import App from '@/App';
 import Error from '@/pages/error';
 import Signin from '@/pages/home';
+import { url } from '@/services/core';
 import Profile from '@/pages/profile/Profile';
 import Register from '@/pages/admission/register';
 import Admission, { AdmissionProvider } from '@/pages/admission';
+import { authServices, userServices } from '@/services/core';
 
 import { UserLoggedOutGuard } from './LoggedGuard';
+
+async function getUser() {
+    const params = getParams<{ email: string }>();
+
+    if (window.location.href.includes('error')) { return; }
+
+    const email = params.email || userServices.currentByToken.email;
+
+    console.log('email', email);
+
+    return userServices.getUserByEmail(email)
+        .catch(() => {
+            authServices.logout(() => window.open(url.sso, '_self'));
+            logger.info('Usuário não encontrado');
+        });
+};
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +38,8 @@ export const router = createBrowserRouter([
                 <App />
             </UserLoggedOutGuard>
         ),
+        errorElement: <Error />,
+        loader: () => getUser(),
         children: [
             {
                 path: '/',

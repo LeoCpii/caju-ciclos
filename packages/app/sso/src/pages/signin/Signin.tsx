@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Icon from '@caju/ui/components/Icon';
 import Slide from '@caju/ui/animations/Slide';
 import Input from '@caju/ui/components/Input';
 import Stack from '@caju/ui/components/Stack';
 import Button from '@caju/ui/components/Button';
+import Divider from '@caju/ui/components/Divider';
 import Loading from '@caju/ui/components/Loading';
 import { useAlert } from '@caju/ui/components/Alert';
 import Container from '@caju/ui/components/Container';
@@ -15,15 +17,19 @@ import Form, { Control, useForm, FormControl } from '@caju/ui/components/Form';
 
 import logger from '@caju/toolkit/logger';
 
-import { authServices, userServices, url, admissionServices, isLocal } from '@/services/core';
+import { authServices, url } from '@/services/core';
 
-const redirect = () => {
-    const managerUrl = `${url.manager}?token=${authServices.access_token}`;
-    logger.info('Redirecting to manager page:', managerUrl);
-    window.open(managerUrl, '_self');
+const FIREBASE = {
+    'auth/user-not-found': 'Email ou senha inválidos',
+    'auth/wrong-password': 'Email ou senha inválidos',
+    // eslint-disable-next-line max-len
+    'auth/too-many-requests': 'O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login malsucedidas. Você pode restaurá-lo imediatamente redefinindo sua senha ou pode tentar novamente mais tarde.',
 };
 
 function EmailAndPasswordForm() {
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
     const [type, setType] = useState<'text' | 'password'>('password');
 
     const { addAlert } = useAlert();
@@ -35,138 +41,96 @@ function EmailAndPasswordForm() {
         },
         handle: {
             submit: (form) => {
+                setLoading(true);
                 const { email, password } = form.values;
 
-                logger.info('SSSUUUU');
-
                 authServices.loginWithPassword(email, password)
-                    .then(() => {
-                        redirect();
-                    })
+                    .then(() => { redirect(); })
                     .catch((e) => {
                         const { code } = e;
 
-                        if (code === 'auth/user-not-found') {
-                            return authServices.createUserWithPassword(email, password)
-                                .then((user) => {
-                                    logger.info('usuario criado no autenticador!', user);
-                                    return user;
-                                })
-                                .then((user) => userServices.createUser(user))
-                                .then(() => logger.info('usuario criado com sucesso!'))
-                                .then(() => admissionServices.createAdmission(userServices.currentByToken.user_id))
-                                .then(() => logger.info('admissão criada com sucesso!'))
-                                .then(() => redirect())
-                                .catch((e) => { logger.error('Erro ao criar ususario, ', e); });
-                        }
-
                         addAlert({
                             color: 'error',
-                            message: 'Erro ao tentar fazer login.',
+                            message: FIREBASE[code] || 'Erro ao fazer login',
                             icon: <Icon name="error" />,
                         });
 
-                        logger.info('Error on login:', e);
-                    });
+                        logger.info('Error on login:', { e });
+                    })
+                    .finally(() => { setLoading(false); });
             }
         }
     }, []);
 
-    const toggleType = () => {
-        setType(prev => prev === 'text' ? 'password' : 'text');
+    const redirect = () => {
+        const managerUrl = `${url.manager}?token=${authServices.access_token}&email=${formGroup.controls.email.value}`;
+        logger.info('Redirecting to manager page:', managerUrl);
+        window.open(managerUrl, '_self');
     };
+
+    const toggleType = () => { setType(prev => prev === 'text' ? 'password' : 'text'); };
+
+    const goToSignup = () => { navigate('/signup'); };
 
     return (
         <Form formGroup={formGroup}>
-            <Control
-                controlName="email"
-                field={(control) => <Input
+            <Stack spacing="small">
+                <Control
+                    controlName="email"
+                    field={(control) => <Input
+                        fullWidth
+                        gutterBottom
+                        placeholder="Email"
+                        value={control.value}
+                        error={control.isInvalid}
+                        helperText={control.messageError}
+                    />}
+                />
+                <Control
+                    controlName="password"
+                    field={(control) => <Input
+                        fullWidth
+                        gutterBottom
+                        type={type}
+                        placeholder="Senha"
+                        value={control.value}
+                        error={control.isInvalid}
+                        helperText={control.messageError}
+                        endIcon={
+                            <ButtonIcon type="button" onClick={toggleType}>
+                                <Icon name="eye" />
+                            </ButtonIcon>
+                        }
+                    />}
+                />
+                <Button
                     fullWidth
-                    gutterBottom
-                    placeholder="email"
-                    value={control.value}
-                    error={control.isInvalid}
-                    helperText={control.messageError}
-                />}
-            />
-            <Control
-                controlName="password"
-                field={(control) => <Input
-                    fullWidth
-                    gutterBottom
-                    type={type}
-                    placeholder="password"
-                    value={control.value}
-                    error={control.isInvalid}
-                    helperText={control.messageError}
-                    endIcon={
-                        <ButtonIcon type="button" onClick={toggleType}>
-                            <Icon name="eye" />
-                        </ButtonIcon>
-                    }
-                />}
-            />
-            <Button
-                fullWidth
-                type="submit"
-                size="large"
-                variant="outlined"
-            >
-                Entrar
-            </Button>
+                    type="submit"
+                    size="large"
+                    disabled={loading}
+                    loading={loading && <Loading />}
+                >
+                    Entrar
+                </Button>
+                <Divider />
+                <Stack orientation="row" justify="center">
+                    <Typography variant="body2" style={{ textAlign: 'center' }}>Não possui conta?</Typography>
+                    <Button
+                        noHover
+                        size="small"
+                        type="button"
+                        variant="text"
+                        onClick={goToSignup}
+                    >
+                        Criar conta
+                    </Button>
+                </Stack>
+            </Stack>
         </Form>
     );
 }
 
 export default function Signin() {
-    const { addAlert } = useAlert();
-    const [loading, setLoading] = useState(false);
-
-    const signinWithGoogle = () => {
-        setLoading(true);
-
-        authServices.login()
-            .then(() => { verifyUser(); })
-            .catch((e) => {
-                logger.info('Error on login:', e);
-                addAlert({
-                    color: 'error',
-                    message: 'Erro ao tentar fazer login.',
-                    icon: <Icon name="error" />,
-                    delay: 800000
-                });
-            })
-            .finally(() => setTimeout(() => { setLoading(false); }, 500));
-
-    };
-
-    const verifyUser = () => {
-        const { email, user_id } = userServices.currentByToken;
-
-        userServices.getUserByEmail(email)
-            .then(current => {
-                if (current) {
-                    setTimeout(() => { redirect(); }, 500);
-                    return;
-                }
-
-                logger.info('criando usuario');
-
-                userServices.createUser(userServices.currentByToken)
-                    .then(() => admissionServices.createAdmission(user_id))
-                    .then(() => setTimeout(() => { redirect(); }, 500))
-                    .catch((e) => {
-                        addAlert({
-                            color: 'error',
-                            message: 'Erro ao tentar fazer login.',
-                            icon: <Icon name="error" />,
-                        });
-
-                        logger.info('Error on login:', { e });
-                    });
-            });
-    };
-
     return (
         <Slide enter direction="top">
             <Stack justify="center" sx={(theme) => ({
@@ -182,24 +146,7 @@ export default function Signin() {
                             <Typography variant="subtitle1" noMargin gutterBottom>Login</Typography>
 
                             <Stack spacing="small">
-                                {isLocal && <EmailAndPasswordForm />}
-
-                                <div>
-                                    <Typography variant="body2" noMargin gutterBottom>
-                                        Use sua conta do Google para acessar o desafio Caju.
-                                    </Typography>
-
-                                    <Button
-                                        fullWidth
-                                        size="large"
-                                        startIcon={<Icon name="google" />}
-                                        style={{ marginTop: 16 }}
-                                        loading={loading && <Loading />}
-                                        onClick={signinWithGoogle}
-                                    >
-                                        Entrar com o Google
-                                    </Button>
-                                </div>
+                                <EmailAndPasswordForm />
                             </Stack>
                         </CardContent>
                     </Card>

@@ -52,6 +52,7 @@ export default function CandidateCard({
                         <Card
                             data-cy="candidate-card"
                             sx={({ palette }) => ({
+                                cursor: 'grab',
                                 display: 'flex',
                                 alignItems: 'center',
                                 borderLeft: `4px solid ${palette[color].main}`,
