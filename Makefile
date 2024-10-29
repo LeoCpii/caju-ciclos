@@ -89,3 +89,13 @@ ui-test:
 
 layout-test:
 	$(call run_in_workspace,layout,test)
+
+# -------------------- EMULADOR ------------------- #
+
+# CUIDADO: Este comando irá sobrescrever o path mock
+db-write:
+	firebase emulators:start --import ./mock --export-on-exit ./mock
+
+db:
+	@echo "Starting Firestore emulator..."
+	@cd packages/db && firebase emulators:start --import ./mock
