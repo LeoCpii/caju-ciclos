@@ -35,6 +35,8 @@ function EmailAndPasswordForm() {
 
     const { addAlert } = useAlert();
 
+    const iconEye = type === 'text' ? 'eye-slash' : 'eye';
+
     const [formGroup] = useForm<{ email: string; password: string }>({
         form: {
             email: new FormControl({ value: '', type: 'email', required: true }),
@@ -99,7 +101,7 @@ function EmailAndPasswordForm() {
                         helperText={control.messageError}
                         endIcon={
                             <ButtonIcon type="button" onClick={toggleType}>
-                                <Icon name="eye" />
+                                <Icon name={iconEye} />
                             </ButtonIcon>
                         }
                     />}
@@ -136,14 +138,18 @@ export default function Signin() {
         <Slide enter direction="top">
             <Stack justify="center" sx={(theme) => ({
                 height: '100vh',
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: theme.palette.secondary.main,
             })}>
                 <Container sm="100%" md={500} lg={500}>
-                    <Typography variant="h4" style={{ textAlign: 'center' }} noMargin gutterBottom>
-                        Desafio Caju!
-                    </Typography>
                     <Card>
                         <CardContent>
+                            <Stack orientation="row">
+                                <img
+                                    style={{ width: 120, margin: 'auto' }}
+                                    src="https://auth.caju.com.br/resources/mx5fr/login/caju/img/caju-logo.svg"
+                                />
+                            </Stack>
+
                             <Typography variant="subtitle1" noMargin gutterBottom>Login</Typography>
 
                             <Stack spacing="small">
@@ -154,9 +160,17 @@ export default function Signin() {
                     <Box>
                         <Typography
                             variant="body2"
+                            color="secondary.contrastText"
                             style={{ textAlign: 'center' }}
                         >
-                            Copyright © 2024, Leozinho - Versão: {release}
+                            Desafio Caju - Leonardo Gonçalves
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            color="secondary.contrastText"
+                            style={{ textAlign: 'center' }}
+                        >
+                            Versão: {release}
                         </Typography>
                     </Box>
                 </Container>

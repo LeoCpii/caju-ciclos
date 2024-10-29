@@ -39,6 +39,8 @@ export default function Signup() {
 
     const { addAlert } = useAlert();
 
+    const iconEye = type === 'text' ? 'eye-slash' : 'eye';
+
     const [formGroup] = useForm<SignupForm>({
         form: {
             name: new FormControl({ value: '', type: 'text', required: true }),
@@ -79,6 +81,15 @@ export default function Signup() {
             },
         },
         validator: {
+            password: (form) => {
+                const { password } = form.values;
+
+                if (password.length < 6) {
+                    return 'A senha deve ter no mínimo 6 caracteres';
+                }
+
+                return '';
+            },
             confirmPassword: (form) => {
                 const { password, confirmPassword } = form.values;
 
@@ -105,19 +116,21 @@ export default function Signup() {
         <Slide enter direction="top">
             <Stack justify="center" sx={(theme) => ({
                 height: '100vh',
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: theme.palette.secondary.main,
             })}>
                 <Container sm="100%" md={500} lg={500}>
-                    <Typography variant="h4" style={{ textAlign: 'center' }} noMargin gutterBottom>
-                        Desafio Caju!
-                    </Typography>
                     <Card>
                         <CardContent>
+                            <Stack orientation="row">
+                                <img
+                                    style={{ width: 120, margin: 'auto' }}
+                                    src="https://auth.caju.com.br/resources/mx5fr/login/caju/img/caju-logo.svg"
+                                />
+                            </Stack>
                             <Typography variant="subtitle1" noMargin gutterBottom>Criar conta</Typography>
 
                             <Stack spacing="small">
                                 <Form formGroup={formGroup}>
-
                                     <Stack spacing="small">
                                         <Control
                                             controlName="name"
@@ -160,7 +173,7 @@ export default function Signup() {
                                                     helperText={control.messageError}
                                                     endIcon={
                                                         <ButtonIcon onClick={toggleType}>
-                                                            <Icon name="eye" />
+                                                            <Icon name={iconEye} />
                                                         </ButtonIcon>
                                                     }
                                                 />
@@ -178,11 +191,6 @@ export default function Signup() {
                                                     value={control.value}
                                                     error={control.isInvalid}
                                                     helperText={control.messageError}
-                                                    endIcon={
-                                                        <ButtonIcon onClick={toggleType}>
-                                                            <Icon name="eye" />
-                                                        </ButtonIcon>
-                                                    }
                                                 />
                                             )}
                                         />
@@ -215,14 +223,6 @@ export default function Signup() {
                             </Stack>
                         </CardContent>
                     </Card>
-                    <Box>
-                        <Typography
-                            variant="body2"
-                            style={{ textAlign: 'center' }}
-                        >
-                            Copyright © 2024, Leozinho - Versão: {release}
-                        </Typography>
-                    </Box>
                 </Container>
             </Stack>
         </Slide>

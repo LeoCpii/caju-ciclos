@@ -3,12 +3,12 @@ import type { Theme } from './Theme';
 export const themeDefaultLight: Theme = {
     palette: {
         mode: 'light',
-        info: '#2196f3',
+        info: '#3767e1',
         error: '#f44336',
         warning: '#ff9800',
         success: '#A6D577',
         primary: '#3f51b5',
-        secondary: '#f50057',
+        secondary: '#ee2737',
         text: {
             primary: 'rgba(0, 0, 0, 0.87)',
             secondary: 'rgba(0, 0, 0, 0.6)',
@@ -25,12 +25,12 @@ export const themeDefaultLight: Theme = {
 export const themeDefaultDark: Theme = {
     palette: {
         mode: 'dark',
-        info: '#2196f3',
+        info: '#3767e1',
         error: '#f44336',
         warning: '#ff9800',
         success: '#4caf50',
         primary: '#1abc9c',
-        secondary: '#f50057',
+        secondary: '#e80537',
         text: {
             primary: '#fff',
             secondary: 'rgba(255, 255, 255, 0.7)',
@@ -40,6 +40,6 @@ export const themeDefaultDark: Theme = {
             paper: '#424242',
             default: '#303030',
         },
-        divider: 'rgba(0, 0, 0, 0.12)'
+        divider: 'rgba(255, 255, 255, 0.12)'
     }
 };

@@ -25,7 +25,7 @@ export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
         theme: _theme,
         updateMode: (mode: Mode) => updateMode(mode),
         updateTheme: (newTheme: ThemeBuilded) => updateTheme(newTheme),
-    }), [theme]);
+    }), [theme, _theme]);
 
     useEffect(() => { applyTheme(_theme); }, [_theme]);
 
@@ -34,9 +34,7 @@ export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
         setTheme(prevTheme => ({ ...prevTheme, palette: { ...prevTheme.palette, mode } }));
     };
 
-    const updateTheme = (newTheme: Partial<ThemeBuilded>) => {
-        setTheme(prev => ({ ...prev, ...newTheme }));
-    };
+    const updateTheme = (newTheme: ThemeBuilded) => { setTheme(newTheme); };
 
     return (
         <ThemeContext.Provider value={context}>

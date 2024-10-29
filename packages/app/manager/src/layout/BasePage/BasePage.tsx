@@ -39,8 +39,8 @@ export default function BasePage({ title, subtitle, action, backAction, children
     };
 
     return (
-        <Slide enter direction="top" style={{ height: '100%' }}>
-            <Stack justify="space-between" className="base-page-container">
+        <Stack justify="space-between" className="base-page-container" style={{ height: '100%' }}>
+            <Slide enter direction="top">
                 <div>
                     {backAction}
                     <Stack
@@ -75,15 +75,15 @@ export default function BasePage({ title, subtitle, action, backAction, children
                         )
                     }
                 </div>
+            </Slide>
 
-                <Stack
-                    justify="center"
-                    align="center"
-                    sx={({ palette }) => ({ color: palette.text.secondary })}
-                >
-                    <span>Versão: {release}</span>
-                </Stack>
+            <Stack
+                justify="center"
+                align="center"
+                sx={({ palette }) => ({ color: palette.text.secondary })}
+            >
+                <span>Versão: {release}</span>
             </Stack>
-        </Slide>
+        </Stack >
     );
 }

@@ -26,6 +26,7 @@
         transition: all $animation;
         cursor: pointer;
         position: relative;
+        color: var(--text-primary);
 
         &:hover {
             background-color: var(--background-paper);

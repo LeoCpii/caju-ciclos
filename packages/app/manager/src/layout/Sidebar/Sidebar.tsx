@@ -43,7 +43,7 @@ export default function Sidebar() {
             <div>
                 <SidebarButton
                     path="pagina-inicial"
-                    icon="home"
+                    icon="user-md"
                     aria-label="página inicial"
                     onClick={() => goTo('pagina-inicial')}
                 />

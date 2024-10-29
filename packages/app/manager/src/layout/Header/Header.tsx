@@ -1,19 +1,24 @@
-import { useNavigate } from 'react-router-dom';
-
 import Icon from '@caju/ui/components/Icon';
 import Stack from '@caju/ui/components/Stack';
 import Button from '@caju/ui/components/Button';
 import Avatar from '@caju/ui/components/Avatar';
+import ButtonIcon from '@caju/ui/components/ButtonIcon';
+import { useTheme, createTheme, themeDefaultLight, themeDefaultDark } from '@caju/ui/theme';
 
 import { useUser } from '@/providers/user';
 import { useGlobal } from '@/providers/global';
 
 export default function Header() {
-    const navigate = useNavigate();
     const { currentUser } = useUser();
     const { startGuide } = useGlobal();
+    const { theme, updateTheme } = useTheme();
 
-    const goToProfile = () => { navigate('meu-perfil'); };
+    const modeIcon = theme.palette.mode === 'dark' ? 'moon' : 'sun';
+
+    const updateMode = () => {
+        const newTheme = theme.palette.mode === 'dark' ? themeDefaultLight : themeDefaultDark;
+        updateTheme(createTheme(newTheme));
+    };
 
     return (
         <div className="layout__header">
@@ -24,7 +29,7 @@ export default function Header() {
                 </button>
             </div>
 
-            <Stack orientation="row" justify="flex-end">
+            <Stack orientation="row" justify="flex-end" align="center">
                 <Button
                     size="small"
                     variant="text"
@@ -33,13 +38,17 @@ export default function Header() {
                 >
                     Ajuda
                 </Button>
-                <Avatar
-                    color="primary"
-                    name={currentUser.name}
-                    alt={currentUser.name}
-                    src={currentUser.picture}
-                    onClick={goToProfile}
-                />
+                <ButtonIcon onClick={updateMode}>
+                    <Icon name={modeIcon} />
+                </ButtonIcon>
+                <div title={currentUser.email}>
+                    <Avatar
+                        name={currentUser.name}
+                        alt={currentUser.name}
+                        src={currentUser.picture}
+                        sx={({ palette }) => ({ backgroundColor: palette.secondary.main })}
+                    />
+                </div>
             </Stack>
         </div>
     );

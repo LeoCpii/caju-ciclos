@@ -13,7 +13,8 @@
 
 .cj-guide__frame {
     right: 0;
-    width: fit-content;
+    width: max-content;
+    max-width: 550px;
     position: absolute;
     transition: all $animation;
 

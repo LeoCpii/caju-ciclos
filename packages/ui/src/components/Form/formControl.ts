@@ -1,5 +1,6 @@
+import { maskCpf, maskPhone } from '@caju/toolkit/mask';
+
 import validator from './validator';
-import { maskCpf, maskPhone } from './formatter';
 
 export const MESSAGES = {
     email: () => 'O campo deve ser um email válido',

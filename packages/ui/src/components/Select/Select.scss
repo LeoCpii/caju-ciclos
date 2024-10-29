@@ -23,6 +23,7 @@
     border-radius: 4px;
     background-color: var(--background-default);
     transition: all $animation;
+    color: var(--text-primary);
 
     &:hover {
         background-color: var(--background-paper);

@@ -11,7 +11,7 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLElement>, 'children'>
     color?: Colors | 'default';
     variant?: 'contained' | 'outlined';
 };
-export default function Chip({ label, color = 'default', variant, ...props }: ChipProps) {
+export default function Chip({ label, color = 'default', variant = 'contained', ...props }: ChipProps) {
 
     const clss = joinClass([
         'cj-chip',
