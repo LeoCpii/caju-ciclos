@@ -81,7 +81,7 @@ export default function BasePage({ title, subtitle, action, backAction, children
                     align="center"
                     sx={({ palette }) => ({ color: palette.text.secondary })}
                 >
-                    <span>Varsão: {release}</span>
+                    <span>Versão: {release}</span>
                 </Stack>
             </Stack>
         </Slide>

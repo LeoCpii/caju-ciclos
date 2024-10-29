@@ -21,6 +21,8 @@ export const url = {
     manager: import.meta.env.VITE_MANAGER_URL,
 };
 
+export const release = import.meta.env.VITE_RELEASE;
+
 export const isLocal = import.meta.env.VITE_ENV === 'local';
 
 // FIREBASE

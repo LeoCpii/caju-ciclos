@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Box from '@caju/ui/components/Box';
 import Icon from '@caju/ui/components/Icon';
 import Slide from '@caju/ui/animations/Slide';
 import Input from '@caju/ui/components/Input';
@@ -17,7 +18,7 @@ import Form, { Control, useForm, FormControl } from '@caju/ui/components/Form';
 
 import logger from '@caju/toolkit/logger';
 
-import { authServices, url } from '@/services/core';
+import { authServices, release, url } from '@/services/core';
 
 const FIREBASE = {
     'auth/user-not-found': 'Email ou senha inválidos',
@@ -150,12 +151,14 @@ export default function Signin() {
                             </Stack>
                         </CardContent>
                     </Card>
-                    <Typography
-                        variant="body2"
-                        style={{ textAlign: 'center' }}
-                    >
-                        Copyright © 2024, Leozinho
-                    </Typography>
+                    <Box>
+                        <Typography
+                            variant="body2"
+                            style={{ textAlign: 'center' }}
+                        >
+                            Copyright © 2024, Leozinho - Versão: {release}
+                        </Typography>
+                    </Box>
                 </Container>
             </Stack>
         </Slide>
