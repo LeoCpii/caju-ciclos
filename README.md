@@ -32,7 +32,7 @@ Manager | https://manager-desafio-caju.web.app/
 
 ## Arquitetura
 
-
+![image](https://github.com/user-attachments/assets/2310a588-249f-405a-96f3-7d5f95ac60da)
 
 ## Solução desenvolvida
 
@@ -119,6 +119,10 @@ Manager | http://localhost:5001
 
 8. Para se autenticar localmente utilize as credenciais `desafio@caju.com.br` e `Testando123` ou adicione um novo usuário no processo de criação de conta.
 
+![image](https://github.com/user-attachments/assets/cd64cc86-667a-4f31-b99a-5ebab4c68e57)
+
+![image](https://github.com/user-attachments/assets/a3c62339-8758-4a63-9e22-347de1372f5c)
+
 ## Comandos adicionais
 
 Após ter feito o setup do projeto você pode executar, individualmente, cada um dos módulos.
@@ -130,6 +134,7 @@ Nele temos a documentação e exemplos de utilização de todos os componentes u
 ```bash
 make run ui storybook
 ```
+![image](https://github.com/user-attachments/assets/b416831e-a4ed-4497-ae07-27895d508bec)
 
 ### e2e
 
