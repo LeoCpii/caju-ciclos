@@ -30,13 +30,6 @@ jobs:
   tests-e2e:
     runs-on: ubuntu-latest
 
-    services:
-      firebase-emulator:
-        image: codechem/firebase-emulators
-        ports:
-          - 8080:8080 # Firestore emulator
-          - 9099:9099 # Auth emulator
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -93,7 +86,3 @@ jobs:
           wait-on: http://localhost:${{ inputs.PORT }}, http://localhost:8080
           config-file: packages/e2e/cypress.config.ts
           command: make run e2e ${{ inputs.RUN_TEST_COMMAND }}
-
-      - name: Stop Firebase Emulator
-        if: success() || failure()
-        run: pkill -f "firebase emulators:start"
