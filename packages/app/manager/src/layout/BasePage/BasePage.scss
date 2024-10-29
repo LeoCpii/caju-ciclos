@@ -1,0 +1,11 @@
+.base-page-container {
+    height: 100%;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.base-page {
+    &__loading-container {
+        height: 300px;
+    }
+}

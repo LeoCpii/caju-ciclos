@@ -1,6 +1,10 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+    // ENV
+    readonly VITE_ENV: string;
+    readonly VITE_RELEASE: string;
+
     // FIREBASE
     readonly VITE_APP_ID: string;
     readonly VITE_API_KEY: string;

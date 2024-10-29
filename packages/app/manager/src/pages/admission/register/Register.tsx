@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@caju/ui/components/Box';
@@ -12,14 +12,17 @@ import Loading from '@caju/ui/components/Loading';
 import { useAlert } from '@caju/ui/components/Alert';
 import { Select, Option } from '@caju/ui/components/Select';
 import Form, { Control, useForm, FormControl } from '@caju/ui/components/Form';
+import { Step } from '@caju/ui/components/Guide';
 
 import logger from '@caju/toolkit/logger';
 
 import { BasicCandidateData } from '@caju/services/candidates';
 
 import { BasePage } from '@/layout';
-import { admissionServices } from '@/services/core';
 import { useGlobal } from '@/providers/global';
+import { admissionServices } from '@/services/core';
+
+import useGuideRegister from './useGuideRegister';
 
 interface RegisterForm extends Omit<BasicCandidateData, 'ownerId' | 'position'> {
     position: BasicCandidateData['position'] | string;
@@ -28,9 +31,10 @@ interface RegisterForm extends Omit<BasicCandidateData, 'ownerId' | 'position'> 
 export default function Register() {
     const navigate = useNavigate();
     const { addAlert } = useAlert();
+    const { start } = useGuideRegister();
     const [loading, setLoading] = useState(false);
 
-    const { admission, updateAdmission } = useGlobal();
+    const { admission, updateAdmission, pageToGuide } = useGlobal();
 
     const goTo = () => { navigate('/admissao'); };
 
@@ -101,6 +105,8 @@ export default function Register() {
         },
     }, []);
 
+    useEffect(() => { if (pageToGuide === 'cadastro') { start(); } }, [pageToGuide]);
+
     const goBack = () => { navigate('/admissao'); };
 
     return (
@@ -119,99 +125,104 @@ export default function Register() {
                 </Button>
             }
         >
-            <Box style={{ maxWidth: 400 }}>
-                <Slide enter direction="left" delay={150}>
-                    <Form formGroup={formGroup}>
-                        <Stack>
-                            <Control
-                                controlName="name"
-                                field={(control) => (
-                                    <Input
-                                        fullWidth
-                                        label="Nome"
-                                        value={control.value}
-                                        error={control.isInvalid}
-                                        helperText={control.messageError}
-                                        data-cy="name-input"
-                                    />
-                                )}
-                            />
-                            <Control
-                                controlName="email"
-                                field={(control) => (
-                                    <Input
-                                        fullWidth
-                                        label="E-mail"
-                                        value={control.value}
-                                        error={control.isInvalid}
-                                        helperText={control.messageError}
-                                        data-cy="email-input"
-                                    />
-                                )}
-                            />
-                            <Control
-                                controlName="cpf"
-                                field={(control) => (
-                                    <Input
-                                        fullWidth
-                                        maxLength={14}
-                                        label="CPF"
-                                        value={control.masked}
-                                        error={control.isInvalid}
-                                        helperText={control.messageError}
-                                        data-cy="cpf-input"
-                                    />
-                                )}
-                            />
-                            <Control
-                                controlName="admissionDate"
-                                field={(control) => (
-                                    <Input
-                                        fullWidth
-                                        type="date"
-                                        label="Data de admissão"
-                                        value={control.value}
-                                        error={control.isInvalid}
-                                        helperText={control.messageError}
-                                        data-cy="admission-date-input"
-                                    />
-                                )}
-                            />
-                            <Control
-                                controlName="position"
-                                action="onChange"
-                                field={(control) => (
-                                    <Select
-                                        fullWidth
-                                        label="Cargo"
-                                        placeholder="Selecione um cargo"
-                                        value={control.value}
-                                        error={control.isInvalid}
-                                        helperText={control.messageError}
-                                        data-cy="position-select"
-                                    >
-                                        <Option
-                                            value="frontend"
-                                            data-cy="frontend-option"
+            <Step name="step-register_form">
+                <Box style={{ maxWidth: 400, paddingRight: 16 }}>
+                    <Slide enter direction="left" delay={150}>
+                        <Form formGroup={formGroup}>
+                            <Stack>
+                                <Control
+                                    controlName="name"
+                                    field={(control) => (
+                                        <Input
+                                            fullWidth
+                                            label="Nome"
+                                            placeholder="ex: João das Meves"
+                                            value={control.value}
+                                            error={control.isInvalid}
+                                            helperText={control.messageError}
+                                            data-cy="name-input"
+                                        />
+                                    )}
+                                />
+                                <Control
+                                    controlName="email"
+                                    field={(control) => (
+                                        <Input
+                                            fullWidth
+                                            label="E-mail"
+                                            placeholder="ex: joao.neves@caju.com.br"
+                                            value={control.value}
+                                            error={control.isInvalid}
+                                            helperText={control.messageError}
+                                            data-cy="email-input"
+                                        />
+                                    )}
+                                />
+                                <Control
+                                    controlName="cpf"
+                                    field={(control) => (
+                                        <Input
+                                            fullWidth
+                                            maxLength={14}
+                                            label="CPF"
+                                            placeholder="000.000.000-00"
+                                            value={control.masked}
+                                            error={control.isInvalid}
+                                            helperText={control.messageError}
+                                            data-cy="cpf-input"
+                                        />
+                                    )}
+                                />
+                                <Control
+                                    controlName="admissionDate"
+                                    field={(control) => (
+                                        <Input
+                                            fullWidth
+                                            type="date"
+                                            label="Data de admissão"
+                                            value={control.value}
+                                            error={control.isInvalid}
+                                            helperText={control.messageError}
+                                            data-cy="admission-date-input"
+                                        />
+                                    )}
+                                />
+                                <Control
+                                    controlName="position"
+                                    action="onChange"
+                                    field={(control) => (
+                                        <Select
+                                            fullWidth
+                                            label="Cargo"
+                                            placeholder="Selecione um cargo"
+                                            value={control.value}
+                                            error={control.isInvalid}
+                                            helperText={control.messageError}
+                                            data-cy="position-select"
                                         >
-                                            Frontend
-                                        </Option>
-                                        <Option value="backend">Backend</Option>
-                                    </Select>
-                                )}
-                            />
-                            <Button
-                                type="submit"
-                                size="large"
-                                data-cy="submit-button"
-                                loading={loading && <Loading size={20} color="text.secondary" />}
-                            >
-                                Salvar
-                            </Button>
-                        </Stack>
-                    </Form>
-                </Slide>
-            </Box>
+                                            <Option
+                                                value="frontend"
+                                                data-cy="frontend-option"
+                                            >
+                                                Frontend
+                                            </Option>
+                                            <Option value="backend">Backend</Option>
+                                        </Select>
+                                    )}
+                                />
+                                <Button
+                                    type="submit"
+                                    size="large"
+                                    data-cy="submit-button"
+                                    loading={loading && <Loading size={20} color="text.secondary" />}
+                                >
+                                    Salvar
+                                </Button>
+                            </Stack>
+                        </Form>
+                    </Slide>
+                </Box>
+            </Step>
         </BasePage>
     );
 }

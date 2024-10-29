@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
@@ -10,6 +10,7 @@ import Slide from '@caju/ui/animations/Slide';
 import Button from '@caju/ui/components/Button';
 import useResize from '@caju/ui/hooks/useResize';
 import useFilter from '@caju/ui/hooks/useFilter';
+import { Step } from '@caju/ui/components/Guide';
 import Loading from '@caju/ui/components/Loading';
 import ButtonIcon from '@caju/ui/components/ButtonIcon';
 import Form, { Control, FormControl, useForm } from '@caju/ui/components/Form';
@@ -22,6 +23,7 @@ import { useGlobal } from '@/providers/global';
 
 import Columns from './Columns';
 import useAdmission from '../useAdmission';
+import useGuideDashboard from './useGuideDashboard';
 
 interface FilterForm { sort: string; cpf: string; }
 
@@ -30,7 +32,8 @@ export default function Admission() {
     const [isLoading, setIsLoading] = useState(false);
     const [fullWidth, setfullWidth] = useState(false);
 
-    const { admission } = useGlobal();
+    const { start } = useGuideDashboard();
+    const { admission, pageToGuide } = useGlobal();
     const { reorderCard, changeCardColumn } = useAdmission();
 
     const { filter, filtered, reset } = useFilter(admission);
@@ -74,6 +77,8 @@ export default function Admission() {
         onFullHD: () => setfullWidth(false),
     }, []);
 
+    useEffect(() => { if (pageToGuide === 'admissao') { start(); } }, [pageToGuide]);
+
     const goTo = () => { navigate('/admissao/cadastro'); };
 
     const onDragEnd = (result: DropResult) => {
@@ -113,16 +118,18 @@ export default function Admission() {
             title="Admissão"
             subtitle="Detalhes sobre a admissão de novos funcionários."
             action={
-                <Button
-                    size="small"
-                    color="primary"
-                    variant="contained"
-                    fullWidth={fullWidth}
-                    startIcon={<Icon name="plus" />}
-                    onClick={goTo}
-                >
-                    Nova admissão
-                </Button>
+                <Step name="step-register_button">
+                    <Button
+                        size="small"
+                        color="primary"
+                        variant="contained"
+                        fullWidth={fullWidth}
+                        startIcon={<Icon name="plus" />}
+                        onClick={goTo}
+                    >
+                        Nova admissão
+                    </Button>
+                </Step>
             }
         >
             <Stack>
@@ -158,12 +165,12 @@ export default function Admission() {
                 <DragDropContext onDragEnd={onDragEnd}>
                     {
                         isLoading
-                            ? (
-                                <Stack justify="center" align="center">
-                                    <Loading />
-                                </Stack>
-                            )
-                            : <Columns admission={filtered} />
+                            ? <Stack justify="center" align="center">
+                                <Loading />
+                            </Stack>
+                            : <Step name="step-admission_list">
+                                <Columns admission={filtered} />
+                            </Step>
                     }
                 </DragDropContext>
             </Stack>

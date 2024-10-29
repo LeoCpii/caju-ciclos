@@ -6,10 +6,12 @@ import Button from '@caju/ui/components/Button';
 import Avatar from '@caju/ui/components/Avatar';
 
 import { useUser } from '@/providers/user';
+import { useGlobal } from '@/providers/global';
 
 export default function Header() {
     const navigate = useNavigate();
     const { currentUser } = useUser();
+    const { startGuide } = useGlobal();
 
     const goToProfile = () => { navigate('meu-perfil'); };
 
@@ -26,10 +28,13 @@ export default function Header() {
                 <Button
                     size="small"
                     variant="text"
-                    startIcon={<Icon name="question-circle" />}>
+                    startIcon={<Icon name="question-circle" />}
+                    onClick={startGuide}
+                >
                     Ajuda
                 </Button>
                 <Avatar
+                    color="primary"
                     name={currentUser.name}
                     alt={currentUser.name}
                     src={currentUser.picture}

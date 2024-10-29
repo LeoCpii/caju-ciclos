@@ -1,6 +1,7 @@
 import { Outlet, useLoaderData } from 'react-router-dom';
 
 import AlertProvider from '@caju/ui/components/Alert';
+import GuideProvider from '@caju/ui/components/Guide';
 import { ThemeProvider, createTheme } from '@caju/ui/theme';
 
 import { UserData } from '@caju/services/user';
@@ -19,9 +20,11 @@ export default function App() {
             <AlertProvider>
                 <UserProvider user={user}>
                     <GlobalProvider>
-                        <Layout>
-                            <Outlet />
-                        </Layout>
+                        <GuideProvider>
+                            <Layout>
+                                <Outlet />
+                            </Layout>
+                        </GuideProvider>
                     </GlobalProvider>
                 </UserProvider>
             </AlertProvider>
