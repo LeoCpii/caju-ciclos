@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import Box from '@caju/ui/components/Box';
 import Icon from '@caju/ui/components/Icon';
 import Slide from '@caju/ui/animations/Slide';
 import Stack from '@caju/ui/components/Stack';
@@ -18,7 +17,7 @@ import Form, { Control, FormControl, useForm } from '@caju/ui/components/Form';
 
 import logger from '@caju/toolkit/logger';
 
-import { admissionServices, authServices, release, url, userServices } from '@/services/core';
+import { admissionServices, authServices, url, userServices } from '@/services/core';
 
 interface SignupForm {
     name: string;

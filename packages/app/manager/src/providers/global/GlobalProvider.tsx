@@ -1,7 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 
-import { Mode } from '@caju/ui/theme';
-
 import { getPage } from '@caju/toolkit/url';
 
 import type { AdmissionData } from '@caju/services/admission';
