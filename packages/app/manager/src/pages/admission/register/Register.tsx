@@ -102,6 +102,15 @@ export default function Register() {
 
                 return '';
             },
+            admissionDate: (form) => {
+                const { admissionDate } = form.values;
+
+                const date = new Date(admissionDate);
+
+                if (date > new Date()) { return 'Data de admissão inválida'; }
+
+                return '';
+            },
         },
     }, []);
 
@@ -135,8 +144,8 @@ export default function Register() {
                                     field={(control) => (
                                         <Input
                                             fullWidth
-                                            label="Nome"
-                                            placeholder="ex: João das Meves"
+                                            label="Nome completo"
+                                            placeholder="ex: João das Neves"
                                             value={control.value}
                                             error={control.isInvalid}
                                             helperText={control.messageError}

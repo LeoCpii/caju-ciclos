@@ -5,6 +5,8 @@ import Typography from '@caju/ui/components/Typography';
 import { Grid, GridItem } from '@caju/ui/components/Grid';
 import { Drawer, DrawerContent } from '@caju/ui/components/Drawer';
 
+import { maskCpf, maskDate } from '@caju/toolkit/mask';
+
 import type { CandidateData } from '@caju/services/candidates';
 
 interface CandiateDetailProps extends CandidateData {
@@ -28,18 +30,18 @@ export default function CandiateDetail({ open, onClose, ...candidate }: Candiate
                         </div>
                     </Stack>
 
-                    <Grid sm={12} md={4} lg={4}>
+                    <Grid sm={12} md={12} lg={12}>
                         <GridItem>
                             <Typography variant="body2" weight="bold" noMargin>Contato</Typography>
                             <Typography variant="body2" noMargin>{candidate.email}</Typography>
                         </GridItem>
                         <GridItem>
                             <Typography variant="body2" weight="bold" noMargin>CPF</Typography>
-                            <Typography variant="body2" noMargin>{candidate.cpf}</Typography>
+                            <Typography variant="body2" noMargin>{maskCpf(candidate.cpf)}</Typography>
                         </GridItem>
                         <GridItem>
                             <Typography variant="body2" weight="bold" noMargin>Data de Admissão</Typography>
-                            <Typography variant="body2" noMargin>{candidate.admissionDate}</Typography>
+                            <Typography variant="body2" noMargin>{maskDate(candidate.admissionDate)}</Typography>
                         </GridItem>
                     </Grid>
 
@@ -48,7 +50,7 @@ export default function CandiateDetail({ open, onClose, ...candidate }: Candiate
                         <Stack orientation="row" spacing="small">
                             {
                                 candidate.skills.map((skill) => (
-                                    <Chip key={skill} label={skill} />
+                                    <Chip variant="outlined" key={skill} label={skill} />
                                 ))
                             }
                         </Stack>

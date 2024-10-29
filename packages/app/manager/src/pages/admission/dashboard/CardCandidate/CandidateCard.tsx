@@ -10,6 +10,8 @@ import ButtonIcon from '@caju/ui/components/ButtonIcon';
 import { Card, CardContent } from '@caju/ui/components/Card';
 import { Menu, MenuButton, useMenu } from '@caju/ui/components/Menu';
 
+import { maskDate } from '@caju/toolkit/mask';
+
 import { Status } from '@caju/services/admission';
 import type { CandidateData } from '@caju/services/candidates';
 
@@ -109,7 +111,7 @@ export default function CandidateCard({
                                     <Stack orientation="row" spacing="small">
                                         <Icon name="schedule" color="text.secondary" size="small" />
                                         <Typography variant="body2" noMargin>
-                                            {admissionDate}
+                                            {maskDate(admissionDate)}
                                         </Typography>
                                     </Stack>
                                 </Stack>
