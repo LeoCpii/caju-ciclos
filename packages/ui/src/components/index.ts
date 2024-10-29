@@ -5,6 +5,7 @@ export * from './Icon';
 export * from './Card';
 export * from './Menu';
 export * from './Chip';
+export * from './Guide';
 export * from './Alert';
 export * from './Input';
 export * from './Stack';
