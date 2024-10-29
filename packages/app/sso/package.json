@@ -6,6 +6,7 @@
   "author": "leonardo.goncalves <leogoncalves.contato@gmail.com>",
   "scripts": {
     "start": "env-cmd -f .env vite --port 5000",
+    "dev": "env-cmd -f .env.dev vite --port 5000",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 5000"
