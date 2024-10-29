@@ -29,11 +29,6 @@ export const router = createBrowserRouter([
                 element: <Signin />,
             },
             {
-                path: '/vagas',
-                loader: () => document.title = 'Caju - Vagas',
-                element: <Vacancies />,
-            },
-            {
                 path: '/admissao',
                 loader: () => document.title = 'Caju - Admissão',
                 element: (

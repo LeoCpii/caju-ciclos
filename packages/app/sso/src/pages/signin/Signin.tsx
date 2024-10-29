@@ -150,9 +150,20 @@ export default function Signin() {
                     return;
                 }
 
-                userServices.createUser(current)
+                logger.info('criando usuario');
+
+                userServices.createUser(userServices.currentByToken)
                     .then(() => admissionServices.createAdmission(user_id))
-                    .then(() => setTimeout(() => { redirect(); }, 500));
+                    .then(() => setTimeout(() => { redirect(); }, 500))
+                    .catch((e) => {
+                        addAlert({
+                            color: 'error',
+                            message: 'Erro ao tentar fazer login.',
+                            icon: <Icon name="error" />,
+                        });
+
+                        logger.info('Error on login:', { e });
+                    });
             });
     };
 

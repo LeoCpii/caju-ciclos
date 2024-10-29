@@ -40,7 +40,7 @@ export default function GlobalProvider({ children }: GlobalProviderProps) {
     const getCandidates = () => {
         admissionServices.getAdmissions(currentUser.user_id)
             .then(res => {
-                setAdmission(res);
+                if (res) { setAdmission(res); };
                 setTimeout(() => { setLoading(false); }, 1000);
             });
     };
