@@ -71,8 +71,8 @@ jobs:
 
       - name: Start Firebase Emulator
         run: |
-          make db
-          npx wait-on http://localhost:8080
+          make db &
+          sleep 25
 
       - name: e2e - ${{ inputs.PROJECT }}
         uses: cypress-io/github-action@v6
