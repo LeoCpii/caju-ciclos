@@ -30,7 +30,6 @@ export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
     useEffect(() => { applyTheme(_theme); }, [_theme]);
 
     const updateMode = (mode: Mode) => {
-        console.log('updateMode', mode);
         setTheme(prevTheme => ({ ...prevTheme, palette: { ...prevTheme.palette, mode } }));
     };
 

@@ -94,10 +94,7 @@ export default function Admission() {
         if (!result.destination) { return; }
 
         // Dropping in the same position
-        if (result.destination.index === result.source.index && originColumn === targetColumn) {
-            console.log('mesma posição');
-            return;
-        }
+        if (result.destination.index === result.source.index && originColumn === targetColumn) { return; }
 
         // Dropping in the same column
         if (originColumn === targetColumn) { reorderCard(originColumn as Status, origin, result.destination.index); }

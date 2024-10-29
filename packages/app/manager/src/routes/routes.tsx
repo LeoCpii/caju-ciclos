@@ -20,8 +20,6 @@ async function getUser() {
 
     const email = params.email || userServices.currentByToken.email;
 
-    console.log('email', email);
-
     return userServices.getUserByEmail(email)
         .catch(() => {
             authServices.logout(() => window.open(url.sso, '_self'));
