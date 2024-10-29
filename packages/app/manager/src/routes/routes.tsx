@@ -3,7 +3,6 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import App from '@/App';
 import Error from '@/pages/error';
 import Signin from '@/pages/home';
-import Vacancies from '@/pages/vacancies';
 import Profile from '@/pages/profile/Profile';
 import Register from '@/pages/admission/register';
 import Admission, { AdmissionProvider } from '@/pages/admission';
