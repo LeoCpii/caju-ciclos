@@ -48,12 +48,6 @@ export default function Sidebar() {
                     onClick={() => goTo('pagina-inicial')}
                 />
                 <SidebarButton
-                    path="vagas"
-                    aria-label="vagas"
-                    icon="briefcase-alt"
-                    onClick={() => goTo('vagas')}
-                />
-                <SidebarButton
                     path="admissao"
                     aria-label="admissão"
                     icon="file-edit-alt"
