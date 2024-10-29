@@ -8,3 +8,10 @@ export function getParams<T>(): T {
             return acc;
         }, {} as T);
 }
+
+export function getPage<T>(): T {
+    return window.location.pathname
+        .split('/')
+        .reverse()
+        .filter(Boolean)[0] as T;
+}
