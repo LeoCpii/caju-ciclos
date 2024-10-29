@@ -109,7 +109,7 @@ export default function Register() {
 
                 if (date > new Date()) { return 'Data de admissão inválida'; }
 
-                return '';
+                return form.controls.admissionDate.error;
             },
         },
     }, []);
