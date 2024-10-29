@@ -7,7 +7,6 @@ import App from '@/App';
 import Error from '@/pages/error';
 import Signin from '@/pages/home';
 import { url } from '@/services/core';
-import Profile from '@/pages/profile/Profile';
 import Register from '@/pages/admission/register';
 import Admission, { AdmissionProvider } from '@/pages/admission';
 import { authServices, userServices } from '@/services/core';
@@ -63,11 +62,6 @@ export const router = createBrowserRouter([
                 path: '/admissao/cadastro',
                 loader: () => document.title = 'Caju - Cadastro de candidato',
                 element: <Register />,
-            },
-            {
-                path: '/meu-perfil',
-                loader: () => document.title = 'Caju - Meu perfil',
-                element: <Profile />,
             },
             {
                 path: '*',

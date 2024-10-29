@@ -1,5 +1,7 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 
+import { Mode } from '@caju/ui/theme';
+
 import { getPage } from '@caju/toolkit/url';
 
 import type { AdmissionData } from '@caju/services/admission';
@@ -8,7 +10,7 @@ import { admissionServices } from '@/services/core';
 
 import { useUser } from '../user';
 
-type PageToGuide = 'admissao' | 'cadastro';
+type PageToGuide = 'admissao' | 'cadastro' | 'pagina-inicial';
 
 interface GlobalContextConfig {
     loading: boolean;
@@ -21,8 +23,8 @@ interface GlobalContextConfig {
 
 export const GlobalContext = createContext<GlobalContextConfig>({
     loading: false,
-    admission: { id: '', ownerId: '', columns: { pending: [], approved: [], rejected: [] } },
     pageToGuide: undefined,
+    admission: { id: '', ownerId: '', columns: { pending: [], approved: [], rejected: [] } },
     startGuide: () => { },
     resetGuide: () => { },
     updateAdmission: () => { }
@@ -46,7 +48,7 @@ export default function GlobalProvider({ children }: GlobalProviderProps) {
         pageToGuide,
         resetGuide: () => { setPageToGuide(undefined); },
         startGuide: () => { setPageToGuide(getPage<PageToGuide>()); },
-        updateAdmission: (callback) => setAdmission((prev) => callback(prev))
+        updateAdmission: (callback) => setAdmission((prev) => callback(prev)),
     }), [admission, loading, pageToGuide]);
 
     useEffect(() => { getCandidates(); }, []);
