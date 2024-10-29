@@ -16,18 +16,6 @@ export interface StepLocalData extends StepData {
     visible: boolean;
 }
 
-export interface GuideOptions {
-    palette: {
-        primary?: string;
-        secondary?: string;
-    };
-    label: {
-        back: string;
-        next: string;
-        finish: string;
-    }
-}
-
 export type Options = {
     finishCallback?: (index: number) => void;
 }

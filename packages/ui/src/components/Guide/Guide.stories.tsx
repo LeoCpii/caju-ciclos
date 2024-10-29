@@ -156,12 +156,7 @@ function Content() {
 export const Template: StoryObj<typeof GuideProvider> = {
     render: () => {
         return (
-            <GuideProvider options={{
-                palette: {
-                    primary: 'orange',
-                    secondary: 'blue'
-                }
-            }}>
+            <GuideProvider>
                 <Content />
             </GuideProvider>
         );

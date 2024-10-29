@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import type { GuideOptions, StepData, StepLocalData } from './interface';
+import type { StepData, StepLocalData } from './interface';
 
 export interface GuideContextData {
     isStarted: boolean;

@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
 
 import GuideContext, { GuideContextData } from './GuideContext';
-import type { StepData, StepLocalData, GuideOptions } from './interface';
+import type { StepData, StepLocalData } from './interface';
 
 import './Guide.scss';
 
-interface GuideProviderProps { children: JSX.Element; options?: Partial<GuideOptions>; }
-export default function GuideProvider({ children, options }: GuideProviderProps) {
+interface GuideProviderProps { children: JSX.Element; }
+export default function GuideProvider({ children }: GuideProviderProps) {
     const [start, setStart] = useState(false);
     const [localSteps, setLocalSteps] = useState<StepLocalData[]>([]);
 
@@ -19,11 +19,12 @@ export default function GuideProvider({ children, options }: GuideProviderProps)
         previous: () => { previousStep(); },
         goTo: (name: string) => { goTo(name); },
         set: (steps: StepData[]) => { updateSteps(steps); },
-    }), [options, start, localSteps]);
+    }), [start, localSteps]);
 
     const currentStep = () => { return localSteps.findIndex((step) => step.visible); };
 
     const finish = () => {
+        const index = currentStep();
         setStart(false);
 
         setLocalSteps(prev => {
@@ -35,6 +36,10 @@ export default function GuideProvider({ children, options }: GuideProviderProps)
 
             return mappedSteps;
         });
+
+        const { callback } = localSteps[index];
+
+        if (callback?.finish) { callback.finish(); }
     };
 
     const updateSteps = (steps: StepData[]) => {
@@ -78,10 +83,6 @@ export default function GuideProvider({ children, options }: GuideProviderProps)
 
             return mappedSteps;
         });
-
-        const { callback } = localSteps[index];
-
-        if (callback?.finish) { callback.finish(); }
     };
 
     const previousStep = () => {
