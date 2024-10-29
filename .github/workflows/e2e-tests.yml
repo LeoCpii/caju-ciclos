@@ -72,7 +72,7 @@ jobs:
       - name: Start Firebase Emulator
         run: |
           make db &
-          sleep 25
+          sleep 5
 
       - name: e2e - ${{ inputs.PROJECT }}
         uses: cypress-io/github-action@v6

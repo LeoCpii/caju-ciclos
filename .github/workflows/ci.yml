@@ -64,7 +64,7 @@ jobs:
       PORT: 5001
       PATH: dist
       BUILD_ENV: local
-      PROJECT: account
+      PROJECT: manager
       RUN_TEST_COMMAND: test:manager
       START_PROJECT_COMMAND: start
     secrets: inherit
