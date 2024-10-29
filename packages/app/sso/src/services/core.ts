@@ -1,6 +1,14 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import {
+    getAuth,
+    signOut,
+    signInWithPopup,
+    GoogleAuthProvider,
+    connectAuthEmulator,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+} from 'firebase/auth';
 
 import DB from '@caju/services/db';
 import AuthServices from '@caju/services/auth';
@@ -12,6 +20,8 @@ export const url = {
     sso: import.meta.env.VITE_SSO_URL,
     manager: import.meta.env.VITE_MANAGER_URL,
 };
+
+export const isLocal = import.meta.env.VITE_ENV === 'local';
 
 // FIREBASE
 const app = initializeApp({
@@ -27,13 +37,21 @@ const app = initializeApp({
 // FIREBASE SERVICES
 const firebaseAuth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+const firestore = getFirestore(app);
 
 export const authServices = new AuthServices({
+    signOut: () => signOut(firebaseAuth),
     googleAuth: () => signInWithPopup(firebaseAuth, googleProvider),
-    signout: () => signOut(firebaseAuth),
+    signInWithPassword: (email, password) => signInWithEmailAndPassword(firebaseAuth, email, password),
+    createUserWithEmailAndPassword: (email, password) => createUserWithEmailAndPassword(firebaseAuth, email, password),
 });
 
-export const db = new DB(getFirestore(app));
+export const db = new DB(firestore);
+
+if (isLocal) {
+    connectFirestoreEmulator(firestore, 'localhost', 8080);
+    connectAuthEmulator(firebaseAuth, 'http://localhost:9099');
+}
 
 // ENTITY SERVICES
 export const userServices = new UserServices(db, url.sso);

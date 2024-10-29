@@ -24,8 +24,10 @@ describe('Auth', () => {
     let auth: Auth;
     let cookiesMock: jest.Mocked<Cookies<any>>;
     const mockAuthMethods: AuthMethods = {
-        signout: jest.fn(),
+        signOut: jest.fn(),
         googleAuth: jest.fn(),
+        signInWithPassword: jest.fn(),
+        createUserWithEmailAndPassword: jest.fn(),
     };
 
     beforeEach(() => {
@@ -59,11 +61,11 @@ describe('Auth', () => {
 
     it('should call signout, remove access_token, and call redirect on logout', async () => {
         const mockRedirect = jest.fn();
-        mockAuthMethods.signout = jest.fn().mockResolvedValue(undefined);
+        mockAuthMethods.signOut = jest.fn().mockResolvedValue(undefined);
 
         await auth.logout(mockRedirect);
 
-        expect(mockAuthMethods.signout).toHaveBeenCalled();
+        expect(mockAuthMethods.signOut).toHaveBeenCalled();
         expect(local.remove).toHaveBeenCalledWith('user');
         expect(cookiesMock.remove).toHaveBeenCalledWith('access_token');
         expect(mockRedirect).toHaveBeenCalled();

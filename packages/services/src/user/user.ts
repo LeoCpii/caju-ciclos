@@ -48,10 +48,10 @@ export default class UserServices {
         });
     }
 
-    async createUser() {
+    async createUser(user: UserData) {
         return this.db.setItem<UserData>({
+            data: user,
             path: UserServices.PATH,
-            data: this.currentByToken,
             pathSegments: [this.currentByToken.email],
         });
     }

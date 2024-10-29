@@ -31,7 +31,7 @@ export default class AdmissionServices {
                 ownerId,
                 columns: { pending: [], approved: [], rejected: [] },
             },
-        });
+        }).then(() => ({ id, ownerId, columns: { pending: [], approved: [], rejected: [] } }));
     }
 
     async updateAdmission(data: AdmissionData): Promise<void> {
