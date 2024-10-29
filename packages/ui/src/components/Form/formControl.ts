@@ -1,6 +1,5 @@
+import validators from '@caju/toolkit/validators';
 import { maskCpf, maskPhone } from '@caju/toolkit/mask';
-
-import validator from './validator';
 
 export const MESSAGES = {
     email: () => 'O campo deve ser um email válido',
@@ -67,12 +66,12 @@ export default class FormControl<C> {
     public validate(): void {
         const data: any = {};
 
-        data.required = this.required && validator.isEmpty(this.value);
+        data.required = this.required && validators.isEmpty(this.value);
 
         if (this.value) {
-            data.email = this.type === 'email' && !validator.isValidEmail(this.value as string);
-            data.tel = this.type === 'tel' && !validator.isValidTelCel(this.value as string);
-            data.cpf = this.type === 'cpf' && !validator.isValidCpf(this.value as string);
+            data.email = this.type === 'email' && !validators.isValidEmail(this.value as string);
+            data.tel = this.type === 'tel' && !validators.isValidTelCel(this.value as string);
+            data.cpf = this.type === 'cpf' && !validators.isValidCpf(this.value as string);
         }
 
         const hasError = Object.keys(data).some(key => data[key]);

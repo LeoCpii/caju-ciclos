@@ -1,3 +1,5 @@
+import cpfValidator from './cpfValidator';
+
 class Validator {
     private emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     private numberRegex = /^[0-9]+$/;
@@ -44,7 +46,7 @@ class Validator {
      * @param {string} value Número de cpf
     */
     public isValidCpf(value: string): boolean {
-        return this.cpfRegex.test(value);
+        return this.cpfRegex.test(value) && cpfValidator(value);
     }
 
     /**

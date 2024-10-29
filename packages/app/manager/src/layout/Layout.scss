@@ -27,7 +27,9 @@ $sidebar-width: 56px;
     }
 
     &__sidebar {
-        width: 56px;
+        max-width: 56px;
+        position: sticky;
+        top: 0;
         height: calc(100vh - #{$header-height});
         border-right: 1px solid var(--divider);
         padding: 0;
@@ -69,6 +71,6 @@ $sidebar-width: 56px;
         padding: 32px;
         overflow-y: auto;
         width: calc(100% - #{$sidebar-width});
-        height: calc(100vh - #{$header-height});
+        min-height: calc(100vh - #{$header-height});
     }
 }
