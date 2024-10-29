@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENVIRONMENT }}
     env:
+      # Environment
+      VITE_ENV: ${{ inputs.BUILD_ENV }}
       # Firebase
       VITE_ID: ${{ secrets.FIREBASE_ID }}
       VITE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
