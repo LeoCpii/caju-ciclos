@@ -61,7 +61,7 @@ function CardColumn({ title, icon, color, columnId, children }: CardColumnProps)
                 <Droppable droppableId={columnId}>
                     {(provided) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            <Stack spacing="small">
+                            <Stack spacing="small" data-cy={`colunm-status-${columnId}`}>
                                 {!arrayChildren.length && (
                                     <Zoom enter>
                                         <Typography

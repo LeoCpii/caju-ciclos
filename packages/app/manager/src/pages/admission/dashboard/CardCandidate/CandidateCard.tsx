@@ -41,6 +41,7 @@ export default function CandidateCard({
                 key={cardId}
                 index={index}
                 draggableId={cardId}
+                data-cy="candidate-card-draggable"
             >
                 {(provided) => (
                     <div
@@ -49,6 +50,7 @@ export default function CandidateCard({
                         ref={provided.innerRef}
                     >
                         <Card
+                            data-cy="candidate-card"
                             sx={({ palette }) => ({
                                 display: 'flex',
                                 alignItems: 'center',
@@ -75,6 +77,7 @@ export default function CandidateCard({
                                             <div ref={ref}>
                                                 <ButtonIcon
                                                     color="primary"
+                                                    data-cy="candidate-card-menu-button"
                                                     style={{ padding: 0, width: 35, height: 35 }}
                                                     onClick={toggle}
                                                 >
@@ -88,8 +91,16 @@ export default function CandidateCard({
                                                 anchorEl={el}
                                                 onClose={toggle}
                                             >
-                                                <MenuButton label="Detalhes" onClick={toggleDrawer} />
-                                                <MenuButton label="Deletar" onClick={toggleModal} />
+                                                <MenuButton
+                                                    data-cy="candidate-card-details-button"
+                                                    label="Detalhes"
+                                                    onClick={toggleDrawer}
+                                                />
+                                                <MenuButton
+                                                    data-cy="candidate-card-delete-button"
+                                                    label="Deletar"
+                                                    onClick={toggleModal}
+                                                />
                                             </Menu>
                                         </div>
                                     </Stack>

@@ -13,50 +13,48 @@ interface CandiateDetailProps extends CandidateData {
 }
 export default function CandiateDetail({ open, onClose, ...candidate }: CandiateDetailProps) {
     return (
-        <div>
-            <Drawer open={open} onClose={onClose}>
-                <DrawerContent>
+        <Drawer open={open} onClose={onClose}>
+            <DrawerContent>
+                <Stack data-cy="candidate-details">
+                    <Stack orientation="row" justify="flex-start" align="flex-start">
+                        <Avatar
+                            src={candidate.picture}
+                            alt={candidate.name}
+                            name={candidate.name}
+                        />
+                        <div>
+                            <Typography variant="body1" weight="bold" noMargin>{candidate.name}</Typography>
+                            <Typography variant="body2" noMargin>{candidate.position}</Typography>
+                        </div>
+                    </Stack>
+
+                    <Grid sm={12} md={4} lg={4}>
+                        <GridItem>
+                            <Typography variant="body2" weight="bold" noMargin>Contato</Typography>
+                            <Typography variant="body2" noMargin>{candidate.email}</Typography>
+                        </GridItem>
+                        <GridItem>
+                            <Typography variant="body2" weight="bold" noMargin>CPF</Typography>
+                            <Typography variant="body2" noMargin>{candidate.cpf}</Typography>
+                        </GridItem>
+                        <GridItem>
+                            <Typography variant="body2" weight="bold" noMargin>Data de Admissão</Typography>
+                            <Typography variant="body2" noMargin>{candidate.admissionDate}</Typography>
+                        </GridItem>
+                    </Grid>
+
                     <Stack>
-                        <Stack orientation="row" justify="flex-start" align="flex-start">
-                            <Avatar
-                                src={candidate.picture}
-                                alt={candidate.name}
-                                name={candidate.name}
-                            />
-                            <div>
-                                <Typography variant="body1" weight="bold" noMargin>{candidate.name}</Typography>
-                                <Typography variant="body2" noMargin>{candidate.position}</Typography>
-                            </div>
-                        </Stack>
-
-                        <Grid sm={12} md={4} lg={4}>
-                            <GridItem>
-                                <Typography variant="body2" weight="bold" noMargin>Contato</Typography>
-                                <Typography variant="body2" noMargin>{candidate.email}</Typography>
-                            </GridItem>
-                            <GridItem>
-                                <Typography variant="body2" weight="bold" noMargin>CPF</Typography>
-                                <Typography variant="body2" noMargin>{candidate.cpf}</Typography>
-                            </GridItem>
-                            <GridItem>
-                                <Typography variant="body2" weight="bold" noMargin>Data de Admissão</Typography>
-                                <Typography variant="body2" noMargin>{candidate.admissionDate}</Typography>
-                            </GridItem>
-                        </Grid>
-
-                        <Stack>
-                            <Typography variant="body2" weight="bold" noMargin>Habilidades</Typography>
-                            <Stack orientation="row" spacing="small">
-                                {
-                                    candidate.skills.map((skill) => (
-                                        <Chip key={skill} label={skill} />
-                                    ))
-                                }
-                            </Stack>
+                        <Typography variant="body2" weight="bold" noMargin>Habilidades</Typography>
+                        <Stack orientation="row" spacing="small">
+                            {
+                                candidate.skills.map((skill) => (
+                                    <Chip key={skill} label={skill} />
+                                ))
+                            }
                         </Stack>
                     </Stack>
-                </DrawerContent>
-            </Drawer>
-        </div>
+                </Stack>
+            </DrawerContent>
+        </Drawer>
     );
 }

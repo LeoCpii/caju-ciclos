@@ -132,6 +132,7 @@ export default function Register() {
                                         value={control.value}
                                         error={control.isInvalid}
                                         helperText={control.messageError}
+                                        data-cy="name-input"
                                     />
                                 )}
                             />
@@ -144,6 +145,7 @@ export default function Register() {
                                         value={control.value}
                                         error={control.isInvalid}
                                         helperText={control.messageError}
+                                        data-cy="email-input"
                                     />
                                 )}
                             />
@@ -157,6 +159,7 @@ export default function Register() {
                                         value={control.masked}
                                         error={control.isInvalid}
                                         helperText={control.messageError}
+                                        data-cy="cpf-input"
                                     />
                                 )}
                             />
@@ -170,6 +173,7 @@ export default function Register() {
                                         value={control.value}
                                         error={control.isInvalid}
                                         helperText={control.messageError}
+                                        data-cy="admission-date-input"
                                     />
                                 )}
                             />
@@ -184,8 +188,14 @@ export default function Register() {
                                         value={control.value}
                                         error={control.isInvalid}
                                         helperText={control.messageError}
+                                        data-cy="position-select"
                                     >
-                                        <Option value="frontend">Frontend</Option>
+                                        <Option
+                                            value="frontend"
+                                            data-cy="frontend-option"
+                                        >
+                                            Frontend
+                                        </Option>
                                         <Option value="backend">Backend</Option>
                                     </Select>
                                 )}
@@ -193,6 +203,7 @@ export default function Register() {
                             <Button
                                 type="submit"
                                 size="large"
+                                data-cy="submit-button"
                                 loading={loading && <Loading size={20} color="text.secondary" />}
                             >
                                 Salvar

@@ -1,4 +1,4 @@
-import type { HTMLAttributes, PropsWithChildren } from 'react';
+import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 import Ripple from '@/components/Ripple';
 import joinClass from '@/utils/joinClass';
@@ -6,7 +6,7 @@ import { MappedColors, useTheme, convertPathToColor } from '@/theme';
 
 import './ButtonIcon.scss';
 
-interface ButtonIconProps extends PropsWithChildren<HTMLAttributes<HTMLButtonElement>> {
+interface ButtonIconProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
     color?: MappedColors;
 };
 export default function ButtonIcon({ children, color = 'primary.main', ...props }: ButtonIconProps) {

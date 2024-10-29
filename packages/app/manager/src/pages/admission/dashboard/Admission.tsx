@@ -139,6 +139,7 @@ export default function Admission() {
                                     value={control.masked}
                                     error={control.isInvalid}
                                     helperText={control.messageError}
+                                    data-cy="search-by-cpf"
                                     startIcon={
                                         <Icon name="search" color="text.secondary" />
                                     }

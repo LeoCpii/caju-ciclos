@@ -37,7 +37,6 @@ export default function Modal({ children, sx, title, subtitle, isOpen, onClose, 
         document.body.style.overflow = 'hidden';
 
         return () => {
-            console.log('unmount');
             document.body.style.overflow = 'auto';
         };
     }, []);

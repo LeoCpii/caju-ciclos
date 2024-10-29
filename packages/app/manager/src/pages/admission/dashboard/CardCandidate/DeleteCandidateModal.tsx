@@ -59,6 +59,7 @@ export default function DeleteCandidateModal({
                     onClick={handleDelete}
                     disabled={loading}
                     loading={loading && <Loading />}
+                    data-cy="delete-candidate-modal-button"
                 >
                     Deletar
                 </Button>
