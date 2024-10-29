@@ -11,6 +11,7 @@
     border-radius: 50%;
     overflow: hidden;
     user-select: none;
+    border: 1px solid var(--divider);
 
     &--name {
         background-color: var(--primary);
