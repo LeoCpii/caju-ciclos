@@ -79,7 +79,7 @@ jobs:
       - name: Start Firebase Emulator
         run: |
           make db
-          npx wait-on http://localhost:8080 # Aguarda o emulador iniciar
+          npx wait-on http://localhost:8080
 
       - name: e2e - ${{ inputs.PROJECT }}
         uses: cypress-io/github-action@v6
@@ -96,4 +96,4 @@ jobs:
 
       - name: Stop Firebase Emulator
         if: success() || failure()
-        run: pkill -f "firebase emulators:start" # Encerra o emulador após os testes
+        run: pkill -f "firebase emulators:start"
