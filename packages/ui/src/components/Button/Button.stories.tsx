@@ -73,6 +73,21 @@ export const States: StoryObj<typeof Button> = {
     }
 };
 
+export const NoHover: StoryObj<typeof Button> = {
+    render: () => {
+        return (
+            <>
+                <Button variant="text" noHover startIcon={<Icon name="star" />}>
+                    Disabled
+                </Button>
+                <Button variant="text" noHover>
+                    Disabled
+                </Button>
+            </>
+        );
+    }
+};
+
 export const Loading: StoryObj<typeof Button> = {
     render: () => {
         return (

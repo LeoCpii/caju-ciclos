@@ -12,6 +12,10 @@
 
     cursor: pointer;
 
+    &--noHover {
+        background-color: transparent !important;
+    }
+
     &--small {
         font-size: 0.8125rem;
         padding: 4px 10px;

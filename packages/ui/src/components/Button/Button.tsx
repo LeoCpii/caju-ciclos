@@ -14,6 +14,7 @@ interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonE
     endIcon?: React.JSX.Element;
     loading?: React.JSX.Element | boolean;
     startIcon?: React.JSX.Element;
+    noHover?: boolean;
     variant?: 'contained' | 'outlined' | 'text';
 };
 export default function Button({
@@ -22,6 +23,7 @@ export default function Button({
     variant = 'contained',
     fullWidth,
     startIcon,
+    noHover = false,
     endIcon,
     loading,
     children,
@@ -32,6 +34,7 @@ export default function Button({
         `cj-button--${size}`,
         `cj-button--${color}`,
         `cj-button--${color}--${variant}`,
+        noHover && 'cj-button--noHover',
         fullWidth && 'cj-button--fullWidth',
         props.className
     ]);
