@@ -1,5 +1,6 @@
 <div align="center">
   <h1>Caju ciclos</h1>
+
   <br/>
   <p>
    <strong>Powered by</strong>
@@ -10,9 +11,13 @@
    ![GitHub](https://img.shields.io/badge/github_actions-2088FF.svg?style=falt&logo=githubactions&logoColor=white)
    ![Jest](https://img.shields.io/badge/jest-C53d15.svg?style=falt&logo=jest&logoColor=white)
   </p>
-</div>
+  <p>
 
-<br/>
+  <strong>Status</strong>
+
+  [![CI](https://github.com/LeoCpii/caju-ciclos/actions/workflows/ci.yml/badge.svg)](https://github.com/LeoCpii/caju-ciclos/actions/workflows/ci.yml)
+  </p>
+</div>
 
 ## Descrição
 
@@ -57,7 +62,7 @@ Projeto para criação e execução dos testes e2e
 
 ### [db](https://github.com/LeoCpii/caju-ciclos/tree/master/packages/db)
 
-O DB é um [emulador do Firebase](https://firebase.google.com/docs/emulator-suite?hl=pt-br). É utilizado para desenvolvimento local e para suportar testes de integração com execução `In-Memory`. Com esse recurso, é possível desenvolver e testar com tranquilidade, garantindo uma base de dados limpa para cada execução..
+O DB é um [emulador do Firebase](https://firebase.google.com/docs/emulator-suite?hl=pt-br). É utilizado para desenvolvimento local e para suportar testes de integração com execução `In-Memory`. Com esse recurso, é possível desenvolver e testar com tranquilidade, garantindo uma base de dados limpa para cada execução.
 
 ## Executando a aplicação
 
@@ -85,7 +90,7 @@ make setup
 npm install -g firebase-tools
 ```
 
-> 📝 Este passo é necessário para executar o emulador do firebase para executaro projeto localmente.
+> 📝 Este passo é necessário para executar o emulador do firebase para executar o projeto localmente.
 
 5. Levantar o firebase emulator
 
@@ -93,7 +98,7 @@ npm install -g firebase-tools
 make db
 ```
 
-6. Executar o projecto (manager ou sso)
+6. Executar o projeto (manager ou sso)
 
 > 💡 Para simplificar a execução da aplicação, foi criada uma função `run` no *Makefile*. Essa função facilita a navegação entre as pastas do monorepo e permite executar os scripts definidos em cada `package.json` correspondente.
 
@@ -110,7 +115,7 @@ make run sso dev
 make run manager dev
 ```
 
-7. Após finalizar os steps anteriores você pode acessar o os projetos
+7. Após finalizar os steps anteriores você pode acessar os projetos
 
 Env | URL
 --- | ---
