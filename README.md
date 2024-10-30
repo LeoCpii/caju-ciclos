@@ -69,7 +69,7 @@ O DB é um [emulador do Firebase](https://firebase.google.com/docs/emulator-suit
 1. Clone o repositório
 
 ```bash
-git clone git@github.com:LeoCpii/caju-ciclos.git
+git clone https://github.com/LeoCpii/caju-ciclos.git
 ```
 
 2. Acesse o diretório do projeto
